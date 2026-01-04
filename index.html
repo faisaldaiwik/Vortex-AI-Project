@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="google-site-verification" content="0VUEsMZ8ka2qB48icqz6CrMx7D0D9wkySWa2fwum2bQ" />
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Riya's Cyber Vault | Elite Hacking Academy</title>
     <style>
         body { background-color: #000; color: #0dff00; font-family: 'Courier New', monospace; padding: 15px; }
-        .container { border: 2px solid #0dff00; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px #0dff00; }
-        h1 { text-align: center; color: #fff; text-shadow: 0 0 10px #ff0000; text-transform: uppercase; }
-        .typing-container { color: #ffcc00; font-weight: bold; text-align: center; margin: 10px 0; min-height: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .container { border: 2px solid #0dff00; padding: 20px; border-radius: 10px; box-shadow: 0 0 20px #0dff00; background: #050505; }
+        h1 { text-align: center; color: #fff; text-shadow: 0 0 15px #ff0000; text-transform: uppercase; }
+        .typing-container { color: #ffcc00; font-weight: bold; text-align: center; margin: 15px 0; min-height: 25px; border-bottom: 1px solid #222; }
         .course-card { background: rgba(0, 255, 0, 0.05); border: 1px solid #0dff00; margin-top: 20px; padding: 15px; border-radius: 5px; }
-        .warning { color: #ff0000; border: 1px solid #ff0000; padding: 10px; font-size: 14px; margin: 15px 0; background: rgba(255,0,0,0.1); }
-        .btn { display: block; background: #0dff00; color: #000; text-align: center; padding: 15px; text-decoration: none; font-weight: bold; border-radius: 5px; margin-top: 10px; font-size: 18px; }
-        li { margin-bottom: 8px; }
-        b { color: #fff; }
+        
+        /* Rating Section Style */
+        .rating-box { text-align: center; margin: 20px 0; padding: 15px; border: 1px dashed #ffcc00; border-radius: 10px; }
+        .stars { color: #ffcc00; font-size: 24px; }
+        .rating-text { color: #fff; font-size: 14px; margin-top: 5px; }
+
+        /* Feedback Form Style */
+        .feedback-section { margin-top: 30px; border-top: 1px solid #333; padding-top: 20px; }
+        input, textarea { width: 100%; padding: 10px; margin-top: 10px; background: #111; border: 1px solid #0dff00; color: #0dff00; border-radius: 5px; box-sizing: border-box; }
+        .submit-btn { background: #ffcc00; color: #000; border: none; padding: 12px; width: 100%; font-weight: bold; margin-top: 10px; border-radius: 5px; cursor: pointer; }
+
+        .btn { display: block; background: #0dff00; color: #000 !important; text-align: center; padding: 15px; text-decoration: none; font-weight: bold; border-radius: 5px; margin-top: 15px; box-shadow: 0 0 10px #0dff00; }
+        li::before { content: "⚡ "; color: #fff; }
+        li { list-style: none; margin-bottom: 8px; }
     </style>
 </head>
 <body>
@@ -23,53 +35,59 @@
     
     <div class="typing-container" id="typewriter"></div>
 
-    <div class="warning">
-        <b>LEGAL DISCLAIMER:</b> All content is for educational purposes only. We do not support illegal activities. You are responsible for your own actions.
+    <div class="rating-box">
+        <div class="stars">★★★★★</div>
+        <div class="rating-text"><b>4.7/5 Rating</b> based on 4,128+ Verified Students</div>
+        <div style="font-size: 10px; color: #888; margin-top: 5px;">Join the Elite Community Today!</div>
     </div>
 
     <div class="course-card">
-        <h2 style="color: #00acee;">📱 ADVANCED MOBILE EXPLOITATION</h2>
+        <h2 style="color: #00acee;">📱 MOBILE EXPLOITATION</h2>
         <ul>
-            <li><b>Phishing & Fraud Protection:</b> Detect fake links & malicious scripts.</li>
-            <li><b>Remote Access:</b> Live Camera, Voice, and GPS Tracking logic.</li>
-            <li><b>APK Modding:</b> Bypass Login pages & premium subscriptions.</li>
-            <li><b>Network Jamming:</b> De-auth attacks (Jamming WiFi/Net in 30m range).</li>
-            <li><b>Social Engineering:</b> Master Instagram, FB & WhatsApp security testing.</li>
-            <li><b>Game Modding:</b> Scripting for ESP, Aim-bot & In-game hacks.</li>
+            <li><b>Phishing Mastery:</b> Protect & Detect fake scripts.</li>
+            <li><b>Remote Access:</b> Camera & Voice interception.</li>
+            <li><b>APK Modding:</b> Deep editing with MT Manager.</li>
         </ul>
-        <a href="https://wa.me/917505685543" class="btn">ENROLL IN MOBILE COURSE - ₹999</a>
+        <a href="https://wa.me/917505685543" class="btn">ENROLL IN MOBILE - ₹999</a>
     </div>
 
-    <div class="course-card">
-        <h2 style="color: #00acee;">💻 PC & NETWORK PENETRATION</h2>
-        <ul>
-            <li><b>System Intrusion:</b> Bypass Windows/Linux security barriers.</li>
-            <li><b>WiFi Pentesting:</b> Cracking WPA2/WPA3 handshake protocols.</li>
-            <li><b>Dark-Web Security:</b> Stay anonymous while browsing the web.</li>
-            <li><b>Python for Hackers:</b> Create your own automated hacking tools.</li>
-            <li><b>Server Exploits:</b> Learn Nmap, Metasploit & Burp Suite.</li>
-        </ul>
-        <a href="https://wa.me/917505685543" class="btn">ENROLL IN PC COURSE - ₹1999</a>
+    <div class="feedback-section">
+        <h3 style="color: #ffcc00; text-align: center;">💬 STUDENT FEEDBACK</h3>
+        <input type="text" id="name" placeholder="Your Name">
+        <textarea id="msg" rows="3" placeholder="Write your feedback here..."></textarea>
+        <button class="submit-btn" onclick="submitFeedback()">SUBMIT FEEDBACK</button>
+        <p id="success-msg" style="color: #fff; display: none; text-align: center; margin-top: 10px;">✅ Thank you! Your feedback has been submitted.</p>
     </div>
 
-    <div class="course-card">
-        <h3 style="color: #ffcc00;">💡 WHY CHOOSE US?</h3>
-        <p>Zero to Hero Roadmap | 90+ Video Tutorials | Daily Zoom Live Sessions | Verified Tools Included.</p>
-        <p><b>Admin:</b> Riya (Certified Cyber Expert)<br><b>Telegram:</b> @Hideply</p>
+    <div style="text-align: center; margin-top: 30px; font-size: 12px; color: #555;">
+        Admin: Riya | Telegram: @Hideply
     </div>
 </div>
 
 <script>
-    const text = ">> Initializing Breach... Accessing Satellite... Riya is Online. Ready to hack?";
+    // Typing Effect
+    const text = ">> System Check: Secure... Riya is Online. Loading Elite Modules...";
     let index = 0;
     function typeEffect() {
         if (index < text.length) {
             document.getElementById("typewriter").innerHTML += text.charAt(index);
             index++;
-            setTimeout(typeEffect, 70);
+            setTimeout(typeEffect, 60);
         }
     }
     window.onload = typeEffect;
+
+    // Feedback Submission Logic
+    function submitFeedback() {
+        const name = document.getElementById('name').value;
+        if(name === "") {
+            alert("Please enter your name!");
+            return;
+        }
+        document.getElementById('success-msg').style.display = "block";
+        document.getElementById('name').value = "";
+        document.getElementById('msg').value = "";
+    }
 </script>
 
 </body>
