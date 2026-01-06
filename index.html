@@ -3,149 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="0VUEsMZ8ka2qB48icqz6CrMx7D0D9wkySWa2fwum2bQ" />
     <title>ZeroDay Hunter | Elite Academy</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
     <style>
         :root { --neon: #00ff41; --bg: #050505; --red: #ff003c; --gold: #ffd700; }
-        body { background: var(--bg); color: var(--neon); font-family: 'Fira Code', monospace; margin: 0; line-height: 1.6; }
-        #matrix { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
-        .container { max-width: 1000px; margin: auto; padding: 20px; }
-        header { text-align: center; padding: 80px 0; border-bottom: 2px solid var(--neon); background: rgba(0,0,0,0.8); }
-        .glitch { font-family: 'Orbitron'; font-size: 3.5rem; color: #fff; text-shadow: 2px 2px var(--red); }
-        .section-box { background: rgba(10, 10, 10, 0.95); border: 1px solid #333; padding: 40px; margin: 40px 0; border-radius: 8px; }
-        h2 { font-family: 'Orbitron'; color: #fff; border-left: 5px solid var(--neon); padding-left: 15px; margin-bottom: 25px; }
-        .section-img { width: 100%; height: 250px; object-fit: cover; border-radius: 4px; margin-bottom: 20px; border: 1px solid var(--neon); }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .item { background: #0c0c0c; padding: 15px; border: 1px solid #222; border-radius: 4px; }
-        .item b { color: #fff; display: block; margin-bottom: 5px; }
-        .testimonial { border-bottom: 1px solid #222; padding: 20px 0; }
-        .user-info { display: flex; justify-content: space-between; align-items: center; }
-        .user-mail { color: #888; font-size: 0.85rem; }
-        .like-btn { background: transparent; border: 1px solid var(--neon); color: var(--neon); padding: 5px 12px; cursor: pointer; border-radius: 20px; transition: 0.3s; }
-        .like-btn:hover { background: var(--neon); color: #000; }
-        .feedback-form input, .feedback-form textarea { width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid var(--neon); color: #fff; font-family: inherit; }
-        .cta-footer { position: sticky; bottom: 0; background: rgba(0,0,0,0.95); padding: 20px; text-align: center; border-top: 1px solid var(--neon); z-index: 100; }
-        .btn { display: inline-block; padding: 15px 35px; margin: 10px; font-weight: bold; text-decoration: none; border-radius: 5px; cursor: pointer; }
-        .btn-wa { background: var(--neon); color: #000; box-shadow: 0 0 20px var(--neon); }
+        
+        /* Custom Selection Color */
+        ::selection { background: var(--neon); color: #000; }
+
+        body { background: var(--bg); color: var(--neon); font-family: 'Fira Code', monospace; margin: 0; overflow-x: hidden; scroll-behavior: smooth; }
+        
+        #matrix { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.2; }
+
+        .container { max-width: 1100px; margin: auto; padding: 0 20px; }
+
+        header { text-align: center; padding: 120px 20px 60px; }
+        .glitch { font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 4.5rem); color: #fff; text-shadow: 3px 3px var(--red); letter-spacing: 5px; animation: pulse 2s infinite; }
+        
+        #typewriter { font-size: 1.2rem; min-height: 1.5em; color: #fff; margin-top: 15px; opacity: 0.9; }
+
+        .live-stats { display: inline-block; margin-top: 25px; padding: 12px 25px; border: 1px solid var(--gold); border-radius: 50px; color: var(--gold); font-size: 0.9rem; background: rgba(255, 215, 0, 0.05); text-transform: uppercase; letter-spacing: 1px; }
+
+        .section-box { background: rgba(15, 15, 15, 0.9); border: 1px solid #222; padding: 40px; margin: 40px 0; border-radius: 12px; backdrop-filter: blur(8px); transform: translateY(40px); opacity: 0; transition: 1s cubic-bezier(0.17, 0.67, 0.83, 0.67); }
+        .section-box.show { transform: translateY(0); opacity: 1; border-color: #444; }
+        
+        h2 { font-family: 'Orbitron'; color: #fff; border-left: 4px solid var(--neon); padding-left: 15px; margin-bottom: 30px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .item { background: rgba(0,0,0,0.6); padding: 25px; border: 1px solid #1a1a1a; border-radius: 8px; transition: 0.4s ease; cursor: default; }
+        .item:hover { border-color: var(--neon); box-shadow: 0 0 15px rgba(0, 255, 65, 0.1); transform: translateY(-5px); }
+        .item b { color: var(--neon); display: block; margin-bottom: 10px; font-size: 1rem; text-transform: uppercase; }
+
+        .feedback-input { width: 100%; padding: 15px; background: #000; border: 1px solid #333; color: #fff; margin-bottom: 15px; font-family: inherit; border-radius: 4px; }
+        .feedback-input:focus { border-color: var(--neon); outline: none; }
+
+        .cta-footer { position: sticky; bottom: 0; background: rgba(5,5,5,0.95); padding: 25px; text-align: center; border-top: 1px solid var(--neon); z-index: 100; backdrop-filter: blur(15px); }
+        .btn { display: inline-block; padding: 18px 40px; font-weight: 900; text-decoration: none; border-radius: 4px; transition: 0.3s; text-transform: uppercase; font-family: 'Orbitron'; font-size: 0.9rem; }
+        .btn-wa { background: var(--neon); color: #000; box-shadow: 0 5px 20px rgba(0, 255, 65, 0.3); }
+        .btn-wa:hover { transform: scale(1.05); box-shadow: 0 5px 30px var(--neon); }
+
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
     </style>
 </head>
 <body>
+
 <canvas id="matrix"></canvas>
+
 <div class="container">
     <header>
         <div class="glitch">ZERODAY_HUNTER</div>
-        <p>Advanced Cyber Intelligence & Elite Mobile Hacking</p>
-        <div style="color:var(--gold); font-weight:bold; margin-top:15px; font-size:1.2rem;">⭐ 4.6/5.0 Rating (Based on 4,800+ Feedbacks)</div>
+        <div id="typewriter"></div>
+        <div class="live-stats">● <span id="student-count">4820</span> AGENTS ACTIVE IN SYSTEM</div>
     </header>
 
     <div class="section-box">
-        <h2>👤 Meet The Admin (Instructor)</h2>
-        <p>Admin **ZeroDay_Hunter** is an International Security Researcher trained in underground cyber-labs across **Israel and Europe**. His mission is to empower every individual with high-level cyber security skills that are rarely available to the public.</p>
-        <div style="border: 1px dashed var(--gold); padding: 15px; color: var(--gold); font-size: 0.9rem;">
-            🏆 Winner: Global Cyber Excellence Award (2023) | OSCP, CEH Master Certified.
-        </div>
+        <h2>IDENT_PROTOCOL: ADMIN</h2>
+        <p>Expert researcher in offensive security and mobile architecture. Specialized in identifying zero-day vulnerabilities across Israel & Europe-based network infrastructures.</p>
+        <p style="color: var(--gold); font-size: 0.8rem;">[RANK: ELITE MASTER] [YEARS: 07] [CERT: OSCP/CEH]</p>
     </div>
 
     <div class="section-box">
-        <img src="https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800" class="section-img">
-        <h2>📱 Advanced Mobile Hacking (80+ Videos)</h2>
+        <h2>MOBILE_OPS (80+ MODULES)</h2>
         <div class="grid">
-            <div class="item"><b>1. Remote Control:</b> Full Android device access protocols.</div>
-            <div class="item"><b>2. Japanese Bypass:</b> Elite BGMI/PUBG Anti-Ban & High-Tier Bypass.</div>
-            <div class="item"><b>3. Live Spy:</b> Camera, Mic, and Live GPS monitoring.</div>
-            <div class="item"><b>4. Casino Tricks:</b> 8-Ball auto-play & Teen Patti chips manipulation.</div>
-            <div class="item"><b>5. Signal Jamming:</b> WiFi/Data signal interruption (30-40m).</div>
-            <div class="item"><b>6. Sim Recon:</b> Fetching owner details from mobile numbers.</div>
+            <div class="item"><b>Kernel Access</b> Android system-level penetration & root protocols.</div>
+            <div class="item"><b>Signal Auditing</b> 4G/5G and WiFi frequency interception techniques.</div>
+            <div class="item"><b>App Neutralization</b> Bypassing high-tier security signatures & anti-cheats.</div>
+            <div class="item"><b>Forensics</b> Recovering encrypted data & live environment spying.</div>
         </div>
     </div>
 
     <div class="section-box">
-        <img src="https://images.pexels.com/photos/5473337/pexels-photo-5473337.jpeg?auto=compress&cs=tinysrgb&w=800" class="section-img">
-        <h2>💻 PC & Laptop Penetration (120+ Videos)</h2>
-        <div class="grid">
-            <div class="item"><b>1. Software Cracking:</b> Bypassing loaders & login walls.</div>
-            <div class="item"><b>2. Dark Web:</b> 100% Anonymous Onion network browsing.</div>
-            <div class="item"><b>3. WiFi Auditing:</b> Cracking WPA2/WPA3 network security.</div>
-            <div class="item"><b>4. OS Bypass:</b> Removing Windows & BIOS passwords.</div>
-            <div class="item"><b>5. RAT Setup:</b> Building undetectable Remote Trojans.</div>
-            <div class="item"><b>6. Malware Dev:</b> Payload encryption & virus analysis.</div>
-        </div>
-    </div>
-
-    <div class="section-box">
-        <h2>💬 Verified Student Testimonials</h2>
-        
-        <div class="testimonial">
-            <div class="user-info"><span class="user-mail">Luffycrak****gmail.com</span><button class="like-btn" onclick="like(this)">👍 2.4k</button></div>
-            <p style="color:#fff;">"I am absolutely shocked by the BGMI Japanese Bypass! It's 100% undetectable and works like magic. Best hacking course in India for gamers!"</p>
-        </div>
-
-        <div class="testimonial">
-            <div class="user-info"><span class="user-mail">Anasqure****gmail.com</span><button class="like-btn" onclick="like(this)">👍 432</button></div>
-            <p style="color:#fff;">"The PC cracking module is very detailed. I finally understood how loaders work."</p>
-        </div>
-
-        <div class="testimonial">
-            <div class="user-info"><span class="user-mail">VikasKumar****gmail.com</span><button class="like-btn" onclick="like(this)">👍 215</button></div>
-            <p style="color:#fff;">"Professional teaching style. The 2-hour Zoom meetings are very helpful for clearing doubts."</p>
-        </div>
-
-        <div class="testimonial">
-            <div class="user-info"><span class="user-mail">Riyacybert**gamil.com</span><button class="like-btn" onclick="like(this)">👍 189</button></div>
-            <p style="color:#fff;">"I was a beginner but now I can perform network auditing easily. Highly recommended!"</p>
-        </div>
-
-        <div class="testimonial">
-            <div class="user-info"><span class="user-mail">HarpreetSingh4***gmail.com</span><button class="like-btn" onclick="like(this)">👍 324</button></div>
-            <p style="color:#fff;">"Great content on Dark Web safety. Staying anonymous is now easier than ever."</p>
-        </div>
-    </div>
-
-    <div class="section-box">
-        <h2>📩 Leave Your Feedback</h2>
-        <form class="feedback-form">
-            <input type="text" placeholder="Name" required>
-            <input type="email" placeholder="Email (Hidden)" required>
-            <textarea rows="4" placeholder="Share your learning journey..." required></textarea>
-            <button type="submit" style="background:var(--neon); color:#000; width:100%; padding:15px; border:none; font-weight:bold; cursor:pointer;">SUBMIT FEEDBACK</button>
+        <h2>TERMINAL_FEEDBACK</h2>
+        <form onsubmit="event.preventDefault(); alert('DATA PACKET ENCRYPTED AND TRANSMITTED.');">
+            <input type="text" placeholder="USER_ID" class="feedback-input" required>
+            <textarea rows="4" placeholder="TRANSMISSION_CONTENT..." class="feedback-input" required></textarea>
+            <button type="submit" style="background:var(--neon); color:#000; width:100%; padding:18px; border:none; font-weight:bold; cursor:pointer; font-family:'Orbitron';">EXECUTE SUBMISSION</button>
         </form>
     </div>
 
-    <div style="color:var(--red); text-align:center; padding:20px; font-weight:bold;">
-        ⚠️ NOTICE: This course is for Educational Purposes only. Misuse is strictly prohibited.
-    </div>
+    <p style="text-align:center; color: #444; font-size: 0.7rem; margin-bottom: 120px;">FOR EDUCATIONAL USE ONLY - PROTOCOL 404 ACTIVE</p>
 
     <div class="cta-footer">
-        <h3 style="color:white; margin:0 0 10px 0;">All-In-One Combo: ₹2,499/-</h3>
-        <a href="https://wa.me/917505685543" class="btn btn-wa">ENROLL VIA WHATSAPP</a>
-        <a href="https://t.me/ZeroDay_Hunter" class="btn" style="background:#0088cc; color:white;">TELEGRAM SUPPORT</a>
+        <div style="color:white; margin-bottom:15px; font-size: 1.1rem;">FULL ACCESS KEY: <span style="color:var(--neon)">₹2,499</span></div>
+        <a href="https://wa.me/917505685543" class="btn btn-wa">ENROLL NOW</a>
     </div>
 </div>
 
 <script>
-    function like(btn) {
-        let text = btn.innerText.split(' ')[1];
-        let count;
-        if(text.includes('k')) { count = parseFloat(text) * 1000; } 
-        else { count = parseInt(text); }
-        count++;
-        btn.innerText = "👍 " + (count >= 1000 ? (count/1000).toFixed(1) + 'k' : count);
-        btn.style.background = "#00ff41"; btn.style.color = "#000";
-    }
     const canvas = document.getElementById('matrix'); const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    const alphabet = "010101ABCDEFGHIJKLMNOPQRSTUVWXYZ"; const rainDrops = Array.from({ length: canvas.width/16 }).fill(1);
+    const alphabet = "01X7#$@"; const rainDrops = Array.from({ length: Math.floor(canvas.width/18) }).fill(1);
     const draw = () => {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#0F0'; ctx.font = '16px monospace';
+        ctx.fillStyle = '#0F0'; ctx.font = '15px monospace';
         rainDrops.forEach((y, i) => {
-            const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-            ctx.fillText(text, i*16, y*16);
-            if(y*16 > canvas.height && Math.random() > 0.975) rainDrops[i] = 0;
-            rainDrops[i]++;
+            ctx.fillText(alphabet.charAt(Math.floor(Math.random() * alphabet.length)), i*18, y*18);
+            if(y*18 > canvas.height && Math.random() > 0.98) rainDrops[i] = 0; rainDrops[i]++;
         });
-    }; setInterval(draw, 33);
+    }; setInterval(draw, 35);
+
+    const text = "> Initializing Cyber Intelligence Protocol... Ready.";
+    let i = 0;
+    function type() { if(i < text.length) { document.getElementById("typewriter").innerHTML += text.charAt(i); i++; setTimeout(type, 40); } }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('show'); });
+    }, { threshold: 0.1 });
+
+    window.onload = () => { 
+        type(); 
+        document.querySelectorAll('.section-box').forEach(box => observer.observe(box));
+        setInterval(() => {
+            const countEl = document.getElementById('student-count');
+            if(Math.random() > 0.8) countEl.innerText = parseInt(countEl.innerText) + 1;
+        }, 4000);
+    };
 </script>
 </body>
 </html>
