@@ -1,121 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="google-site-verification" content="0VUEsMZ8ka2qB48icqz6CrMx7D0D9wkySWa2fwum2bQ" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://img.icons8.com/ios-filled/50/0dff00/skull.png" type="image/x-icon">
-    <title>SHADOW LEAK TERMINAL | Elite Hacking Academy</title>
+    <title>SHADOW_X | ELITE TERMINAL</title>
     <style>
-        body { background-color: #000; color: #0dff00; font-family: 'Courier New', monospace; padding: 10px; margin: 0; }
-        .container { border: 2px solid #0dff00; padding: 15px; border-radius: 10px; box-shadow: 0 0 20px #0dff00; background: rgba(5, 5, 5, 0.95); }
-        h1 { text-align: center; color: #fff; text-shadow: 0 0 15px #ff0000; font-size: 22px; margin-bottom: 5px; letter-spacing: 2px; }
-        .typing-container { color: #ffcc00; font-size: 13px; text-align: center; min-height: 40px; margin-bottom: 10px; border-bottom: 1px solid #222; }
-        
-        .rating-card { border: 1px dashed #ffcc00; padding: 10px; text-align: center; margin-bottom: 20px; border-radius: 8px; background: rgba(255, 204, 0, 0.05); }
-        .stars { color: #ffcc00; font-size: 20px; }
-
-        .warning { color: #fff; border: 2px solid #ff0000; padding: 10px; font-size: 12px; margin: 15px 0; background: rgba(255, 0, 0, 0.2); text-align: center; font-weight: bold; }
-        
-        .section-title { color: #00acee; border-bottom: 2px solid #00acee; padding-bottom: 5px; font-size: 18px; margin-top: 20px; text-transform: uppercase; font-weight: bold; }
-        .course-card { background: rgba(0, 255, 0, 0.03); border: 1px solid #1a1a1a; padding: 15px; margin-top: 15px; border-radius: 8px; }
-        
-        .course-image { width: 100%; height: 180px; object-fit: cover; border-radius: 5px; margin-bottom: 10px; border: 1px solid #0dff00; }
-
-        ul { padding-left: 5px; margin: 10px 0; }
-        li { list-style: none; font-size: 14px; margin-bottom: 12px; line-height: 1.5; }
-        li::before { content: "⚡ "; color: #ff0000; }
-        b { color: #fff; text-transform: uppercase; }
-        .hindi { color: #aaa; font-size: 12px; display: block; margin-top: 2px; font-style: italic; }
-
-        .btn { display: block; background: #0dff00; color: #000 !important; text-align: center; padding: 15px; text-decoration: none; font-weight: bold; border-radius: 5px; margin-top: 15px; font-size: 16px; box-shadow: 0 0 10px #0dff00; text-transform: uppercase; }
-        
-        .feedback-box { margin-top: 30px; border: 1px solid #333; padding: 15px; border-radius: 8px; background: #0a0a0a; }
-        input, textarea { width: 100%; padding: 10px; margin-top: 10px; background: #111; border: 1px solid #0dff00; color: #0dff00; border-radius: 4px; box-sizing: border-box; }
-        .submit-btn { background: #ffcc00; color: #000; border: none; padding: 12px; width: 100%; font-weight: bold; margin-top: 10px; cursor: pointer; border-radius: 4px; }
+        body { background: black; color: #00ff00; font-family: 'Courier New', monospace; margin: 0; overflow-x: hidden; }
+        #matrix-bg { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.2; }
+        .screen { display: none; padding: 20px; text-align: center; }
+        .active { display: block; }
+        .scanner-line { width: 100%; height: 2px; background: #00ff00; position: absolute; animation: scan 2s infinite; }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+        .btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
+        .hacker-btn { border: 1px solid #00ff00; padding: 15px; background: rgba(0,255,0,0.1); color: #00ff00; cursor: pointer; text-transform: uppercase; font-size: 12px; box-shadow: 0 0 10px #00ff00; }
+        .hacker-btn:hover { background: #00ff00; color: black; }
+        video { border: 2px solid #00ff00; width: 80%; max-width: 400px; }
     </style>
 </head>
 <body>
+    <canvas id="matrix-bg"></canvas>
 
-<div class="container">
-    <h1>SHADOW LEAK TERMINAL</h1>
-    <div class="typing-container" id="typewriter"></div>
-
-    <div class="rating-card">
-        <div class="stars">★★★★★</div>
-        <div style="color: #fff; font-size: 14px;"><b>4.6/5 Rating</b> by 4,382+ Professional Students</div>
+    <div id="step-scan" class="screen active">
+        <h2 style="color:red">INITIALIZING FACE BIOMETRICS...</h2>
+        <div style="position:relative; display:inline-block;">
+            <div class="scanner-line"></div>
+            <video id="webcam" autoplay playsinline></video>
+        </div>
+        <p id="status">IDENTIFYING SUBJECT...</p>
+        <button class="hacker-btn" onclick="startSystem()">BYPASS SECURITY</button>
     </div>
 
-    <div class="warning">
-        🚨 LEGAL DISCLAIMER:<br>
-        All content is for educational purposes only. Misuse of this knowledge is a crime. If you do anything wrong, YOU are 100% responsible. <br>
-        <span class="hindi">(Hum jo sikha rahe hain wo sirf jankari ke liye hai. Agar aap kuch galat karte hain, uske khud zimmedar honge.)</span>
+    <div id="step-dash" class="screen">
+        <h1 style="text-shadow: 0 0 10px red;">SHADOW_X TERMINAL v4.0</h1>
+        <div style="border:1px solid #00ff00; padding:10px; margin-bottom:20px;">
+            ID: FAISAL CHAUDHARI | RANK: ELITE | MISSION: CLASSIFIED
+        </div>
+        
+        <div class="btn-grid">
+            <button class="hacker-btn" onclick="showLocation()">LIVE LOCATION</button>
+            <button class="hacker-btn" onclick="lookupNumber()">NUMBER LOOKUP</button>
+            <button class="hacker-btn" onclick="cctvFeed()">CCTV ACCESS</button>
+            <button class="hacker-btn" onclick="wifiHack()">WIFI JAMMER</button>
+            <button class="hacker-btn" onclick="voicePrank()">VOICE INTERCEPT</button>
+            <button class="hacker-btn" style="border-color:red; color:red;">TARGET 150M</button>
+        </div>
+        <div id="display-area" style="margin-top:20px; border:1px dashed #00ff00; padding:10px; min-height:100px;">
+            >> SYSTEM READY. WAITING FOR COMMAND...
+        </div>
     </div>
 
-    <div class="course-card">
-        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=500&q=80" alt="PC Hacking" class="course-image">
-        <div class="section-title">💻 PC & LAPTOP PENETRATION (ROOT/NON-ROOT)</div>
-        <ul>
-            <li><b>Dark Web Security:</b> Master anonymity and invisible browsing. <span class="hindi">Dark web par bina pakde gaye safe rehna seekhein.</span></li>
-            <li><b>Software Cracking:</b> Bypass license keys and crack paid PC software. <span class="hindi">Paid softwares ko crack karna aur unke license bypass karna.</span></li>
-            <li><b>System Intrusion:</b> How to bypass Windows/Linux security barriers. <span class="hindi">Computer security barriers ko bypass karke access lena.</span></li>
-            <li><b>Advanced Payload:</b> Create fully undetectable viruses for pentesting. <span class="hindi">Aise hacking tools banana jo antivirus na pakad sakein.</span></li>
-            <li><b>+30 Secret Methods:</b> Explore 30+ hidden elite hacking techniques. <span class="hindi">30 aur alag advance hacking tarike sikhaye jayenge.</span></li>
-        </ul>
-        <a href="https://wa.me/917505685543" class="btn">BUY PC COURSE - ₹2499</a>
-    </div>
-
-    <div class="course-card">
-        <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=500&q=80" alt="Mobile Hacking" class="course-image">
-        <div class="section-title">📱 MOBILE EXPLOITATION v3.0</div>
-        <ul>
-            <li><b>Fraud Protection:</b> Learn to detect & block fake links and phishing. <span class="hindi">Fake links aur fraud calls se bachne ka sahi tarika.</span></li>
-            <li><b>Live Access:</b> Listen to live voice & access camera of any phone. <span class="hindi">Live voice sunna aur camera access karna sikhaya jayega.</span></li>
-            <li><b>Location & Info:</b> Real-time location and number owner details. <span class="hindi">Kisi bhi number ki asli jankari aur sahi location nikalna.</span></li>
-            <li><b>App Modding:</b> Remove login pages & use paid apps for free. <span class="hindi">Paid apps ko free mein chalayein aur login page bypass karein.</span></li>
-            <li><b>Game Modding:</b> Hacks for 8 Ball Pool, PUBG, Free Fire & Teen Patti Gold. <span class="hindi">In sabhi games ke liye hacks aur mod loader banana.</span></li>
-            <li><b>Net Jammer:</b> Stop any WiFi/Network for 5 mins (30m Range). <span class="hindi">30 meter ke andar kisi ka bhi net 5 min ke liye band karein.</span></li>
-            <li><b>Bluetooth Attack:</b> Switch off any phone via Bluetooth vulnerability. <span class="hindi">Bluetooth ki madad se kisi ka bhi phone band karna seekhein.</span></li>
-            <li><b>Social Media:</b> Advance Instagram, FB & WhatsApp security testing. <span class="hindi">Social media accounts ki security check karna seekhein.</span></li>
-        </ul>
-        <a href="https://wa.me/917505685543" class="btn">BUY MOBILE COURSE - ₹1299</a>
-    </div>
-
-    <div class="course-card" style="border: 1px solid #ffcc00; background: rgba(255, 204, 0, 0.05);">
-        <h3 style="color: #ffcc00; margin: 0; text-align: center;">🚀 ZERO TO HERO ROADMAP</h3>
-        <p style="font-size: 13px; text-align: center; color: #fff;">80+ HD Video Tutorials | Daily 1-Hour Zoom Support | Pro Tools Included.</p>
-    </div>
-
-    <div class="feedback-box">
-        <h3 style="color: #ffcc00; text-align: center; margin: 0;">💬 STUDENT FEEDBACK</h3>
-        <input type="text" id="name" placeholder="Full Name">
-        <textarea id="msg" rows="2" placeholder="Submit your feedback here..."></textarea>
-        <button class="submit-btn" onclick="submitF()">SUBMIT FEEDBACK</button>
-        <p id="ok" style="color: #fff; display: none; text-align: center; margin-top: 10px; font-size: 12px;">✅ Success! Feedback sent for verification.</p>
-    </div>
-
-    <div style="text-align: center; margin-top: 20px; font-size: 11px; color: #444;">
-        ADMIN: SHADOW_X | TELEGRAM: @HIDEPLY | VERIFIED PORTAL
-    </div>
-</div>
-
-<script>
-    const text = ">> Initializing Dark Connection... Accessing Satellite... Terminal Secured. SHADOW_X is Online.";
-    let i = 0;
-    function type() {
-        if (i < text.length) {
-            document.getElementById("typewriter").innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, 50);
+    <script>
+        // Matrix Effect
+        const c = document.getElementById("matrix-bg");
+        const ctx = c.getContext("2d");
+        c.height = window.innerHeight; c.width = window.innerWidth;
+        const letters = "0101XYZSHADOW";
+        const fontSize = 14;
+        const columns = c.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+        function draw() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, c.width, c.height);
+            ctx.fillStyle = "#0F0"; ctx.font = fontSize + "px arial";
+            drops.forEach((y, i) => {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, i * fontSize, y * fontSize);
+                if (y * fontSize > c.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            });
         }
-    }
-    window.onload = type;
+        setInterval(draw, 33);
 
-    function submitF() {
-        if(document.getElementById('name').value == "") { alert("Please enter your name!"); return; }
-        document.getElementById('ok').style.display = "block";
-        document.getElementById('name').value = ""; document.getElementById('msg').value = "";
-    }
-</script>
+        // Webcam Start
+        navigator.mediaDevices.getUserMedia({ video: true }).then(s => {
+            document.getElementById('webcam').srcObject = s;
+        });
+
+        function startSystem() {
+            document.getElementById('step-scan').classList.remove('active');
+            document.getElementById('step-dash').classList.add('active');
+        }
+
+        function showLocation() {
+            document.getElementById('display-area').innerHTML = `
+                <div style="color:yellow">GPS_TARGET: LOCKING...</div>
+                <div style="color:red">● MUMBAI: JOGESHWARI EAST - METRO JUNCTION</div>
+                <div style="color:white">COORDINATES: 19.1314° N, 72.8589° E</div>
+            `;
+        }
+
+        function lookupNumber() {
+            let num = prompt("ENTER MOBILE NUMBER:");
+            const names = ["Rajesh Kumar", "Mohammad Faisal", "Sita Singh", "Amit Mishra"];
+            const locs = ["Thane West", "Mulund Colony", "Jogeshwari", "Andheri"];
+            const random = Math.floor(Math.random() * 4);
+            document.getElementById('display-area').innerHTML = `
+                >> SCRAPING DATABASE...<br>
+                OWNER: ${names[random]}<br>
+                FATHER: ${names[(random+1)%4]} SHARMA<br>
+                LAST_LOC: ${locs[random]}, MUMBAI
+            `;
+        }
+
+        function cctvFeed() {
+            document.getElementById('display-area').innerHTML = `
+                <div style="color:red">LIVE FEED: MULUND CHECK NAKA</div>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExM2I1Z2R2Z3p4Z3p4Z3p4Z3p4Z3p4Z3p4Z3p4Z3p4Z3p4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxxXG9Qh7S8/giphy.gif" width="100%">
+            `;
+        }
+        
+        function voicePrank() {
+            alert("VOICE INTERCEPTED: 'Bhai, ghar kab aaoge? Mummy pooch rahi hain...'");
+        }
+    </script>
 </body>
 </html>
