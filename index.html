@@ -3,52 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZeroDay Hunter | Academy & Elite Store</title>
+    <title>ZeroDay Hunter | Elite Academy & Mega Store</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
     <style>
         :root { --neon: #00ff41; --bg: #050505; --red: #ff003c; --gold: #ffd700; --card: #0c0c0c; }
         * { box-sizing: border-box; }
-        body { background: var(--bg); color: var(--neon); font-family: 'Fira Code', monospace; margin: 0; line-height: 1.6; overflow-x: hidden; }
+        body { background: var(--bg); color: var(--neon); font-family: 'Fira Code', monospace; margin: 0; line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
         #matrix { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
         .container { max-width: 1100px; margin: auto; padding: 20px; }
         
         header { text-align: center; padding: 100px 0; border-bottom: 2px solid var(--neon); background: rgba(0,0,0,0.8); margin-bottom: 40px; }
         .glitch { font-family: 'Orbitron'; font-size: clamp(2rem, 10vw, 4rem); color: #fff; text-shadow: 2px 2px var(--red); text-transform: uppercase; letter-spacing: 5px; }
 
-        .section-box { background: rgba(10, 10, 10, 0.98); border: 1px solid #333; padding: 40px; margin: 40px 0; border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,1); }
+        .section-box { background: rgba(10, 10, 10, 0.98); border: 1px solid #333; padding: 40px; margin: 40px 0; border-radius: 8px; }
         h2 { font-family: 'Orbitron'; color: #fff; border-left: 5px solid var(--neon); padding-left: 15px; margin-bottom: 30px; text-transform: uppercase; }
         
-        /* Grid Layouts */
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .item { background: var(--card); padding: 20px; border: 1px solid #222; border-radius: 4px; transition: 0.3s; }
-        .item:hover { border-color: var(--neon); }
+        .item { background: var(--card); padding: 20px; border: 1px solid #222; border-radius: 4px; }
         .item b { color: #fff; display: block; margin-bottom: 10px; font-size: 1.1rem; }
         .section-img { width: 100%; height: 280px; object-fit: cover; border-radius: 4px; margin-bottom: 20px; border: 1px solid var(--neon); }
 
-        /* GADGET STORE GRID */
-        .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-top: 20px; }
+        /* GADGET STORE */
+        .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
         .gadget-card { background: #000; border: 1px solid #222; border-radius: 8px; overflow: hidden; transition: 0.4s ease; display: flex; flex-direction: column; }
-        .gadget-card:hover { border-color: var(--neon); transform: translateY(-10px); box-shadow: 0 0 15px var(--neon); }
-        .gadget-img { width: 100%; height: 160px; object-fit: cover; border-bottom: 1px solid #222; filter: grayscale(50%); }
+        .gadget-card:hover { border-color: var(--neon); transform: translateY(-10px); }
+        .gadget-img { width: 100%; height: 160px; object-fit: cover; border-bottom: 1px solid #222; }
         .gadget-info { padding: 15px; flex-grow: 1; }
         .rating { color: var(--gold); font-size: 0.8rem; margin-bottom: 8px; }
         .price { font-size: 1.3rem; color: #fff; font-weight: bold; margin: 10px 0; }
-        .buy-now-btn { background: var(--neon); color: #000; border: none; padding: 12px; width: 100%; font-weight: 900; cursor: pointer; font-family: 'Orbitron'; text-transform: uppercase; }
+        .buy-now-btn { background: var(--neon); color: #000; border: none; padding: 12px; width: 100%; font-weight: 900; cursor: pointer; font-family: 'Orbitron'; }
 
-        /* CHECKOUT MODALS */
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 10000; display: none; justify-content: center; align-items: center; padding: 20px; }
-        .checkout-box { background: #111; border: 2px solid var(--neon); padding: 30px; width: 100%; max-width: 500px; border-radius: 12px; box-shadow: 0 0 50px rgba(0,255,65,0.2); }
-        .checkout-box input, .checkout-box textarea { width: 100%; padding: 15px; margin: 12px 0; background: #000; border: 1px solid var(--neon); color: #fff; font-family: inherit; font-size: 1rem; border-radius: 4px; }
-        .hidden { display: none; }
-
-        /* Testimonials */
-        .testimonial { border-bottom: 1px solid #222; padding: 20px 0; }
+        /* TESTIMONIALS & LIKES */
+        .testimonial { border-bottom: 1px solid #222; padding: 25px 0; }
         .user-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
         .user-mail { color: #888; font-size: 0.85rem; }
+        .like-btn { background: transparent; border: 1px solid var(--neon); color: var(--neon); padding: 5px 15px; cursor: pointer; border-radius: 20px; transition: 0.3s; font-weight: bold; }
+        .like-btn:hover { background: var(--neon); color: #000; }
 
-        /* Footer CTA */
-        .cta-footer { position: sticky; bottom: 0; background: rgba(0,0,0,0.98); padding: 20px; text-align: center; border-top: 2px solid var(--neon); z-index: 500; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; backdrop-filter: blur(10px); }
-        .btn { padding: 15px 30px; font-weight: 900; text-decoration: none; border-radius: 4px; cursor: pointer; border: none; font-family: 'Orbitron'; font-size: 0.85rem; }
+        /* CHECKOUT MODAL */
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); z-index: 10000; display: none; justify-content: center; align-items: center; padding: 20px; }
+        .checkout-box { background: #111; border: 2px solid var(--neon); padding: 30px; width: 100%; max-width: 500px; border-radius: 12px; }
+        .checkout-box input, .checkout-box textarea { width: 100%; padding: 15px; margin: 12px 0; background: #000; border: 1px solid var(--neon); color: #fff; font-family: inherit; border-radius: 4px; }
+        .hidden { display: none; }
+
+        .cta-footer { position: sticky; bottom: 0; background: rgba(0,0,0,0.95); padding: 20px; text-align: center; border-top: 2px solid var(--neon); z-index: 500; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+        .btn { padding: 15px 30px; font-weight: 900; text-decoration: none; border-radius: 4px; cursor: pointer; font-family: 'Orbitron'; font-size: 0.85rem; }
         .btn-wa { background: var(--neon); color: #000; }
         .btn-tele { background: #0088cc; color: white; }
     </style>
@@ -60,166 +59,130 @@
 <div class="container">
     <header>
         <div class="glitch">ZERODAY_HUNTER</div>
-        <p>Elite Academy of Cyber Intelligence & Hardware Operations</p>
-        <div style="color:var(--gold); font-weight:bold; margin-top:15px; font-size:1.1rem; border: 1px solid var(--gold); display: inline-block; padding: 5px 15px;">⭐ VERIFIED STATUS: 4.8/5.0</div>
+        <p>Advanced Cyber Intelligence & Elite Hardware Distribution</p>
+        <div style="color:var(--gold); font-weight:bold; margin-top:15px;">⭐ 4.6/5.0 Rating (4,800+ Feedbacks)</div>
     </header>
 
     <div class="section-box">
-        <h2>👤 Lead Instructor Profile</h2>
-        <p>Admin **ZeroDay_Hunter** is an International Security Researcher specializing in offensive cyber security. With experience in underground labs across **Israel and Europe**, he brings clandestine knowledge to the forefront of modern education.</p>
-        <div style="border: 1px dashed var(--gold); padding: 15px; color: var(--gold); font-size: 0.9rem; margin-top: 15px;">
-            [DETERMINED: ELITE MASTER] [CERTIFIED: OSCP, CEH, CISSP]
+        <h2>👤 Meet The Admin (Instructor)</h2>
+        <p>Admin **ZeroDay_Hunter** is an International Security Researcher trained in underground cyber-labs across **Israel and Europe**. His mission is to empower every individual with high-level cyber security skills.</p>
+        <div style="border: 1px dashed var(--gold); padding: 15px; color: var(--gold); font-size: 0.9rem;">
+            🏆 Winner: Global Cyber Excellence Award (2023) | OSCP, CEH Master Certified.
         </div>
     </div>
 
     <div class="section-box">
         <img src="https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800" class="section-img">
-        <h2>📱 Advanced Mobile Penetration</h2>
+        <h2>📱 Advanced Mobile Hacking (80+ Videos)</h2>
         <div class="grid">
-            <div class="item"><b>01. Remote Control</b> System-level access for Android/iOS environments.</div>
-            <div class="item"><b>02. Signature Bypass</b> Neutralizing anti-cheat and security layers.</div>
-            <div class="item"><b>03. Signal Jamming</b> Interruption protocols for 4G/5G/WiFi frequencies.</div>
-            <div class="item"><b>04. Data Forensics</b> Recovering and spying on live communication nodes.</div>
-        </div>
-    </div>
-
-    <div class="section-box" id="store">
-        <h2>🛡️ Underground Hardware Store</h2>
-        <p style="color: #888; margin-bottom: 25px;">[RESTRICTED INVENTORY: STEALH SHIPPING WORLDWIDE]</p>
-        <div class="store-grid">
-            <div class="gadget-card">
-                <img src="https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=300" class="gadget-img">
-                <div class="gadget-info">
-                    <div class="rating">⭐⭐⭐⭐⭐ (840)</div>
-                    <h3>Rubber Ducky V3</h3>
-                    <div class="price">₹6,499</div>
-                    <button class="buy-now-btn" onclick="openCheckout('Rubber Ducky V3', '6,499')">BUY NOW</button>
-                </div>
-            </div>
-            <div class="gadget-card">
-                <img src="https://images.pexels.com/photos/5473302/pexels-photo-5473302.jpeg?auto=compress&cs=tinysrgb&w=300" class="gadget-img">
-                <div class="gadget-info">
-                    <div class="rating">⭐⭐⭐⭐⭐ (1.2k)</div>
-                    <h3>WiFi Pineapple</h3>
-                    <div class="price">₹14,200</div>
-                    <button class="buy-now-btn" onclick="openCheckout('WiFi Pineapple', '14,200')">BUY NOW</button>
-                </div>
-            </div>
-            <div class="gadget-card">
-                <img src="https://images.pexels.com/photos/4006151/pexels-photo-4006151.jpeg?auto=compress&cs=tinysrgb&w=300" class="gadget-img">
-                <div class="gadget-info">
-                    <div class="rating">⭐⭐⭐⭐☆ (315)</div>
-                    <h3>RF Cloner Pro</h3>
-                    <div class="price">₹9,800</div>
-                    <button class="buy-now-btn" onclick="openCheckout('RF Cloner Pro', '9,800')">BUY NOW</button>
-                </div>
-            </div>
-            <div class="gadget-card">
-                <img src="https://images.pexels.com/photos/1432675/pexels-photo-1432675.jpeg?auto=compress&cs=tinysrgb&w=300" class="gadget-img">
-                <div class="gadget-info">
-                    <div class="rating">⭐⭐⭐⭐⭐ (150)</div>
-                    <h3>SDR HackRF One</h3>
-                    <div class="price">₹26,500</div>
-                    <button class="buy-now-btn" onclick="openCheckout('SDR HackRF One', '26,500')">BUY NOW</button>
-                </div>
-            </div>
-            <div class="gadget-card">
-                <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=300" class="gadget-img">
-                <div class="gadget-info">
-                    <div class="rating">⭐⭐⭐⭐⭐ (240)</div>
-                    <h3>GPS Disruptor</h3>
-                    <div class="price">₹4,200</div>
-                    <button class="buy-now-btn" onclick="openCheckout('GPS Disruptor', '4,200')">BUY NOW</button>
-                </div>
-            </div>
-             <div class="gadget-card">
-                <img src="https://images.pexels.com/photos/357514/pexels-photo-357514.jpeg?auto=compress&cs=tinysrgb&w=300" class="gadget-img">
-                <div class="gadget-info">
-                    <div class="rating">⭐⭐⭐⭐☆ (89)</div>
-                    <h3>O.MG Payload Cable</h3>
-                    <div class="price">₹11,500</div>
-                    <button class="buy-now-btn" onclick="openCheckout('O.MG Payload Cable', '11,500')">BUY NOW</button>
-                </div>
-            </div>
+            <div class="item"><b>1. Remote Control:</b> Full Android device access protocols.</div>
+            <div class="item"><b>2. Japanese Bypass:</b> Elite BGMI/PUBG Anti-Ban & High-Tier Bypass.</div>
+            <div class="item"><b>3. Live Spy:</b> Camera, Mic, and Live GPS monitoring.</div>
+            <div class="item"><b>4. Casino Tricks:</b> 8-Ball auto-play & Teen Patti chips manipulation.</div>
+            <div class="item"><b>5. Signal Jamming:</b> WiFi/Data signal interruption (30-40m).</div>
+            <div class="item"><b>6. Sim Recon:</b> Fetching owner details from mobile numbers.</div>
         </div>
     </div>
 
     <div class="section-box">
         <img src="https://images.pexels.com/photos/5473337/pexels-photo-5473337.jpeg?auto=compress&cs=tinysrgb&w=800" class="section-img">
-        <h2>💻 PC & Infrastructure Auditing</h2>
+        <h2>💻 PC & Laptop Penetration (120+ Videos)</h2>
         <div class="grid">
-            <div class="item"><b>01. Software Analysis</b> Cracking loaders and auth-walls.</div>
-            <div class="item"><b>02. Deep Web Operations</b> 100% Anonymous navigation protocols.</div>
-            <div class="item"><b>03. Malware Dev</b> Designing undetectable Remote Access Trojans.</div>
-            <div class="item"><b>04. BIOS Bypass</b> Removing firmware-level restrictions and passwords.</div>
+            <div class="item"><b>1. Software Cracking:</b> Bypassing loaders & login walls.</div>
+            <div class="item"><b>2. Dark Web:</b> 100% Anonymous Onion network browsing.</div>
+            <div class="item"><b>3. WiFi Auditing:</b> Cracking WPA2/WPA3 network security.</div>
+            <div class="item"><b>4. OS Bypass:</b> Removing Windows & BIOS passwords.</div>
+            <div class="item"><b>5. RAT Setup:</b> Building undetectable Remote Trojans.</div>
+            <div class="item"><b>6. Malware Dev:</b> Payload encryption & virus analysis.</div>
+        </div>
+    </div>
+
+    <div class="section-box" id="store">
+        <h2>🛡️ Underground Hardware Inventory</h2>
+        <div class="store-grid">
+            <div class="gadget-card">
+                <img src="https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=300" class="gadget-img">
+                <div class="gadget-info"><h3>USB Rubber Ducky</h3><div class="rating">⭐⭐⭐⭐⭐</div><div class="price">₹6,500</div><button class="buy-now-btn" onclick="openCheckout('USB Rubber Ducky', '6,500')">BUY NOW</button></div>
+            </div>
+            <div class="gadget-card">
+                <img src="https://images.pexels.com/photos/5473302/pexels-photo-5473302.jpeg?auto=compress&cs=tinysrgb&w=300" class="gadget-img">
+                <div class="gadget-info"><h3>LAN Turtle</h3><div class="rating">⭐⭐⭐⭐⭐</div><div class="price">₹8,200</div><button class="buy-now-btn" onclick="openCheckout('LAN Turtle', '8,200')">BUY NOW</button></div>
+            </div>
+            <div class="gadget-card">
+                <img src="https://images.pexels.com/photos/1432675/pexels-photo-1432675.jpeg?auto=compress&cs=tinysrgb&w=300" class="gadget-img">
+                <div class="gadget-info"><h3>Flipper Zero</h3><div class="rating">⭐⭐⭐⭐⭐</div><div class="price">₹24,999</div><button class="buy-now-btn" onclick="openCheckout('Flipper Zero', '24,999')">BUY NOW</button></div>
+            </div>
+            <div class="gadget-card">
+                <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=300" class="gadget-img">
+                <div class="gadget-info"><h3>Wi-Fi Deauther Watch</h3><div class="rating">⭐⭐⭐⭐☆</div><div class="price">₹4,800</div><button class="buy-now-btn" onclick="openCheckout('Wi-Fi Deauther Watch', '4,800')">BUY NOW</button></div>
+            </div>
+            <div class="gadget-card">
+                <img src="https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=300" class="gadget-img">
+                <div class="gadget-info"><h3>Satellite Phone Spyware</h3><div class="rating">⭐⭐⭐⭐⭐</div><div class="price">₹35,000</div><button class="buy-now-btn" onclick="openCheckout('Satellite Phone Spyware', '35,000')">BUY NOW</button></div>
+            </div>
         </div>
     </div>
 
     <div class="section-box">
-        <h2>💬 Verified Testimonials</h2>
+        <h2>💬 Verified Student Testimonials</h2>
         <div class="testimonial">
-            <div class="user-info"><span class="user-mail">Luffycrak****@gmail.com</span><span style="color:var(--gold)">★★★★★</span></div>
-            <p>"The Japanese Bypass is insane. Totally undetectable!"</p>
+            <div class="user-info"><span class="user-mail">Luffycrak****@gmail.com</span><button class="like-btn" onclick="like(this)">👍 2.4k</button></div>
+            <p>"I am shocked by the BGMI Japanese Bypass! It's 100% undetectable."</p>
         </div>
         <div class="testimonial">
-            <div class="user-info"><span class="user-mail">Anasqure****@gmail.com</span><span style="color:var(--gold)">★★★★★</span></div>
-            <p>"Professional quality videos. Finally understood RAT setup."</p>
+            <div class="user-info"><span class="user-mail">Anasqure****@gmail.com</span><button class="like-btn" onclick="like(this)">👍 432</button></div>
+            <p>"The PC cracking module is very detailed. Finally understood loaders."</p>
         </div>
     </div>
 
     <div class="section-box">
-        <h2>📩 Operational Feedback</h2>
-        <form onsubmit="event.preventDefault(); alert('FEEDBACK ENCRYPTED AND SENT.');">
-            <input type="text" placeholder="Identity (Name)" style="width:100%; padding:15px; background:#000; border:1px solid var(--neon); color:#fff; margin-bottom:15px;" required>
-            <textarea rows="4" placeholder="Briefing Content..." style="width:100%; padding:15px; background:#000; border:1px solid var(--neon); color:#fff; margin-bottom:15px;" required></textarea>
-            <button type="submit" style="background:var(--neon); color:#000; width:100%; padding:15px; border:none; font-weight:bold; cursor:pointer; font-family:'Orbitron';">SUBMIT FEEDBACK</button>
+        <h2>📩 Leave Your Feedback</h2>
+        <form onsubmit="event.preventDefault(); alert('FEEDBACK SENT!');">
+            <input type="text" placeholder="Name" style="width:100%; padding:15px; background:#000; border:1px solid var(--neon); color:#fff; margin-bottom:15px;" required>
+            <textarea rows="4" placeholder="Share your journey..." style="width:100%; padding:15px; background:#000; border:1px solid var(--neon); color:#fff; margin-bottom:15px;" required></textarea>
+            <button type="submit" style="background:var(--neon); color:#000; width:100%; padding:15px; border:none; font-weight:bold; cursor:pointer; width:100%;">SUBMIT FEEDBACK</button>
         </form>
     </div>
-
-    <p style="text-align:center; color: var(--red); font-weight:bold; padding:40px;">⚠️ LEGAL NOTICE: ALL CONTENT FOR EDUCATIONAL PURPOSES ONLY.</p>
 
 </div>
 
 <div class="overlay" id="checkoutOverlay">
     <div class="checkout-box" id="addressStep">
-        <h2 style="font-size: 1.2rem;">LOGISTICS_PROTOCOL</h2>
-        <p id="selectedItemDisplay" style="color: var(--gold); border: 1px dashed var(--gold); padding: 5px; text-align: center;"></p>
-        <input type="text" id="custName" placeholder="Full Name (Legal Identity)">
-        <textarea id="custAddr" placeholder="Shipping Destination (Full Address)" rows="3"></textarea>
-        <input type="text" id="custPhone" placeholder="Secure Contact Number">
-        <button class="buy-now-btn" onclick="goToPayment()">PROCEED TO PAYMENT</button>
-        <button onclick="closeCheckout()" style="background:none; border:none; color:#555; width:100%; margin-top:10px; cursor:pointer;">ABORT TRANSACTION</button>
+        <h2>LOGISTICS_DATA</h2>
+        <p id="selectedItemDisplay" style="color:var(--gold); text-align:center;"></p>
+        <input type="text" id="custName" placeholder="Full Identity Name">
+        <textarea id="custAddr" placeholder="Shipping Address (Location)" rows="3"></textarea>
+        <input type="text" id="custPhone" placeholder="Secure Contact Node">
+        <button class="buy-now-btn" onclick="goToPayment()">PROCEED TO TELEGRAM</button>
+        <button onclick="closeCheckout()" style="background:none; border:none; color:#555; width:100%; margin-top:10px; cursor:pointer;">ABORT</button>
     </div>
 
     <div class="checkout-box hidden" id="paymentStep">
-        <h2>PAYMENT_GATEWAY</h2>
-        <p style="font-size: 0.8rem; line-height: 1.4;">1. Click below to message Admin on Telegram.<br>2. Complete the Payment via provided link.<br>3. Admin will provide a unique <b>ORDER ID</b>.</p>
-        <a href="https://t.me/ZeroDay_Hunter" target="_blank" class="btn btn-tele" style="display:block; text-align:center; margin-bottom: 20px;">OPEN TELEGRAM ADMIN</a>
-        <input type="text" id="orderIdInput" placeholder="Enter Order ID from Admin">
-        <button class="buy-now-btn" onclick="finalizeOrder()">VERIFY & CONFIRM ORDER</button>
+        <h2>PAYMENT_PORTAL</h2>
+        <p>1. Contact Admin on Telegram for link.<br>2. Complete the transfer.<br>3. Paste the **ORDER ID** provided by Admin below.</p>
+        <a href="https://t.me/ZeroDay_Hunter" target="_blank" class="btn btn-tele" style="display:block; text-align:center; margin-bottom:15px;">OPEN TELEGRAM</a>
+        <input type="text" id="orderIdInput" placeholder="Enter Admin Order ID">
+        <button class="buy-now-btn" onclick="finalizeOrder()">VERIFY & COMPLETE</button>
     </div>
 
     <div class="checkout-box hidden" id="finalStep">
-        <h2 style="color: var(--neon);">ORDER_EXECUTED</h2>
-        <div style="background:#000; border: 1px solid var(--neon); padding: 20px; text-align: center;">
-            <p>Order ID: <b id="displayId" style="color:#fff;"></b></p>
-            <p>Status: <span style="color:var(--gold)">Processing Dispatch</span></p>
-            <p>Delivery: <b>06-07 Business Days</b></p>
-        </div>
-        <button class="buy-now-btn" onclick="location.reload()" style="margin-top:20px;">RETURN TO SYSTEM</button>
+        <h2 style="color: var(--neon);">✔ TRANSACTION_COMPLETE</h2>
+        <p>Order ID: <b id="displayId"></b></p>
+        <p>Status: <span style="color:var(--gold)">Stealth Shipping Active</span></p>
+        <p>Arrival: <b>06 Days</b></p>
+        <button class="buy-now-btn" onclick="location.reload()">FINISH</button>
     </div>
 </div>
 
 <div class="cta-footer">
-    <a href="https://wa.me/917505685543" class="btn btn-wa">ENROLL VIA WA</a>
-    <a href="#store" class="btn" style="background:var(--gold); color:#000;">OPEN GADGET STORE</a>
-    <a href="https://t.me/ZeroDay_Hunter" class="btn btn-tele">TELEGRAM HELP</a>
+    <a href="https://wa.me/917505685543" class="btn btn-wa">WHATSAPP ENROLL</a>
+    <a href="#store" class="btn" style="background:var(--gold); color:#000;">GADGET STORE</a>
 </div>
 
 <script>
     const canvas = document.getElementById('matrix'); const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    const alphabet = "01X#$@%"; const rainDrops = Array.from({ length: canvas.width/16 }).fill(1);
+    const alphabet = "010101"; const rainDrops = Array.from({ length: canvas.width/16 }).fill(1);
     const draw = () => {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = '#0F0'; ctx.font = '16px monospace';
@@ -229,20 +192,27 @@
         });
     }; setInterval(draw, 33);
 
-    // Flow Logic
+    function like(btn) {
+        let text = btn.innerText.split(' ')[1];
+        let count = text.includes('k') ? parseFloat(text) * 1000 : parseInt(text);
+        count++;
+        btn.innerText = "👍 " + (count >= 1000 ? (count/1000).toFixed(1) + 'k' : count);
+        btn.style.background = "#00ff41"; btn.style.color = "#000";
+    }
+
     function openCheckout(item, price) {
         document.getElementById('checkoutOverlay').style.display = 'flex';
-        document.getElementById('selectedItemDisplay').innerText = "UNIT: " + item + " | COST: " + price;
+        document.getElementById('selectedItemDisplay').innerText = "UNIT: " + item + " | PRICE: " + price;
     }
     function closeCheckout() { document.getElementById('checkoutOverlay').style.display = 'none'; }
     function goToPayment() {
-        if(!document.getElementById('custName').value || !document.getElementById('custAddr').value) { alert("ERROR: Missing Identity Data."); return; }
+        if(!document.getElementById('custName').value || !document.getElementById('custAddr').value) return alert("Fill data!");
         document.getElementById('addressStep').classList.add('hidden');
         document.getElementById('paymentStep').classList.remove('hidden');
     }
     function finalizeOrder() {
         const id = document.getElementById('orderIdInput').value;
-        if(id.length < 4) { alert("ERROR: Invalid Order ID provided by Admin."); return; }
+        if(id.length < 4) return alert("Invalid ID!");
         document.getElementById('displayId').innerText = id;
         document.getElementById('paymentStep').classList.add('hidden');
         document.getElementById('finalStep').classList.remove('hidden');
@@ -250,4 +220,3 @@
 </script>
 </body>
 </html>
-
