@@ -1,35 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="google-site-verification" content="0VUEsMZ8ka2qB48icqz6CrMx7D0D9wkySWa2fwum2bQ" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHADOW LEAK TERMINAL v4.0</title>
+    <title>SHADOW_X | ELITE TERMINAL v4.0</title>
     <style>
-        body { background: black; color: #00ff00; font-family: 'Courier New', Courier, monospace; overflow-x: hidden; margin: 0; }
-        #matrix { position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; opacity: 0.3; }
-        .container { padding: 20px; text-align: center; }
-        .glitch { font-size: 2.5em; font-weight: bold; text-transform: uppercase; color: #ff0000; text-shadow: 2px 2px #00ff00; animation: glitch 1s infinite; }
-        @keyframes glitch { 0% { transform: skew(2deg); } 50% { transform: skew(-2deg); } 100% { transform: skew(2deg); } }
-        .typing-box { border: 1px solid #00ff00; padding: 15px; background: rgba(0, 50, 0, 0.3); box-shadow: 0 0 15px #00ff00; margin-top: 20px; text-align: left; min-height: 100px; }
-        .btn { display: inline-block; padding: 15px 30px; margin: 15px; color: black; background: #00ff00; text-decoration: none; font-weight: bold; border-radius: 5px; box-shadow: 0 0 20px #00ff00; transition: 0.3s; }
-        .btn:hover { background: #ff0000; color: white; box-shadow: 0 0 20px #ff0000; }
-        .wa-btn { background: #25D366; box-shadow: 0 0 20px #25D366; }
+        body { background: black; color: #00ff00; font-family: 'Courier New', monospace; margin: 0; overflow-x: hidden; }
+        #matrix { position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; opacity: 0.2; }
+        .screen { display: none; padding: 20px; text-align: center; }
+        .active { display: block; }
+        .glitch { font-size: 2em; color: #ff0000; text-shadow: 2px 2px #00ff00; animation: shake 0.5s infinite; }
+        @keyframes shake { 0% { transform: translate(0,0); } 50% { transform: translate(-2px, 2px); } 100% { transform: translate(2px, -2px); } }
+        .scanner-container { position: relative; display: inline-block; border: 2px solid #00ff00; margin-top: 20px; }
+        .scan-line { width: 100%; height: 4px; background: rgba(0,255,0,0.7); position: absolute; top: 0; left: 0; animation: scanMove 2s infinite linear; box-shadow: 0 0 15px #00ff00; }
+        @keyframes scanMove { 0% { top: 0; } 100% { top: 100%; } }
+        video { width: 300px; height: 300px; object-fit: cover; }
+        .hacker-btn { display: block; width: 80%; max-width: 300px; margin: 10px auto; padding: 15px; background: rgba(0,255,0,0.1); border: 1px solid #00ff00; color: #00ff00; cursor: pointer; text-transform: uppercase; font-weight: bold; box-shadow: 0 0 10px #00ff00; transition: 0.3s; }
+        .hacker-btn:hover { background: #00ff00; color: black; box-shadow: 0 0 20px #ff0000; border-color: #ff0000; }
+        .typing-area { border: 1px dashed #00ff00; background: rgba(0,20,0,0.8); padding: 15px; text-align: left; margin: 20px auto; max-width: 500px; min-height: 150px; }
+        .id-card { border: 2px double #00ff00; padding: 10px; display: inline-block; margin-top: 10px; background: rgba(0,50,0,0.2); }
+        .review-box { border-top: 1px solid #00ff00; margin-top: 30px; padding: 10px; font-size: 0.8em; }
     </style>
 </head>
 <body>
     <canvas id="matrix"></canvas>
-    <div class="container">
-        <h1 class="glitch">SHADOW LEAK TERMINAL</h1>
-        <p style="color: yellow;">Initializing Deep Web Connection... System Secured.</p>
-        
-        <div class="typing-box" id="typing-effect"></div>
 
-        <div style="margin-top: 40px;">
-            <h3>AVAILABLE COURSES</h3>
-            <a href="#" class="btn">MOBILE EXPLOITATION V3.0</a>
-            <a href="#" class="btn">PC PENETRATION (ROOT)</a>
-            <br>
-            <a href="https://wa.me/917505685543" class="btn wa-btn">CONTACT WHATSAPP: +91 7505685543</a>
+    <div id="step-1" class="screen active">
+        <h1 class="glitch">BIOMETRIC LOCK</h1>
+        <div class="scanner-container">
+            <div class="scan-line"></div>
+            <video id="webcam" autoplay playsinline></video>
+        </div>
+        <p style="color: yellow;">>> ANALYZING FACIAL STRUCTURE...</p>
+        <button class="hacker-btn" onclick="goToDashboard()">BYPASS SECURITY</button>
+    </div>
+
+    <div id="step-2" class="screen">
+        <div class="id-card">
+            <h3 style="margin:0; color: #ff0000;">ID: FAISAL CHAUDHARI</h3>
+            <p style="margin:5px 0;">RANK: ELITE HACKER | STATUS: TOP SECRET</p>
+            <p style="margin:0; color: yellow;">MISSION: SERVER INFILTRATION</p>
+        </div>
+
+        <div class="typing-area" id="terminal-out">
+            >> SYSTEM ONLINE. STANDBY FOR COMMANDS...
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+            <button class="hacker-btn" onclick="startPrank('loc')">LIVE LOCATION</button>
+            <button class="hacker-btn" onclick="startPrank('num')">NUMBER LOOKUP</button>
+            <button class="hacker-btn" onclick="startPrank('wifi')">WIFI JAMMER</button>
+            <button class="hacker-btn" onclick="startPrank('cctv')">CCTV FEEDS</button>
+            <button class="hacker-btn" onclick="window.location.href='https://wa.me/917505685543'">CONTACT ADMIN</button>
+        </div>
+
+        <div class="review-box">
+            <h4>STUDENT FEEDBACK [Verified]</h4>
+            <p>⭐⭐⭐⭐⭐ "Bhai, Jogeshwari ki location ekdum sahi dikhayi!" - Aryan X</p>
+            <p>⭐⭐⭐⭐⭐ "Face scan animation is dangerous!" - Shadow_Hunter</p>
+            <button class="hacker-btn" style="padding: 5px; font-size: 10px;">SUBMIT FEEDBACK</button>
         </div>
     </div>
 
@@ -37,19 +67,14 @@
         // Matrix Effect
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        const letters = "0101SHADOWLEAKSYSTEMERROR";
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        const letters = "0101SHADOWLEAKSYSTEM";
         const fontSize = 16;
         const columns = canvas.width / fontSize;
         const drops = Array(Math.floor(columns)).fill(1);
-
         function drawMatrix() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#0f0"; // Green Matrix
-            if(Math.random() > 0.95) ctx.fillStyle = "#f00"; // Occasional Red
-            ctx.font = fontSize + "px arial";
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "#0f0"; ctx.font = fontSize + "px arial";
             drops.forEach((y, i) => {
                 const text = letters[Math.floor(Math.random() * letters.length)];
                 ctx.fillText(text, i * fontSize, y * fontSize);
@@ -57,31 +82,32 @@
                 drops[i]++;
             });
         }
-        setInterval(drawMatrix, 33);
+        setInterval(drawMatrix, 35);
 
-        // Typing Effect
-        const textArray = [
-            ">> Accessing Satellite... Success",
-            ">> Dark Web Security: Master Anonymity Activated",
-            ">> Software Cracking Engine Online",
-            ">> Target: Global Network. Status: ONLINE."
-        ];
-        let i = 0;
-        let j = 0;
-        function typeWriter() {
-            if (i < textArray.length) {
-                if (j < textArray[i].length) {
-                    document.getElementById("typing-effect").innerHTML += textArray[i].charAt(j);
-                    j++;
-                    setTimeout(typeWriter, 50);
-                } else {
-                    document.getElementById("typing-effect").innerHTML += "<br>";
-                    i++; j = 0;
-                    setTimeout(typeWriter, 500);
-                }
+        // Webcam Access
+        navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
+            document.getElementById('webcam').srcObject = stream;
+        }).catch(err => console.log("Camera Blocked"));
+
+        function goToDashboard() {
+            document.getElementById('step-1').classList.remove('active');
+            document.getElementById('step-2').classList.add('active');
+        }
+
+        function startPrank(type) {
+            const out = document.getElementById('terminal-out');
+            if(type === 'loc') {
+                out.innerHTML = "<span style='color:red'>TARGET LOCKED:</span> MUMBAI - JOGESHWARI METRO STATION<br>COORDINATES: 19.1314° N, 72.8589° E<br>STATUS: LIVE TRACKING...";
+            } else if(type === 'num') {
+                let n = prompt("ENTER TARGET NUMBER:");
+                const locs = ["Mulund East", "Thane Sector 5", "Andheri West", "Bandra Bunker"];
+                out.innerHTML = "SEARCHING DATABASE for " + n + "...<br>OWNER: Mohammad Faisal<br>LOCATION: " + locs[Math.floor(Math.random()*4)];
+            } else if(type === 'cctv') {
+                out.innerHTML = "ACCESSING TRAFFIC CAM: JOGESHWARI LINK ROAD...<br><div style='background:grey; height:100px; color:black;'>[ENCRYPTED VIDEO FEED ACTIVE]</div>";
+            } else if(type === 'wifi') {
+                out.innerHTML = "SCANNING WIFI...<br>1. JIO_FIBER_PRIVATE (98%)<br>2. POLICE_DEPT_STATION (60%)<br>ATTEMPTING EXPLOIT...";
             }
         }
-        typeWriter();
     </script>
 </body>
 </html>
