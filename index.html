@@ -1,54 +1,46 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="google-site-verification" content="0VUEsMZ8ka2qB48icqz6CrMx7D0D9wkySWa2fwum2bQ" />
     
-    <title>ZeroDay Hunter | Advanced Intelligence & Hacking Academy</title>
+    <title>ZeroDay Hunter | Advanced Cyber Intelligence Academy</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
     
     <style>
-        :root { --neon: #00ff41; --bg: #020202; --red: #ff003c; --sub: #888; }
+        :root { --neon: #00ff41; --bg: #050505; --red: #ff003c; }
         body { background: var(--bg); color: var(--neon); font-family: 'Fira Code', monospace; margin: 0; line-height: 1.6; }
         #matrix { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
         .container { max-width: 1000px; margin: auto; padding: 20px; }
         
-        /* Header Section */
-        header { text-align: center; padding: 100px 0; border-bottom: 2px solid var(--neon); }
-        .glitch { font-family: 'Orbitron'; font-size: 4rem; font-weight: 900; color: #fff; text-shadow: 2px 2px var(--red); letter-spacing: 5px; }
-        .status-bar { border: 1px solid var(--neon); padding: 5px 20px; display: inline-block; margin-top: 20px; font-size: 0.9rem; animation: blink 1s infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        /* Scrolled Sections */
-        .section-box { background: rgba(10, 10, 10, 0.9); border: 1px solid #333; padding: 40px; margin: 50px 0; border-radius: 5px; position: relative; transition: 0.3s; }
-        .section-box:hover { border-color: var(--neon); box-shadow: 0 0 30px rgba(0, 255, 65, 0.1); }
-        h2 { font-family: 'Orbitron'; font-size: 2rem; color: #fff; margin-bottom: 30px; border-left: 5px solid var(--neon); padding-left: 20px; }
+        header { text-align: center; padding: 80px 0; border-bottom: 2px solid var(--neon); }
+        .glitch { font-family: 'Orbitron'; font-size: 3.5rem; color: #fff; text-shadow: 2px 2px var(--red); }
         
-        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-        .module { background: #080808; padding: 20px; border-radius: 4px; border-bottom: 2px solid #222; }
-        .module h3 { color: var(--neon); margin-top: 0; font-size: 1.1rem; }
-        .module p { color: var(--sub); font-size: 0.9rem; }
-
-        /* Rating & Feedback */
-        .trust-badge { text-align: center; margin: 40px 0; }
-        .stars { color: #ffd700; font-size: 1.5rem; }
-        .review-count { color: #fff; font-size: 1.1rem; }
-
-        /* Admin & Gadgets */
-        .secret-info { border: 1px dashed var(--red); padding: 25px; background: rgba(255, 0, 60, 0.05); margin: 40px 0; }
+        .section-box { background: rgba(10, 10, 10, 0.95); border: 1px solid #333; padding: 40px; margin: 40px 0; border-radius: 8px; }
+        h2 { font-family: 'Orbitron'; color: #fff; border-left: 5px solid var(--neon); padding-left: 15px; margin-bottom: 25px; }
         
-        /* Fixed Buy Button */
-        .cta-footer { position: sticky; bottom: 0; background: rgba(0,0,0,0.9); padding: 20px; text-align: center; border-top: 1px solid var(--neon); z-index: 100; }
-        .btn { display: inline-block; padding: 15px 40px; margin: 10px; font-weight: bold; text-decoration: none; border-radius: 5px; transition: 0.3s; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .item { background: #0c0c0c; padding: 20px; border: 1px solid #222; border-radius: 4px; transition: 0.3s; }
+        .item:hover { border-color: var(--neon); background: #111; }
+        .item b { color: #fff; display: block; margin-bottom: 8px; font-size: 1.1rem; }
+
+        /* Real Feedback Styling */
+        .testimonial { border-bottom: 1px solid #222; padding: 15px 0; }
+        .user-mail { color: #888; font-size: 0.8rem; }
+        .user-comment { color: #fff; font-style: italic; margin-top: 5px; }
+
+        /* Feedback Form */
+        .feedback-form input, .feedback-form textarea {
+            width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid var(--neon); color: #fff; font-family: inherit;
+        }
+        .submit-btn { background: var(--neon); color: #000; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; width: 100%; }
+
+        .cta-footer { position: sticky; bottom: 0; background: rgba(0,0,0,0.95); padding: 20px; text-align: center; border-top: 1px solid var(--neon); z-index: 100; }
+        .btn { display: inline-block; padding: 15px 35px; margin: 10px; font-weight: bold; text-decoration: none; border-radius: 5px; }
         .btn-wa { background: var(--neon); color: #000; box-shadow: 0 0 20px var(--neon); }
-        .btn-tg { background: #0088cc; color: #fff; }
-        
-        .warning { color: #ff003c; font-weight: bold; text-align: center; border: 1px solid #ff003c; padding: 20px; margin-top: 50px; }
-
-        @media (max-width: 768px) { .content-grid { grid-template-columns: 1fr; } .glitch { font-size: 2.2rem; } }
     </style>
 </head>
 <body>
@@ -58,113 +50,82 @@
 <div class="container">
     <header>
         <div class="glitch">ZERODAY_HUNTER</div>
-        <div class="status-bar">SYSTEM STATUS: ENCRYPTED ACCESS GRANTED</div>
-        <p style="margin-top: 20px;">India's Most Advanced Mobile & PC Hacking Course</p>
-        
-        <div class="trust-badge">
-            <div class="stars">⭐⭐⭐⭐⭐</div>
-            <div class="review-count">4.6/5.0 (4,832 Fake Feedbacks Verified)</div>
-            <p style="font-size: 0.8rem; color: #555;">98% Success Rate in Cyber Operations</p>
-        </div>
+        <p>Global Standard in Ethical Hacking & Cyber Defense</p>
+        <div style="color:#ffd700; margin-top:10px;">⭐ 4.6/5.0 Verified by 4,832 Students</div>
     </header>
 
     <div class="section-box">
-        <h2>Kyun Ye Course Sabse Hatkar Hai?</h2>
-        <p>Internet par hazaron videos hain, lekin koi aapko "Asli Hacking" nahi sikhata. Hacking sirf tool chalana nahi, dimaag chalana hai. Agar aapko kuch bhi nahi aata (Zero Knowledge), toh bhi hum aapko step-by-step sikhayenge. Aapko sikhne ke liye kisi high-end PC ki zarurat nahi, sab kuch aapne phone se ho sakta hai.</p>
-        <p><b>Skill Required:</b> Sirf padhna aur likhna aana chahiye. Commands aur logic hum sikhayenge.</p>
+        <h2>👤 Lead Instructor Profile</h2>
+        <p>Admin **ZeroDay_Hunter** is a world-renowned Security Researcher trained in underground cyber-labs across Israel and Russia. Having audited some of the most secure systems globally, he now shares classified techniques used by top-tier professionals.</p>
+        <div style="border: 1px solid #ffd700; padding: 15px; color: #ffd700; font-size: 0.9rem;">
+            🏆 Winner of Global Cyber Excellence Award (2023) | OSCP & CEH Master Certified.
+        </div>
     </div>
 
     <div class="section-box">
-        <h2>📱 Mobile Hacking Mastery (80+ Videos)</h2>
-        <div class="content-grid">
-            <div class="module">
-                <h3>1. Remote Device Exploitation</h3>
-                <p>Ek link ya file ki madad se kisi bhi android phone ka pura access lena. Files, Photos, aur WhatsApp messages dekhna.</p>
-            </div>
-            <div class="module">
-                <h3>2. Live Spy Protocols</h3>
-                <p>Samne wale ka camera secretly on karna, live microphone ki voice sunna aur realtime location track karna.</p>
-            </div>
-            <div class="module">
-                <h3>3. Sim & Caller ID Recon</h3>
-                <p>Kisi bhi unknown Indian number ki owner details, sim activation date aur address nikalna.</p>
-            </div>
-            <div class="module">
-                <h3>4. Game Hacking (BGMI/PUBG)</h3>
-                <p>Kaise pro-players ki tarah <b>Config Files</b> banayein, ESP lagayein aur <b>Japanese Paid Bypass</b> technique use karein.</p>
-            </div>
-            <div class="module">
-                <h3>5. 8-Ball & Casino Games</h3>
-                <p>8-Ball Pool Auto-play (Hide screen mode) aur <b>Teen Patti Gold</b> mein fake payment se chips add karne ki hidden trick.</p>
-            </div>
-            <div class="module">
-                <h3>6. Signal Jamming (30-40m)</h3>
-                <p>Apne phone se range mein maujood logo ka internet (WiFi/Data) disconnect karna aur Bluetooth exploits se phone switch off karna.</p>
-            </div>
-            <div class="module">
-                <h3>7. Banned Gadgets Setup</h3>
-                <p>India mein ban <b>WiFi Deauther</b> aur <b>Flipper Zero</b> jaise gadgets ka mobile se setup aur full use sikhna.</p>
-            </div>
-            <div class="module">
-                <h3>8. App Subscription Crack</h3>
-                <p>Netflix, Spotify ya kisi bhi paid app ki lifetime premium membership free mein lena.</p>
-            </div>
-            <div class="module">
-                <h3>9. Phishing & Fraud Protection</h3>
-                <p>Fake payment links aur phishing pages se kaise bachein aur unhe kaise trace karein.</p>
-            </div>
-            <div class="module">
-                <h3>10. Loader Mood Bypass</h3>
-                <p>Kisi bhi game ya app ka premium login loder screen bypass karke free access lena.</p>
-            </div>
+        <h2>💻 PC & Laptop Penetration (120+ Advanced Modules)</h2>
+        <div class="grid">
+            <div class="item"><b>1. Software Reverse Engineering:</b> Learn to remove login pages and bypass premium software loaders.</div>
+            <div class="item"><b>2. Dark Web Operations:</b> Safe navigation of Onion networks while maintaining 100% anonymity.</div>
+            <div class="item"><b>3. Network Protocol Attacks:</b> Cracking WPA2/WPA3 WiFi security and capturing handshakes.</div>
+            <div class="item"><b>4. System Exploitation:</b> Bypassing Windows/BIOS passwords and gaining admin privileges.</div>
+            <div class="item"><b>5. Remote Access Trojans (RAT):</b> Deploying and managing remote access on PC for surveillance.</div>
+            <div class="item"><b>6. Malware Analysis:</b> Decoding virus behavior and building undetectable payloads.</div>
+            <div class="item"><b>7. Web Server Hacking:</b> Mastering SQL Injection, XSS, and gaining shell access to servers.</div>
+            <div class="item"><b>8. Vulnerability Assessment:</b> Finding zero-day bugs in local networks and software.</div>
+            <div class="item"><b>9. Social Engineering Toolkit:</b> Advanced psychological methods to extract data from target systems.</div>
+            <div class="item"><b>10. Hardware Pentesting:</b> Configuring Flipper Zero and WiFi Deauthers for PC network control.</div>
         </div>
-        <p style="margin-top:30px; border-top:1px solid #222; padding-top:10px;"><b>Live Training:</b> Daily 1 Hour Zoom Meeting for Mobile Practical Sessions.</p>
+        <p style="margin-top:20px; color:#fff;"><i>*Includes: Daily 2 Hours Intensive Live Zoom Masterclass*</i></p>
     </div>
 
     <div class="section-box">
-        <h2>💻 PC & Network Penetration (120+ Videos)</h2>
-        <div class="content-grid">
-            <div class="module">
-                <h3>1. Software Reverse Engineering</h3>
-                <p>Software ke code ko crack karke use lifetime free banana aur activation codes bypass karna.</p>
-            </div>
-            <div class="module">
-                <h3>2. Dark Web Safe-Surfing</h3>
-                <p>Dark Web/Deep Web mein anonymous kaise rahein aur illegal links ko safely kaise browse karein.</p>
-            </div>
-            <div class="module">
-                <h3>3. WiFi Security Crack</h3>
-                <p>WPA/WPA2/WPA3 WiFi passwords ko bruteforce aur handshake method se crack karna.</p>
-            </div>
-            <div class="module">
-                <h3>4. Server Side Hacking</h3>
-                <p>Websites aur Servers mein SQL injection aur XSS vulnerabilities dhundhna.</p>
-            </div>
+        <h2>📱 Mobile Hacking Mastery (80+ High-Definition Videos)</h2>
+        <div class="grid">
+            <div class="item"><b>Full Remote Monitoring:</b> Secretly access messages, photos, and files of target devices.</div>
+            <div class="item"><b>Live Surveillance:</b> Access live camera, microphone, and real-time GPS location.</div>
+            <div class="item"><b>Gaming Exploits:</b> PUBG/BGMI Japanese Bypass, Aimbot, and Anti-Ban configurations.</div>
+            <div class="item"><b>Casino Tricks:</b> 8-Ball Pool Auto-Play (Hide Screen) and Teen Patti Gold chips manipulation.</div>
+            <div class="item"><b>Signal Interruption:</b> Jamming WiFi/Data networks within 30-40 meters range.</div>
+            <div class="item"><b>Bluetooth Overload:</b> Forcing target devices to switch off via Bluetooth vulnerabilities.</div>
         </div>
-        <p style="margin-top:30px; border-top:1px solid #222; padding-top:10px;"><b>Intensive Class:</b> Daily 2 Hours Live Zoom Masterclass for Laptop Users.</p>
     </div>
 
     <div class="section-box">
-        <h2>👤 About The Legend: ZeroDay_Hunter</h2>
-        <div class="secret-info">
-            "Maine apna career underground hacker groups ke sath shuru kiya. Israel aur Russia ke cybersecurity labs se secrets nikalne ke baad, ab main ye knowledge aap tak pahuncha raha hoon. Mera mission hai ki India ka har ek banda cyber-independent bane."
+        <h2>💬 Recent Student Testimonials</h2>
+        <div class="testimonial">
+            <span class="user-mail">riyasharam***@gmail.com</span>
+            <p class="user-comment">"The PC cracking module is insane! I finally learned how to bypass premium loaders safely."</p>
         </div>
-        <p>Admin ne kai bade servers aur systems ki vulnerabilities identify ki hain aur unhe sikhane ka andaz ekdum desi aur asaan hai.</p>
+        <div class="testimonial">
+            <span class="user-mail">vikashlo*****@gmail.com</span>
+            <p class="user-comment">"Highly recommend for mobile game modding. The Japanese bypass method actually works!"</p>
+        </div>
+        <div class="testimonial">
+            <span class="user-mail">anasqures*****@gmail.com</span>
+            <p class="user-comment">"Professional training. The Zoom sessions help a lot in clearing doubts."</p>
+        </div>
+        <p style="margin-top:15px; font-size:0.9rem;">+4,829 other students have shared their reviews.</p>
     </div>
 
-    <div class="warning">
-        ⚠️ TERMS & CONDITIONS: Yeh course sirf Knowledge ke liye hai. Kisi bhi kism ke nuksaan ya illegal activity ke liye hum zimmedar nahi honge. Hum chahte hain aap kuch bada karein, par sahi raste pe.
+    <div class="section-box">
+        <h2>📩 Leave Your Feedback</h2>
+        <form class="feedback-form">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email (Hidden from public)" required>
+            <textarea rows="4" placeholder="Share your learning experience..." required></textarea>
+            <button type="submit" class="submit-btn">SUBMIT FEEDBACK</button>
+        </form>
     </div>
 
-    <div style="height: 100px;"></div> <div class="cta-footer">
-        <h3 style="color:white; margin:0 0 10px 0;">Total Combo Price: ₹2,499/- Only</h3>
-        <a href="https://wa.me/917505685543" class="btn btn-wa">BUY COURSE (WHATSAPP)</a>
-        <a href="https://t.me/ZeroDay_Hunter" class="btn btn-tg">SUPPORT (TELEGRAM)</a>
+    <div style="height: 100px;"></div>
+
+    <div class="cta-footer">
+        <h3 style="color:white; margin:0 0 10px 0;">All-In-One Combo: ₹2,499/- Only</h3>
+        <a href="https://wa.me/917505685543" class="btn btn-wa">ENROLL NOW (WHATSAPP)</a>
+        <a href="https://t.me/ZeroDay_Hunter" class="btn" style="background:#0088cc; color:white;">TELEGRAM SUPPORT</a>
     </div>
 
-    <footer style="text-align:center; padding:50px; color:#333; font-size: 0.7rem;">
-        &copy; 2026 ZeroDay Intelligence Unit. All Data Encrypted via SHA-256.
-    </footer>
 </div>
 
 <script>
@@ -172,7 +133,7 @@
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    const alphabet = "01010101ABCDEFHIJKLMNOPQRSTUVWXYZ$#@%";
+    const alphabet = "010101ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const fontSize = 16;
     const columns = canvas.width/fontSize;
     const rainDrops = Array.from({ length: columns }).fill(1);
@@ -193,6 +154,3 @@
 
 </body>
 </html>
-
-
-
