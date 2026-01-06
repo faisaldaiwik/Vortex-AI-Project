@@ -1,113 +1,198 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
-    <meta name="google-site-verification" content="0VUEsMZ8ka2qB48icqz6CrMx7D0D9wkySWa2fwum2bQ" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHADOW_X | ELITE TERMINAL v4.0</title>
+    
+    <meta name="google-site-verification" content="0VUEsMZ8ka2qB48icqz6CrMx7D0D9wkySWa2fwum2bQ" />
+    
+    <title>ZeroDay Hunter | Advanced Intelligence & Hacking Academy</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+    
     <style>
-        body { background: black; color: #00ff00; font-family: 'Courier New', monospace; margin: 0; overflow-x: hidden; }
-        #matrix { position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; opacity: 0.2; }
-        .screen { display: none; padding: 20px; text-align: center; }
-        .active { display: block; }
-        .glitch { font-size: 2em; color: #ff0000; text-shadow: 2px 2px #00ff00; animation: shake 0.5s infinite; }
-        @keyframes shake { 0% { transform: translate(0,0); } 50% { transform: translate(-2px, 2px); } 100% { transform: translate(2px, -2px); } }
-        .scanner-container { position: relative; display: inline-block; border: 2px solid #00ff00; margin-top: 20px; }
-        .scan-line { width: 100%; height: 4px; background: rgba(0,255,0,0.7); position: absolute; top: 0; left: 0; animation: scanMove 2s infinite linear; box-shadow: 0 0 15px #00ff00; }
-        @keyframes scanMove { 0% { top: 0; } 100% { top: 100%; } }
-        video { width: 300px; height: 300px; object-fit: cover; }
-        .hacker-btn { display: block; width: 80%; max-width: 300px; margin: 10px auto; padding: 15px; background: rgba(0,255,0,0.1); border: 1px solid #00ff00; color: #00ff00; cursor: pointer; text-transform: uppercase; font-weight: bold; box-shadow: 0 0 10px #00ff00; transition: 0.3s; }
-        .hacker-btn:hover { background: #00ff00; color: black; box-shadow: 0 0 20px #ff0000; border-color: #ff0000; }
-        .typing-area { border: 1px dashed #00ff00; background: rgba(0,20,0,0.8); padding: 15px; text-align: left; margin: 20px auto; max-width: 500px; min-height: 150px; }
-        .id-card { border: 2px double #00ff00; padding: 10px; display: inline-block; margin-top: 10px; background: rgba(0,50,0,0.2); }
-        .review-box { border-top: 1px solid #00ff00; margin-top: 30px; padding: 10px; font-size: 0.8em; }
+        :root { --neon: #00ff41; --bg: #020202; --red: #ff003c; --sub: #888; }
+        body { background: var(--bg); color: var(--neon); font-family: 'Fira Code', monospace; margin: 0; line-height: 1.6; }
+        #matrix { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
+        .container { max-width: 1000px; margin: auto; padding: 20px; }
+        
+        /* Header Section */
+        header { text-align: center; padding: 100px 0; border-bottom: 2px solid var(--neon); }
+        .glitch { font-family: 'Orbitron'; font-size: 4rem; font-weight: 900; color: #fff; text-shadow: 2px 2px var(--red); letter-spacing: 5px; }
+        .status-bar { border: 1px solid var(--neon); padding: 5px 20px; display: inline-block; margin-top: 20px; font-size: 0.9rem; animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Scrolled Sections */
+        .section-box { background: rgba(10, 10, 10, 0.9); border: 1px solid #333; padding: 40px; margin: 50px 0; border-radius: 5px; position: relative; transition: 0.3s; }
+        .section-box:hover { border-color: var(--neon); box-shadow: 0 0 30px rgba(0, 255, 65, 0.1); }
+        h2 { font-family: 'Orbitron'; font-size: 2rem; color: #fff; margin-bottom: 30px; border-left: 5px solid var(--neon); padding-left: 20px; }
+        
+        .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .module { background: #080808; padding: 20px; border-radius: 4px; border-bottom: 2px solid #222; }
+        .module h3 { color: var(--neon); margin-top: 0; font-size: 1.1rem; }
+        .module p { color: var(--sub); font-size: 0.9rem; }
+
+        /* Rating & Feedback */
+        .trust-badge { text-align: center; margin: 40px 0; }
+        .stars { color: #ffd700; font-size: 1.5rem; }
+        .review-count { color: #fff; font-size: 1.1rem; }
+
+        /* Admin & Gadgets */
+        .secret-info { border: 1px dashed var(--red); padding: 25px; background: rgba(255, 0, 60, 0.05); margin: 40px 0; }
+        
+        /* Fixed Buy Button */
+        .cta-footer { position: sticky; bottom: 0; background: rgba(0,0,0,0.9); padding: 20px; text-align: center; border-top: 1px solid var(--neon); z-index: 100; }
+        .btn { display: inline-block; padding: 15px 40px; margin: 10px; font-weight: bold; text-decoration: none; border-radius: 5px; transition: 0.3s; }
+        .btn-wa { background: var(--neon); color: #000; box-shadow: 0 0 20px var(--neon); }
+        .btn-tg { background: #0088cc; color: #fff; }
+        
+        .warning { color: #ff003c; font-weight: bold; text-align: center; border: 1px solid #ff003c; padding: 20px; margin-top: 50px; }
+
+        @media (max-width: 768px) { .content-grid { grid-template-columns: 1fr; } .glitch { font-size: 2.2rem; } }
     </style>
 </head>
 <body>
-    <canvas id="matrix"></canvas>
 
-    <div id="step-1" class="screen active">
-        <h1 class="glitch">BIOMETRIC LOCK</h1>
-        <div class="scanner-container">
-            <div class="scan-line"></div>
-            <video id="webcam" autoplay playsinline></video>
+<canvas id="matrix"></canvas>
+
+<div class="container">
+    <header>
+        <div class="glitch">ZERODAY_HUNTER</div>
+        <div class="status-bar">SYSTEM STATUS: ENCRYPTED ACCESS GRANTED</div>
+        <p style="margin-top: 20px;">India's Most Advanced Mobile & PC Hacking Course</p>
+        
+        <div class="trust-badge">
+            <div class="stars">⭐⭐⭐⭐⭐</div>
+            <div class="review-count">4.6/5.0 (4,832 Fake Feedbacks Verified)</div>
+            <p style="font-size: 0.8rem; color: #555;">98% Success Rate in Cyber Operations</p>
         </div>
-        <p style="color: yellow;">>> ANALYZING FACIAL STRUCTURE...</p>
-        <button class="hacker-btn" onclick="goToDashboard()">BYPASS SECURITY</button>
+    </header>
+
+    <div class="section-box">
+        <h2>Kyun Ye Course Sabse Hatkar Hai?</h2>
+        <p>Internet par hazaron videos hain, lekin koi aapko "Asli Hacking" nahi sikhata. Hacking sirf tool chalana nahi, dimaag chalana hai. Agar aapko kuch bhi nahi aata (Zero Knowledge), toh bhi hum aapko step-by-step sikhayenge. Aapko sikhne ke liye kisi high-end PC ki zarurat nahi, sab kuch aapne phone se ho sakta hai.</p>
+        <p><b>Skill Required:</b> Sirf padhna aur likhna aana chahiye. Commands aur logic hum sikhayenge.</p>
     </div>
 
-    <div id="step-2" class="screen">
-        <div class="id-card">
-            <h3 style="margin:0; color: #ff0000;">ID: FAISAL CHAUDHARI</h3>
-            <p style="margin:5px 0;">RANK: ELITE HACKER | STATUS: TOP SECRET</p>
-            <p style="margin:0; color: yellow;">MISSION: SERVER INFILTRATION</p>
+    <div class="section-box">
+        <h2>📱 Mobile Hacking Mastery (80+ Videos)</h2>
+        <div class="content-grid">
+            <div class="module">
+                <h3>1. Remote Device Exploitation</h3>
+                <p>Ek link ya file ki madad se kisi bhi android phone ka pura access lena. Files, Photos, aur WhatsApp messages dekhna.</p>
+            </div>
+            <div class="module">
+                <h3>2. Live Spy Protocols</h3>
+                <p>Samne wale ka camera secretly on karna, live microphone ki voice sunna aur realtime location track karna.</p>
+            </div>
+            <div class="module">
+                <h3>3. Sim & Caller ID Recon</h3>
+                <p>Kisi bhi unknown Indian number ki owner details, sim activation date aur address nikalna.</p>
+            </div>
+            <div class="module">
+                <h3>4. Game Hacking (BGMI/PUBG)</h3>
+                <p>Kaise pro-players ki tarah <b>Config Files</b> banayein, ESP lagayein aur <b>Japanese Paid Bypass</b> technique use karein.</p>
+            </div>
+            <div class="module">
+                <h3>5. 8-Ball & Casino Games</h3>
+                <p>8-Ball Pool Auto-play (Hide screen mode) aur <b>Teen Patti Gold</b> mein fake payment se chips add karne ki hidden trick.</p>
+            </div>
+            <div class="module">
+                <h3>6. Signal Jamming (30-40m)</h3>
+                <p>Apne phone se range mein maujood logo ka internet (WiFi/Data) disconnect karna aur Bluetooth exploits se phone switch off karna.</p>
+            </div>
+            <div class="module">
+                <h3>7. Banned Gadgets Setup</h3>
+                <p>India mein ban <b>WiFi Deauther</b> aur <b>Flipper Zero</b> jaise gadgets ka mobile se setup aur full use sikhna.</p>
+            </div>
+            <div class="module">
+                <h3>8. App Subscription Crack</h3>
+                <p>Netflix, Spotify ya kisi bhi paid app ki lifetime premium membership free mein lena.</p>
+            </div>
+            <div class="module">
+                <h3>9. Phishing & Fraud Protection</h3>
+                <p>Fake payment links aur phishing pages se kaise bachein aur unhe kaise trace karein.</p>
+            </div>
+            <div class="module">
+                <h3>10. Loader Mood Bypass</h3>
+                <p>Kisi bhi game ya app ka premium login loder screen bypass karke free access lena.</p>
+            </div>
         </div>
-
-        <div class="typing-area" id="terminal-out">
-            >> SYSTEM ONLINE. STANDBY FOR COMMANDS...
-        </div>
-
-        <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-            <button class="hacker-btn" onclick="startPrank('loc')">LIVE LOCATION</button>
-            <button class="hacker-btn" onclick="startPrank('num')">NUMBER LOOKUP</button>
-            <button class="hacker-btn" onclick="startPrank('wifi')">WIFI JAMMER</button>
-            <button class="hacker-btn" onclick="startPrank('cctv')">CCTV FEEDS</button>
-            <button class="hacker-btn" onclick="window.location.href='https://wa.me/917505685543'">CONTACT ADMIN</button>
-        </div>
-
-        <div class="review-box">
-            <h4>STUDENT FEEDBACK [Verified]</h4>
-            <p>⭐⭐⭐⭐⭐ "Bhai, Jogeshwari ki location ekdum sahi dikhayi!" - Aryan X</p>
-            <p>⭐⭐⭐⭐⭐ "Face scan animation is dangerous!" - Shadow_Hunter</p>
-            <button class="hacker-btn" style="padding: 5px; font-size: 10px;">SUBMIT FEEDBACK</button>
-        </div>
+        <p style="margin-top:30px; border-top:1px solid #222; padding-top:10px;"><b>Live Training:</b> Daily 1 Hour Zoom Meeting for Mobile Practical Sessions.</p>
     </div>
 
-    <script>
-        // Matrix Effect
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        const letters = "0101SHADOWLEAKSYSTEM";
-        const fontSize = 16;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
-        function drawMatrix() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#0f0"; ctx.font = fontSize + "px arial";
-            drops.forEach((y, i) => {
-                const text = letters[Math.floor(Math.random() * letters.length)];
-                ctx.fillText(text, i * fontSize, y * fontSize);
-                if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            });
-        }
-        setInterval(drawMatrix, 35);
+    <div class="section-box">
+        <h2>💻 PC & Network Penetration (120+ Videos)</h2>
+        <div class="content-grid">
+            <div class="module">
+                <h3>1. Software Reverse Engineering</h3>
+                <p>Software ke code ko crack karke use lifetime free banana aur activation codes bypass karna.</p>
+            </div>
+            <div class="module">
+                <h3>2. Dark Web Safe-Surfing</h3>
+                <p>Dark Web/Deep Web mein anonymous kaise rahein aur illegal links ko safely kaise browse karein.</p>
+            </div>
+            <div class="module">
+                <h3>3. WiFi Security Crack</h3>
+                <p>WPA/WPA2/WPA3 WiFi passwords ko bruteforce aur handshake method se crack karna.</p>
+            </div>
+            <div class="module">
+                <h3>4. Server Side Hacking</h3>
+                <p>Websites aur Servers mein SQL injection aur XSS vulnerabilities dhundhna.</p>
+            </div>
+        </div>
+        <p style="margin-top:30px; border-top:1px solid #222; padding-top:10px;"><b>Intensive Class:</b> Daily 2 Hours Live Zoom Masterclass for Laptop Users.</p>
+    </div>
 
-        // Webcam Access
-        navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
-            document.getElementById('webcam').srcObject = stream;
-        }).catch(err => console.log("Camera Blocked"));
+    <div class="section-box">
+        <h2>👤 About The Legend: ZeroDay_Hunter</h2>
+        <div class="secret-info">
+            "Maine apna career underground hacker groups ke sath shuru kiya. Israel aur Russia ke cybersecurity labs se secrets nikalne ke baad, ab main ye knowledge aap tak pahuncha raha hoon. Mera mission hai ki India ka har ek banda cyber-independent bane."
+        </div>
+        <p>Admin ne kai bade servers aur systems ki vulnerabilities identify ki hain aur unhe sikhane ka andaz ekdum desi aur asaan hai.</p>
+    </div>
 
-        function goToDashboard() {
-            document.getElementById('step-1').classList.remove('active');
-            document.getElementById('step-2').classList.add('active');
-        }
+    <div class="warning">
+        ⚠️ TERMS & CONDITIONS: Yeh course sirf Knowledge ke liye hai. Kisi bhi kism ke nuksaan ya illegal activity ke liye hum zimmedar nahi honge. Hum chahte hain aap kuch bada karein, par sahi raste pe.
+    </div>
 
-        function startPrank(type) {
-            const out = document.getElementById('terminal-out');
-            if(type === 'loc') {
-                out.innerHTML = "<span style='color:red'>TARGET LOCKED:</span> MUMBAI - JOGESHWARI METRO STATION<br>COORDINATES: 19.1314° N, 72.8589° E<br>STATUS: LIVE TRACKING...";
-            } else if(type === 'num') {
-                let n = prompt("ENTER TARGET NUMBER:");
-                const locs = ["Mulund East", "Thane Sector 5", "Andheri West", "Bandra Bunker"];
-                out.innerHTML = "SEARCHING DATABASE for " + n + "...<br>OWNER: Mohammad Faisal<br>LOCATION: " + locs[Math.floor(Math.random()*4)];
-            } else if(type === 'cctv') {
-                out.innerHTML = "ACCESSING TRAFFIC CAM: JOGESHWARI LINK ROAD...<br><div style='background:grey; height:100px; color:black;'>[ENCRYPTED VIDEO FEED ACTIVE]</div>";
-            } else if(type === 'wifi') {
-                out.innerHTML = "SCANNING WIFI...<br>1. JIO_FIBER_PRIVATE (98%)<br>2. POLICE_DEPT_STATION (60%)<br>ATTEMPTING EXPLOIT...";
-            }
+    <div style="height: 100px;"></div> <div class="cta-footer">
+        <h3 style="color:white; margin:0 0 10px 0;">Total Combo Price: ₹2,499/- Only</h3>
+        <a href="https://wa.me/917505685543" class="btn btn-wa">BUY COURSE (WHATSAPP)</a>
+        <a href="https://t.me/ZeroDay_Hunter" class="btn btn-tg">SUPPORT (TELEGRAM)</a>
+    </div>
+
+    <footer style="text-align:center; padding:50px; color:#333; font-size: 0.7rem;">
+        &copy; 2026 ZeroDay Intelligence Unit. All Data Encrypted via SHA-256.
+    </footer>
+</div>
+
+<script>
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const alphabet = "01010101ABCDEFHIJKLMNOPQRSTUVWXYZ$#@%";
+    const fontSize = 16;
+    const columns = canvas.width/fontSize;
+    const rainDrops = Array.from({ length: columns }).fill(1);
+    const draw = () => {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#0F0';
+        ctx.font = fontSize + 'px monospace';
+        for(let i = 0; i < rainDrops.length; i++) {
+            const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+            ctx.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+            if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975) rainDrops[i] = 0;
+            rainDrops[i]++;
         }
-    </script>
+    };
+    setInterval(draw, 33);
+</script>
+
 </body>
 </html>
+
+
+
