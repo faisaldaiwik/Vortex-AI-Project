@@ -3,162 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <meta name="google-site-verification" content="0VUEsMZ8ka2qB48icqz6CrMx7D0D9wkySWa2fwum2bQ" />
-    
-    <title>ZeroDay Hunter | Professional Cyber Intelligence Academy</title>
-    
+    <title>ZeroDay Hunter | Elite Cyber & Mobile Intelligence</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
-    
     <style>
         :root { --neon: #00ff41; --bg: #050505; --red: #ff003c; --gold: #ffd700; }
         body { background: var(--bg); color: var(--neon); font-family: 'Fira Code', monospace; margin: 0; line-height: 1.6; }
         #matrix { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
         .container { max-width: 1000px; margin: auto; padding: 20px; }
-        
-        header { text-align: center; padding: 100px 0; border-bottom: 2px solid var(--neon); background: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000') no-repeat center; background-size: cover; background-blend-mode: overlay; }
+        header { text-align: center; padding: 100px 0; border-bottom: 2px solid var(--neon); background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1000'); background-size: cover; }
         .glitch { font-family: 'Orbitron'; font-size: 3.5rem; color: #fff; text-shadow: 2px 2px var(--red); }
-        
         .section-box { background: rgba(10, 10, 10, 0.95); border: 1px solid #333; padding: 40px; margin: 40px 0; border-radius: 8px; }
         h2 { font-family: 'Orbitron'; color: #fff; border-left: 5px solid var(--neon); padding-left: 15px; margin-bottom: 25px; }
-        
-        /* Image Cards */
-        .img-banner { width: 100%; height: 250px; background: #111; margin-bottom: 20px; border-radius: 8px; overflow: hidden; border: 1px solid #333; }
-        .img-banner img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
-
+        .section-img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; margin-bottom: 20px; border: 1px solid var(--neon); opacity: 0.7; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .item { background: #0c0c0c; padding: 20px; border: 1px solid #222; border-radius: 4px; }
-        .item b { color: #fff; display: block; margin-bottom: 8px; }
-
-        /* FAQ Section */
+        .item { background: #0c0c0c; padding: 15px; border: 1px solid #222; border-radius: 4px; }
+        .item b { color: #fff; display: block; margin-bottom: 5px; }
         .faq-box { background: rgba(0, 255, 65, 0.05); padding: 20px; border-left: 3px solid var(--gold); margin-bottom: 20px; }
-        .faq-q { color: var(--gold); font-weight: bold; font-size: 1.1rem; }
-        .faq-a { color: #fff; margin-top: 10px; }
-
-        /* Feedback Section */
-        .testimonial { border-bottom: 1px solid #222; padding: 15px 0; }
-        .user-mail { color: #888; font-size: 0.8rem; }
-        .user-comment { color: #fff; font-style: italic; margin-top: 5px; }
-
-        /* Form */
-        .feedback-form input, .feedback-form textarea {
-            width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid var(--neon); color: #fff;
-        }
-        .submit-btn { background: var(--neon); color: #000; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; width: 100%; }
-
+        .testimonial { border-bottom: 1px solid #222; padding: 20px 0; }
+        .user-info { display: flex; justify-content: space-between; align-items: center; }
+        .user-mail { color: #888; font-size: 0.85rem; }
+        .user-comment { color: #fff; margin: 10px 0; line-height: 1.4; }
+        .like-btn { background: transparent; border: 1px solid var(--neon); color: var(--neon); padding: 5px 12px; cursor: pointer; border-radius: 20px; font-size: 0.8rem; transition: 0.3s; }
+        .like-btn:hover { background: var(--neon); color: #000; }
+        .feedback-form input, .feedback-form textarea { width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid var(--neon); color: #fff; }
         .cta-footer { position: sticky; bottom: 0; background: rgba(0,0,0,0.95); padding: 20px; text-align: center; border-top: 1px solid var(--neon); z-index: 100; }
-        .btn { display: inline-block; padding: 15px 35px; margin: 10px; font-weight: bold; text-decoration: none; border-radius: 5px; }
+        .btn { display: inline-block; padding: 15px 35px; margin: 10px; font-weight: bold; text-decoration: none; border-radius: 5px; cursor: pointer; }
         .btn-wa { background: var(--neon); color: #000; box-shadow: 0 0 20px var(--neon); }
     </style>
 </head>
 <body>
-
 <canvas id="matrix"></canvas>
-
 <div class="container">
     <header>
         <div class="glitch">ZERODAY_HUNTER</div>
-        <p>Mastering the Shadows: Elite Cyber Intelligence Training</p>
-        <div style="color:var(--gold); margin-top:10px;">⭐ 4.6/5.0 Verified Student Success Rate</div>
+        <p>Global Standard in Ethical Hacking & Cyber Defense</p>
     </header>
 
-    <div class="img-banner">
-        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc48?auto=format&fit=crop&q=80&w=1000" alt="Hacking Lab">
-    </div>
-
     <div class="section-box">
-        <h2>💻 PC & Laptop Penetration (120+ Advanced Modules)</h2>
+        <img src="https://images.unsplash.com/photo-1510511459019-5dee595dc98b?w=800" class="section-img">
+        <h2>📱 Advanced Mobile Hacking (80+ Videos)</h2>
         <div class="grid">
-            <div class="item"><b>1. Reverse Engineering:</b> Removing login pages & bypassing premium loaders.</div>
-            <div class="item"><b>2. Dark Web Safety:</b> Full anonymity protocols for secure Onion browsing.</div>
-            <div class="item"><b>3. WiFi Auditing:</b> Cracking WPA2/WPA3 networks & handshake capture.</div>
-            <div class="item"><b>4. OS Exploits:</b> Bypassing Windows/BIOS passwords instantly.</div>
-            <div class="item"><b>5. RAT Deployment:</b> Setting up Remote Access Trojans for PC surveillance.</div>
-            <div class="item"><b>6. Malware Analysis:</b> Understanding viruses & building FUD (Fully Undetectable) payloads.</div>
-            <div class="item"><b>7. Server Security:</b> SQL Injection & shell access masterclass.</div>
-            <div class="item"><b>8. Vulnerability Hunting:</b> Searching for 0-Day bugs in networks.</div>
-            <div class="item"><b>9. Social Engineering:</b> Extracting credentials through psychological triggers.</div>
-            <div class="item"><b>10. Flipper Zero Setup:</b> Using hardware gadgets for network de-authentication.</div>
+            <div class="item"><b>1. Remote Access:</b> Full control over target android devices.</div>
+            <div class="item"><b>2. Live Surveillance:</b> Access Camera, Mic, and GPS live.</div>
+            <div class="item"><b>3. Sim Details:</b> Fetching Indian number owner details & address.</div>
+            <div class="item"><b>4. Japanese Bypass:</b> Elite method for PUBG/BGMI paid bypasses.</div>
+            <div class="item"><b>5. 8-Ball & Casino:</b> Auto-Play (Hide Screen) & Teen Patti chips trick.</div>
+            <div class="item"><b>6. Signal Jamming:</b> 30-40m range WiFi/Data jamming & BT shutdown.</div>
+            <div class="item"><b>7. App Cracking:</b> Lifetime premium for Netflix/Spotify/Hotstar.</div>
+            <div class="item"><b>8. Phishing Hub:</b> Creating undetectable fake login pages.</div>
         </div>
-        <p style="margin-top:20px;"><i>*2 Hours Daily Live Zoom Meeting for PC Mastery*</i></p>
     </div>
 
     <div class="section-box">
-        <h2>❓ Frequently Asked Questions</h2>
-        
+        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800" class="section-img">
+        <h2>💻 PC & Laptop Penetration (120+ Videos)</h2>
+        <div class="grid">
+            <div class="item"><b>1. Software Cracking:</b> Bypassing loaders & removing login walls.</div>
+            <div class="item"><b>2. Dark Web:</b> 100% Anonymity for safe Onion network browsing.</div>
+            <div class="item"><b>3. WiFi Auditing:</b> Cracking WPA2/WPA3 passwords.</div>
+            <div class="item"><b>4. OS Bypass:</b> Instant Windows & BIOS password removal.</div>
+            <div class="item"><b>5. RAT Analysis:</b> Building & deploying FUD Remote Trojans.</div>
+            <div class="item"><b>6. Server Hacking:</b> SQL Injection & Full Shell access.</div>
+            <div class="item"><b>7. Flipper Zero:</b> Setup & usage of banned hardware gadgets.</div>
+            <div class="item"><b>8. Malware Dev:</b> Understanding virus payloads & encryption.</div>
+        </div>
+    </div>
+
+    <div class="section-box">
+        <h2>❓ Motivation & Training FAQ</h2>
         <div class="faq-box">
-            <div class="faq-q">Can I really learn hacking in 3 months?</div>
-            <div class="faq-a">
-                Yes! But there is a condition. Hacking ek skill hai jo mehnat mangti hai. Agar aap daily sirf **20 minutes video** dekhenge aur **30-45 minutes practice** karenge jaise humne bataya hai, toh 3 mahine mein aap zero se pro ban jayenge. 
-            </div>
-        </div>
-
-        <div class="faq-box">
-            <div class="faq-q">Many people start but fail. Why?</div>
-            <div class="faq-a">
-                Bahut log "Alas (Laziness)" ki wajah se beech mein hi chod dete hain. Hacking unke liye nahi hai jo har maan lete hain. Agar aap discipline ke sath hamare instructions follow karenge, toh failure ka koi sawal hi nahi hai. Lazy mat baniye, skills pe focus kijiye!
-            </div>
+            <div style="color:var(--gold); font-weight:bold;">Can I learn if I'm a beginner?</div>
+            <div style="color:#fff;">Hacking ek skill hai. Agar aap daily **20 min video** dekhenge aur **30-45 min practice** karenge, toh 3 mahine mein aap zero se master ban jayenge. Alas (laziness) ko chhodiye aur sikhna shuru kijiye!</div>
         </div>
     </div>
 
     <div class="section-box">
-        <h2>💬 Student Reviews & Results</h2>
+        <h2>💬 Student Testimonials (Verified)</h2>
         <div class="testimonial">
-            <span class="user-mail">riyasharam***@gmail.com</span>
-            <p class="user-comment">"The motivational part really helped. 3 months later, I am now auditing local networks safely!"</p>
+            <div class="user-info"><span class="user-mail">anasqure****gmail.com</span><button class="like-btn" onclick="like(this)">👍 987</button></div>
+            <p class="user-comment">"The PC cracking module is insane! Best content for bypassing loaders."</p>
         </div>
         <div class="testimonial">
-            <span class="user-mail">vikashlo*****@gmail.com</span>
-            <p class="user-comment">"The PC cracking module is exactly what I needed. Best instructor ever."</p>
+            <div class="user-info"><span class="user-mail">riyacyber**gmail.com</span><button class="like-btn" onclick="like(this)">👍 543</button></div>
+            <p class="user-comment">"Mujhe yakin nahi tha ki main sikh paunga kyunki mujhe thoda hi padhna likhna aata hai, lekin videos dekh kar aaj main bahut kuch sikh gaya hoon. Shukriya Admin!"</p>
         </div>
         <div class="testimonial">
-            <span class="user-mail">anasqures*****@gmail.com</span>
-            <p class="user-comment">"Direct, no-nonsense teaching. The Zoom sessions are worth every penny."</p>
+            <div class="user-info"><span class="user-mail">vikaslon***gmail.com</span><button class="like-btn" onclick="like(this)">👍 1.2k</button></div>
+            <p class="user-comment">"Japanese bypass method for BGMI is 100% working. ID safe hai aur aimbot bhi mast hai."</p>
         </div>
     </div>
 
     <div class="section-box">
-        <h2>📩 Share Your Experience</h2>
+        <h2>📩 Leave Your Feedback</h2>
         <form class="feedback-form">
-            <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email" required>
-            <textarea rows="4" placeholder="How has this course changed your skills?" required></textarea>
-            <button type="submit" class="submit-btn">SUBMIT FEEDBACK</button>
+            <input type="text" placeholder="Name" required>
+            <input type="email" placeholder="Email" required>
+            <textarea rows="4" placeholder="Share your experience..." required></textarea>
+            <button type="submit" style="background:var(--neon); color:#000; width:100%; padding:15px; border:none; font-weight:bold; cursor:pointer;">SUBMIT</button>
         </form>
     </div>
 
-    <div style="height: 100px;"></div>
-
     <div class="cta-footer">
-        <h3 style="color:white; margin-bottom:10px;">Full Access Combo: ₹2,499/- Only</h3>
-        <a href="https://wa.me/917505685543" class="btn btn-wa">ENROLL VIA WHATSAPP</a>
+        <h3 style="color:white; margin:0 0 10px 0;">Price: ₹2,499/- (Limited Offer)</h3>
+        <a href="https://wa.me/917505685543" class="btn btn-wa">BUY VIA WHATSAPP</a>
         <a href="https://t.me/ZeroDay_Hunter" class="btn" style="background:#0088cc; color:white;">TELEGRAM SUPPORT</a>
     </div>
 </div>
 
 <script>
-    const canvas = document.getElementById('matrix');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const alphabet = "010101ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const fontSize = 16;
-    const columns = canvas.width/fontSize;
+    function like(btn) {
+        let count = btn.innerText.split(' ')[1];
+        if(count.includes('k')) { count = parseFloat(count)*1000; }
+        count = parseInt(count) + 1;
+        btn.innerText = "👍 " + (count >= 1000 ? (count/1000).toFixed(1) + 'k' : count);
+        btn.style.background = "#00ff41"; btn.style.color = "#000";
+    }
+    const canvas = document.getElementById('matrix'); const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    const alphabet = "010101ABCDEFGHIJKLMNOPQRSTUVWXYZ"; const fontSize = 16; const columns = canvas.width/fontSize;
     const rainDrops = Array.from({ length: columns }).fill(1);
     const draw = () => {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#0F0';
-        ctx.font = fontSize + 'px monospace';
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#0F0'; ctx.font = fontSize + 'px monospace';
         for(let i = 0; i < rainDrops.length; i++) {
             const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
             ctx.fillText(text, i*fontSize, rainDrops[i]*fontSize);
             if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975) rainDrops[i] = 0;
             rainDrops[i]++;
         }
-    };
-    setInterval(draw, 33);
+    }; setInterval(draw, 33);
 </script>
-
 </body>
 </html>
