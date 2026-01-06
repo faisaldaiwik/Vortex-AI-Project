@@ -6,35 +6,43 @@
     
     <meta name="google-site-verification" content="0VUEsMZ8ka2qB48icqz6CrMx7D0D9wkySWa2fwum2bQ" />
     
-    <title>ZeroDay Hunter | Advanced Cyber Intelligence Academy</title>
+    <title>ZeroDay Hunter | Professional Cyber Intelligence Academy</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
     
     <style>
-        :root { --neon: #00ff41; --bg: #050505; --red: #ff003c; }
+        :root { --neon: #00ff41; --bg: #050505; --red: #ff003c; --gold: #ffd700; }
         body { background: var(--bg); color: var(--neon); font-family: 'Fira Code', monospace; margin: 0; line-height: 1.6; }
         #matrix { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
         .container { max-width: 1000px; margin: auto; padding: 20px; }
         
-        header { text-align: center; padding: 80px 0; border-bottom: 2px solid var(--neon); }
+        header { text-align: center; padding: 100px 0; border-bottom: 2px solid var(--neon); background: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1000') no-repeat center; background-size: cover; background-blend-mode: overlay; }
         .glitch { font-family: 'Orbitron'; font-size: 3.5rem; color: #fff; text-shadow: 2px 2px var(--red); }
         
         .section-box { background: rgba(10, 10, 10, 0.95); border: 1px solid #333; padding: 40px; margin: 40px 0; border-radius: 8px; }
         h2 { font-family: 'Orbitron'; color: #fff; border-left: 5px solid var(--neon); padding-left: 15px; margin-bottom: 25px; }
         
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .item { background: #0c0c0c; padding: 20px; border: 1px solid #222; border-radius: 4px; transition: 0.3s; }
-        .item:hover { border-color: var(--neon); background: #111; }
-        .item b { color: #fff; display: block; margin-bottom: 8px; font-size: 1.1rem; }
+        /* Image Cards */
+        .img-banner { width: 100%; height: 250px; background: #111; margin-bottom: 20px; border-radius: 8px; overflow: hidden; border: 1px solid #333; }
+        .img-banner img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
 
-        /* Real Feedback Styling */
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .item { background: #0c0c0c; padding: 20px; border: 1px solid #222; border-radius: 4px; }
+        .item b { color: #fff; display: block; margin-bottom: 8px; }
+
+        /* FAQ Section */
+        .faq-box { background: rgba(0, 255, 65, 0.05); padding: 20px; border-left: 3px solid var(--gold); margin-bottom: 20px; }
+        .faq-q { color: var(--gold); font-weight: bold; font-size: 1.1rem; }
+        .faq-a { color: #fff; margin-top: 10px; }
+
+        /* Feedback Section */
         .testimonial { border-bottom: 1px solid #222; padding: 15px 0; }
         .user-mail { color: #888; font-size: 0.8rem; }
         .user-comment { color: #fff; font-style: italic; margin-top: 5px; }
 
-        /* Feedback Form */
+        /* Form */
         .feedback-form input, .feedback-form textarea {
-            width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid var(--neon); color: #fff; font-family: inherit;
+            width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid var(--neon); color: #fff;
         }
         .submit-btn { background: var(--neon); color: #000; border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; width: 100%; }
 
@@ -50,70 +58,71 @@
 <div class="container">
     <header>
         <div class="glitch">ZERODAY_HUNTER</div>
-        <p>Global Standard in Ethical Hacking & Cyber Defense</p>
-        <div style="color:#ffd700; margin-top:10px;">⭐ 4.6/5.0 Verified by 4,832 Students</div>
+        <p>Mastering the Shadows: Elite Cyber Intelligence Training</p>
+        <div style="color:var(--gold); margin-top:10px;">⭐ 4.6/5.0 Verified Student Success Rate</div>
     </header>
 
-    <div class="section-box">
-        <h2>👤 Lead Instructor Profile</h2>
-        <p>Admin **ZeroDay_Hunter** is a world-renowned Security Researcher trained in underground cyber-labs across Israel and Russia. Having audited some of the most secure systems globally, he now shares classified techniques used by top-tier professionals.</p>
-        <div style="border: 1px solid #ffd700; padding: 15px; color: #ffd700; font-size: 0.9rem;">
-            🏆 Winner of Global Cyber Excellence Award (2023) | OSCP & CEH Master Certified.
-        </div>
+    <div class="img-banner">
+        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc48?auto=format&fit=crop&q=80&w=1000" alt="Hacking Lab">
     </div>
 
     <div class="section-box">
         <h2>💻 PC & Laptop Penetration (120+ Advanced Modules)</h2>
         <div class="grid">
-            <div class="item"><b>1. Software Reverse Engineering:</b> Learn to remove login pages and bypass premium software loaders.</div>
-            <div class="item"><b>2. Dark Web Operations:</b> Safe navigation of Onion networks while maintaining 100% anonymity.</div>
-            <div class="item"><b>3. Network Protocol Attacks:</b> Cracking WPA2/WPA3 WiFi security and capturing handshakes.</div>
-            <div class="item"><b>4. System Exploitation:</b> Bypassing Windows/BIOS passwords and gaining admin privileges.</div>
-            <div class="item"><b>5. Remote Access Trojans (RAT):</b> Deploying and managing remote access on PC for surveillance.</div>
-            <div class="item"><b>6. Malware Analysis:</b> Decoding virus behavior and building undetectable payloads.</div>
-            <div class="item"><b>7. Web Server Hacking:</b> Mastering SQL Injection, XSS, and gaining shell access to servers.</div>
-            <div class="item"><b>8. Vulnerability Assessment:</b> Finding zero-day bugs in local networks and software.</div>
-            <div class="item"><b>9. Social Engineering Toolkit:</b> Advanced psychological methods to extract data from target systems.</div>
-            <div class="item"><b>10. Hardware Pentesting:</b> Configuring Flipper Zero and WiFi Deauthers for PC network control.</div>
+            <div class="item"><b>1. Reverse Engineering:</b> Removing login pages & bypassing premium loaders.</div>
+            <div class="item"><b>2. Dark Web Safety:</b> Full anonymity protocols for secure Onion browsing.</div>
+            <div class="item"><b>3. WiFi Auditing:</b> Cracking WPA2/WPA3 networks & handshake capture.</div>
+            <div class="item"><b>4. OS Exploits:</b> Bypassing Windows/BIOS passwords instantly.</div>
+            <div class="item"><b>5. RAT Deployment:</b> Setting up Remote Access Trojans for PC surveillance.</div>
+            <div class="item"><b>6. Malware Analysis:</b> Understanding viruses & building FUD (Fully Undetectable) payloads.</div>
+            <div class="item"><b>7. Server Security:</b> SQL Injection & shell access masterclass.</div>
+            <div class="item"><b>8. Vulnerability Hunting:</b> Searching for 0-Day bugs in networks.</div>
+            <div class="item"><b>9. Social Engineering:</b> Extracting credentials through psychological triggers.</div>
+            <div class="item"><b>10. Flipper Zero Setup:</b> Using hardware gadgets for network de-authentication.</div>
         </div>
-        <p style="margin-top:20px; color:#fff;"><i>*Includes: Daily 2 Hours Intensive Live Zoom Masterclass*</i></p>
+        <p style="margin-top:20px;"><i>*2 Hours Daily Live Zoom Meeting for PC Mastery*</i></p>
     </div>
 
     <div class="section-box">
-        <h2>📱 Mobile Hacking Mastery (80+ High-Definition Videos)</h2>
-        <div class="grid">
-            <div class="item"><b>Full Remote Monitoring:</b> Secretly access messages, photos, and files of target devices.</div>
-            <div class="item"><b>Live Surveillance:</b> Access live camera, microphone, and real-time GPS location.</div>
-            <div class="item"><b>Gaming Exploits:</b> PUBG/BGMI Japanese Bypass, Aimbot, and Anti-Ban configurations.</div>
-            <div class="item"><b>Casino Tricks:</b> 8-Ball Pool Auto-Play (Hide Screen) and Teen Patti Gold chips manipulation.</div>
-            <div class="item"><b>Signal Interruption:</b> Jamming WiFi/Data networks within 30-40 meters range.</div>
-            <div class="item"><b>Bluetooth Overload:</b> Forcing target devices to switch off via Bluetooth vulnerabilities.</div>
+        <h2>❓ Frequently Asked Questions</h2>
+        
+        <div class="faq-box">
+            <div class="faq-q">Can I really learn hacking in 3 months?</div>
+            <div class="faq-a">
+                Yes! But there is a condition. Hacking ek skill hai jo mehnat mangti hai. Agar aap daily sirf **20 minutes video** dekhenge aur **30-45 minutes practice** karenge jaise humne bataya hai, toh 3 mahine mein aap zero se pro ban jayenge. 
+            </div>
+        </div>
+
+        <div class="faq-box">
+            <div class="faq-q">Many people start but fail. Why?</div>
+            <div class="faq-a">
+                Bahut log "Alas (Laziness)" ki wajah se beech mein hi chod dete hain. Hacking unke liye nahi hai jo har maan lete hain. Agar aap discipline ke sath hamare instructions follow karenge, toh failure ka koi sawal hi nahi hai. Lazy mat baniye, skills pe focus kijiye!
+            </div>
         </div>
     </div>
 
     <div class="section-box">
-        <h2>💬 Recent Student Testimonials</h2>
+        <h2>💬 Student Reviews & Results</h2>
         <div class="testimonial">
             <span class="user-mail">riyasharam***@gmail.com</span>
-            <p class="user-comment">"The PC cracking module is insane! I finally learned how to bypass premium loaders safely."</p>
+            <p class="user-comment">"The motivational part really helped. 3 months later, I am now auditing local networks safely!"</p>
         </div>
         <div class="testimonial">
             <span class="user-mail">vikashlo*****@gmail.com</span>
-            <p class="user-comment">"Highly recommend for mobile game modding. The Japanese bypass method actually works!"</p>
+            <p class="user-comment">"The PC cracking module is exactly what I needed. Best instructor ever."</p>
         </div>
         <div class="testimonial">
             <span class="user-mail">anasqures*****@gmail.com</span>
-            <p class="user-comment">"Professional training. The Zoom sessions help a lot in clearing doubts."</p>
+            <p class="user-comment">"Direct, no-nonsense teaching. The Zoom sessions are worth every penny."</p>
         </div>
-        <p style="margin-top:15px; font-size:0.9rem;">+4,829 other students have shared their reviews.</p>
     </div>
 
     <div class="section-box">
-        <h2>📩 Leave Your Feedback</h2>
+        <h2>📩 Share Your Experience</h2>
         <form class="feedback-form">
             <input type="text" placeholder="Your Name" required>
-            <input type="email" placeholder="Your Email (Hidden from public)" required>
-            <textarea rows="4" placeholder="Share your learning experience..." required></textarea>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="4" placeholder="How has this course changed your skills?" required></textarea>
             <button type="submit" class="submit-btn">SUBMIT FEEDBACK</button>
         </form>
     </div>
@@ -121,11 +130,10 @@
     <div style="height: 100px;"></div>
 
     <div class="cta-footer">
-        <h3 style="color:white; margin:0 0 10px 0;">All-In-One Combo: ₹2,499/- Only</h3>
-        <a href="https://wa.me/917505685543" class="btn btn-wa">ENROLL NOW (WHATSAPP)</a>
+        <h3 style="color:white; margin-bottom:10px;">Full Access Combo: ₹2,499/- Only</h3>
+        <a href="https://wa.me/917505685543" class="btn btn-wa">ENROLL VIA WHATSAPP</a>
         <a href="https://t.me/ZeroDay_Hunter" class="btn" style="background:#0088cc; color:white;">TELEGRAM SUPPORT</a>
     </div>
-
 </div>
 
 <script>
