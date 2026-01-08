@@ -1,175 +1,132 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>ZeroDay Hunter | All-In-One Super Portal</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZeroDay AI Node | Voice & Vision</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
     <style>
-        :root { --neon: #00ff41; --pink: #ff007f; --bg: #050505; --glass: rgba(255, 255, 255, 0.05); }
-        * { box-sizing: border-box; transition: 0.3s; }
-        body { background: var(--bg); color: #fff; font-family: 'Poppins', sans-serif; margin: 0; }
+        :root { --neon: #00ff41; --bg: #050505; --card: #0c0c0c; --user-bg: #1a1a1a; }
+        * { box-sizing: border-box; }
+        body { background: var(--bg); color: var(--neon); font-family: 'Fira Code', monospace; margin: 0; display: flex; flex-direction: column; height: 100vh; }
         
-        /* Layout Design */
-        .header { background: linear-gradient(45deg, #000, #1a1a1a); padding: 50px; text-align: center; border-bottom: 3px solid var(--pink); }
-        .container { max-width: 1200px; margin: auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+        header { padding: 15px; border-bottom: 1px solid #333; text-align: center; background: rgba(0,0,0,0.9); }
+        .glitch { font-family: 'Orbitron'; font-size: 1.2rem; color: #fff; text-shadow: 0 0 10px var(--neon); }
+
+        #chat-container { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; max-width: 800px; margin: auto; width: 100%; }
         
-        .card { background: var(--glass); border: 1px solid #333; padding: 30px; border-radius: 20px; backdrop-filter: blur(10px); }
-        .card:hover { border-color: var(--pink); transform: translateY(-5px); }
-        h2 { font-family: 'Orbitron'; color: var(--pink); font-size: 1.2rem; margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .message { padding: 15px; border-radius: 12px; line-height: 1.6; position: relative; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Input Styles */
-        input, select, textarea { width: 100%; padding: 12px; background: #111; border: 1px solid #444; color: #fff; border-radius: 8px; margin-bottom: 10px; }
-        .btn { background: var(--pink); color: #fff; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%; }
-        .btn:hover { background: #fff; color: #000; }
+        .user-msg { background: var(--user-bg); align-self: flex-end; color: #fff; border: 1px solid #333; border-bottom-right-radius: 2px; }
+        .ai-msg { background: var(--card); align-self: flex-start; border: 1px solid var(--neon); border-bottom-left-radius: 2px; box-shadow: 0 0 15px rgba(0,255,65,0.05); width: 90%; }
 
-        /* Game Box */
-        #game-canvas { background: #000; border: 2px solid var(--neon); display: block; margin: auto; border-radius: 10px; }
+        .ai-img { width: 100%; border-radius: 8px; margin-top: 10px; border: 1px solid var(--neon); }
 
-        /* Voice Selection UI */
-        .voice-box { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+        /* Audio Button Style */
+        .audio-controls { margin-top: 10px; display: flex; align-items: center; gap: 10px; border-top: 1px solid #222; padding-top: 8px; }
+        .speak-btn { background: none; border: 1px solid var(--neon); color: var(--neon); cursor: pointer; border-radius: 50%; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: 0.3s; }
+        .speak-btn:hover { background: var(--neon); color: #000; box-shadow: 0 0 10px var(--neon); }
+
+        .input-area { padding: 20px; background: #000; border-top: 1px solid #333; display: flex; gap: 10px; position: sticky; bottom: 0; }
+        input { flex-grow: 1; padding: 15px; background: #080808; border: 1px solid var(--neon); color: #fff; font-family: inherit; border-radius: 5px; outline: none; }
+        #sendBtn { padding: 15px 25px; background: var(--neon); color: #000; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; font-family: 'Orbitron'; }
+
+        #status { font-size: 0.7rem; color: #888; margin-left: 20px; margin-bottom: 5px; }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1 style="font-family: 'Orbitron'; letter-spacing: 5px;">ZERODAY SUPER-APP</h1>
-    <p>AI Voices • Video Downloader • Translator • Games • Info Bot</p>
+<header>
+    <div class="glitch">ZERODAY_AI_BRAIN v2.0</div>
+</header>
+
+<div id="chat-container">
+    <div class="message ai-msg">
+        Intelligence Node Online. Main ChatGPT aur Gemini ke protocols follow kar raha hoon. 
+        Main jankari de sakta hoon, image bana sakta hoon aur bol kar sunaa bhi sakta hoon.
+    </div>
 </div>
 
-<div class="container">
+<div id="status"></div>
 
-    <div class="card">
-        <h2>🎙️ AI VOICE & INFO ANALYSER</h2>
-        <label>Select Female Voice:</label>
-        <select id="voiceSelect"></select>
-        
-        <textarea id="infoQuery" rows="3" placeholder="Yahan sawal likhein (e.g. Is this link fake? Kitna time lagega?)"></textarea>
-        <button class="btn" onclick="analyzeAndSpeak()">ASK AI & LISTEN</button>
-        <p id="analysisOutput" style="font-size: 0.8rem; color: #888; margin-top: 10px;"></p>
-    </div>
-
-    <div class="card">
-        <h2>📥 VIDEO DOWNLOADER</h2>
-        <input type="text" id="videoUrl" placeholder="Paste Video Link (FB, Insta, YT...)">
-        <p style="font-size: 0.7rem; color: var(--neon);">*Note: Server connection required for direct download.</p>
-        <button class="btn" style="background: var(--neon); color: #000;" onclick="startDownload()">GENERATE DOWNLOAD LINK</button>
-    </div>
-
-    <div class="card">
-        <h2>Translate: Hindi ➔ English</h2>
-        <textarea id="hindiText" placeholder="Hindi mein likhein..."></textarea>
-        <button class="btn" onclick="translateText()">TRANSLATE NOW</button>
-        <div id="englishResult" style="margin-top:15px; padding:10px; background:#000; border-radius:5px; color:var(--neon)"></div>
-    </div>
-
-    <div class="card" style="grid-column: span 1;">
-        <h2>🎮 MINI GAME: NEON SNAKE</h2>
-        <canvas id="game-canvas" width="300" height="200"></canvas>
-        <p style="text-align:center; font-size:0.7rem;">Use Arrow Keys to Play</p>
-    </div>
-
+<div class="input-area">
+    <input type="text" id="userInput" placeholder="Ask or type 'generate image of...'" onkeypress="if(event.key === 'Enter') sendMessage()">
+    <button id="sendBtn" onclick="sendMessage()">SEND</button>
 </div>
 
 <script>
-    // --- 1. VOICE SYSTEM (MULTIPLE LADIES VOICES) ---
-    let voices = [];
-    function loadVoices() {
-        voices = window.speechSynthesis.getVoices();
-        const select = document.getElementById('voiceSelect');
-        select.innerHTML = '';
+    const container = document.getElementById('chat-container');
+    const status = document.getElementById('status');
+
+    function sendMessage() {
+        const input = document.getElementById('userInput');
+        const text = input.value.trim();
         
-        // Filter for female-sounding voices
-        voices.forEach((voice, i) => {
-            if (voice.name.includes('Google') || voice.name.includes('Female') || voice.lang.includes('en')) {
-                const option = document.createElement('option');
-                option.value = i;
-                option.textContent = `${voice.name} (${voice.lang})`;
-                select.appendChild(option);
+        if (!text) return;
+
+        // User Message
+        addMessage(text, 'user-msg');
+        input.value = "";
+        status.innerText = "AI is processing...";
+
+        // AI Logic
+        setTimeout(() => {
+            status.innerText = "";
+            let aiResponse = "";
+            let isImage = false;
+
+            if(text.toLowerCase().includes("image") || text.toLowerCase().includes("banao") || text.toLowerCase().includes("photo")) {
+                isImage = true;
+                const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(text)}?width=500&height=500&nologo=true`;
+                aiResponse = `Maine aapke liye ye image generate ki hai: "${text}"`;
+                addMessage(aiResponse, 'ai-msg', imgUrl);
+            } else {
+                // Real AI connect karne ke liye yahan API lagani hogi
+                aiResponse = "Main ZeroDay AI hoon. Abhi main test mode mein hoon, isliye main sirf limited sawalon ke jawab de sakta hoon. Gemini API connect hone ke baad main har jankari de paunga.";
+                addMessage(aiResponse, 'ai-msg');
             }
-        });
+        }, 1000);
     }
-    window.speechSynthesis.onvoiceschanged = loadVoices;
 
-    function analyzeAndSpeak() {
-        const query = document.getElementById('infoQuery').value;
-        const output = document.getElementById('analysisOutput');
+    function addMessage(text, type, imgUrl = null) {
+        const div = document.createElement('div');
+        div.className = `message ${type}`;
         
-        // Logic for AI analysis
-        let response = "Main iski jankari nikal rahi hoon. ";
-        if(query.includes("fake")) {
-            response += "Analysis ke mutabik ye information 80% fake lag rahi hai. Kripya savdhan rahein.";
-        } else if(query.includes("time")) {
-            response += "Is kaam mein lagbhag 2 se 3 ghante ka samay lag sakta hai.";
-        } else {
-            response += "Aapka sawal mil gaya hai. Iska jawab hai ki aapko mehnat karni hogi aur sahi rasta chunna hoga.";
+        let content = `<div>${text}</div>`;
+        
+        if(imgUrl) {
+            content += `<img src="${imgUrl}" class="ai-img">`;
         }
-        
-        output.innerText = response;
 
-        const utter = new SpeechSynthesisUtterance(response);
-        const selectedVoice = document.getElementById('voiceSelect').value;
-        utter.voice = voices[selectedVoice];
-        utter.pitch = 1.2; // High pitch for female voice
-        window.speechSynthesis.speak(utter);
-    }
-
-    // --- 2. VIDEO DOWNLOADER LOGIC ---
-    function startDownload() {
-        const url = document.getElementById('videoUrl').value;
-        if(!url) { alert("Link to daalo bhai!"); return; }
-        alert("Searching Video on Server... \nLink Detected: " + url.substring(0,20) + "...");
-        // In real web app, we redirect to a downloader API
-        window.open("https://en.savefrom.net/", "_blank");
-    }
-
-    // --- 3. TRANSLATOR LOGIC ---
-    function translateText() {
-        const text = document.getElementById('hindiText').value;
-        const result = document.getElementById('englishResult');
-        // Simple client-side mapping for size & demo
-        const demoDict = { "kaise ho": "How are you?", "naam": "Name", "khana": "Food", "shiksha": "Education" };
-        result.innerText = "Translating: " + (demoDict[text.toLowerCase()] || "Translation service connecting to Cloud...");
-    }
-
-    // --- 4. SNAKE GAME LOGIC ---
-    const canvas = document.getElementById('game-canvas');
-    const ctx = canvas.getContext('2d');
-    let snake = [{x: 10, y: 10}];
-    let food = {x: 15, y: 15};
-    let dx = 1, dy = 0;
-
-    function drawGame() {
-        ctx.fillStyle = "black";
-        ctx.fillRect(0,0,300,200);
-        
-        ctx.fillStyle = "#00ff41";
-        snake.forEach(p => ctx.fillRect(p.x*10, p.y*10, 8, 8));
-        
-        ctx.fillStyle = "red";
-        ctx.fillRect(food.x*10, food.y*10, 8, 8);
-        
-        let head = {x: snake[0].x + dx, y: snake[0].y + dy};
-        snake.unshift(head);
-        if(head.x === food.x && head.y === food.y) {
-            food = {x: Math.floor(Math.random()*29), y: Math.floor(Math.random()*19)};
-        } else {
-            snake.pop();
+        // Add Audio Button only for AI messages
+        if(type === 'ai-msg') {
+            content += `
+                <div class="audio-controls">
+                    <button class="speak-btn" onclick="speakText('${text.replace(/'/g, "\\'")}')" title="Listen Audio">🔊</button>
+                    <span style="font-size: 0.7rem; color: #888;">Listen</span>
+                </div>
+            `;
         }
+
+        div.innerHTML = content;
+        container.appendChild(div);
+        container.scrollTop = container.scrollHeight;
     }
-    setInterval(drawGame, 100);
-    window.onkeydown = (e) => {
-        if(e.key === "ArrowUp") { dx=0; dy=-1; }
-        if(e.key === "ArrowDown") { dx=0; dy=1; }
-        if(e.key === "ArrowLeft") { dx=-1; dy=0; }
-        if(e.key === "ArrowRight") { dx=1; dy=0; }
-    };
+
+    // Voice Function
+    function speakText(text) {
+        // Stop any current speech
+        window.speechSynthesis.cancel();
+        
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'hi-IN'; // Hindi-Indian voice
+        utterance.pitch = 1;
+        utterance.rate = 1;
+        
+        window.speechSynthesis.speak(utterance);
+    }
 </script>
-
-<div style="display:none">
-    <script>
-        document.write("Cyber_Knowledge_Archive_".repeat(4000));
-    </script>
-</div>
 
 </body>
 </html>
