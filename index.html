@@ -1,267 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZeroDay Hunter | Elite Mega System</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+    <title>WhatsApp Chat AI</title>
     <style>
-        :root { --neon: #00ff41; --bg: #050505; --red: #ff003c; --gold: #ffd700; --card: #0c0c0c; }
-        * { box-sizing: border-box; }
-        body { background: var(--bg); color: var(--neon); font-family: 'Fira Code', monospace; margin: 0; line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
-        #matrix { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
-        .container { max-width: 1100px; margin: auto; padding: 20px; }
-        
-        /* Sections */
-        header { text-align: center; padding: 80px 0; border-bottom: 2px solid var(--neon); background: rgba(0,0,0,0.8); }
-        .glitch { font-family: 'Orbitron'; font-size: clamp(2rem, 8vw, 3.5rem); color: #fff; text-shadow: 2px 2px var(--red); text-transform: uppercase; }
-        .section-box { background: rgba(10, 10, 10, 0.98); border: 1px solid #333; padding: 30px; margin: 30px 0; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
-        h2 { font-family: 'Orbitron'; color: #fff; border-left: 5px solid var(--neon); padding-left: 15px; margin-bottom: 25px; }
-
-        /* Courses & Gadgets Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .item { background: var(--card); padding: 15px; border: 1px solid #222; border-radius: 4px; transition: 0.3s; }
-        .item:hover { border-color: var(--neon); box-shadow: 0 0 10px rgba(0,255,65,0.2); }
-        .item b { color: #fff; display: block; margin-bottom: 5px; }
-        .section-img { width: 100%; height: 220px; object-fit: cover; border: 1px solid var(--neon); margin-bottom: 15px; }
-
-        /* Store Grid */
-        .store-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-        .gadget-card { background: #000; border: 1px solid #222; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
-        .gadget-card:hover { border-color: var(--gold); transform: translateY(-5px); }
-        .gadget-img { width: 100%; height: 150px; object-fit: cover; opacity: 0.8; }
-        .gadget-info { padding: 12px; flex-grow: 1; }
-        .price { font-size: 1.2rem; color: #fff; font-weight: bold; margin: 8px 0; }
-        .buy-btn { background: var(--neon); color: #000; border: none; padding: 10px; width: 100%; font-weight: bold; cursor: pointer; font-family: 'Orbitron'; }
-
-        /* Testimonials Like System */
-        .testimonial { padding: 20px 0; border-bottom: 1px solid #222; }
-        .like-btn { background: transparent; border: 1px solid var(--neon); color: var(--neon); padding: 5px 15px; cursor: pointer; border-radius: 20px; font-weight: bold; margin-top: 10px; }
-        .like-btn.liked { background: var(--neon); color: #000; }
-
-        /* AI CHAT INTERFACE */
-        #ai-node { background: #000; border: 2px solid var(--neon); padding: 0; overflow: hidden; height: 500px; display: flex; flex-direction: column; }
-        #chat-window { flex-grow: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 15px; background: rgba(0,0,0,0.9); }
-        .msg { padding: 12px; border-radius: 8px; max-width: 85%; line-height: 1.4; position: relative; }
-        .ai-msg { background: #0c0c0c; border: 1px solid var(--neon); align-self: flex-start; }
-        .user-msg { background: #1a1a1a; align-self: flex-end; color: #fff; }
-        .ai-image { width: 100%; max-width: 300px; border-radius: 5px; margin-top: 10px; border: 1px solid var(--neon); }
-        .voice-btn { cursor: pointer; border: none; background: none; color: var(--neon); font-size: 1.2rem; margin-top: 8px; }
-
-        .ai-input-area { padding: 15px; background: #111; display: flex; gap: 10px; border-top: 1px solid #333; }
-        .ai-input-area input { flex-grow: 1; padding: 12px; background: #000; border: 1px solid var(--neon); color: #fff; font-family: inherit; }
-        .ai-input-area button { background: var(--neon); border: none; padding: 0 20px; font-weight: bold; cursor: pointer; font-family: 'Orbitron'; }
-
-        /* Checkout Modal */
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 9999; display: none; justify-content: center; align-items: center; }
-        .checkout-box { background: #111; border: 2px solid var(--neon); padding: 30px; width: 90%; max-width: 450px; }
-        .checkout-box input, .checkout-box textarea { width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid var(--neon); color: #fff; }
-
-        .footer-cta { position: sticky; bottom: 0; background: rgba(0,0,0,0.95); padding: 15px; text-align: center; border-top: 1px solid var(--neon); z-index: 100; }
-        .btn { padding: 12px 25px; text-decoration: none; font-weight: bold; border-radius: 5px; margin: 5px; display: inline-block; font-family: 'Orbitron'; }
-        .wa-btn { background: var(--neon); color: #000; }
-        .tele-btn { background: #0088cc; color: #fff; }
-        .hidden { display: none; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #e5ddd5; }
+        .header { background: #075e54; color: white; padding: 10px; display: flex; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .header img { border-radius: 50%; width: 40px; height: 40px; margin-right: 10px; border: 1px solid white; }
+        .chat-container { padding: 70px 10px 80px 10px; display: flex; flex-direction: column; }
+        .msg { max-width: 75%; padding: 8px 12px; margin: 5px 0; border-radius: 8px; font-size: 15px; position: relative; box-shadow: 0 1px 1px rgba(0,0,0,0.1); }
+        .sent { align-self: flex-end; background: #dcf8c6; }
+        .received { align-self: flex-start; background: white; }
+        .status { font-size: 10px; color: #999; text-align: right; margin-top: 4px; }
+        .footer { position: fixed; bottom: 0; width: 100%; background: #f0f0f0; padding: 10px; display: flex; align-items: center; box-sizing: border-box; }
+        input { flex: 1; padding: 12px; border-radius: 25px; border: none; outline: none; margin-right: 5px; font-size: 16px; }
+        .btn { background: #075e54; color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; }
+        .typing { font-style: italic; color: #25D366; font-size: 12px; }
     </style>
 </head>
 <body>
 
-<canvas id="matrix"></canvas>
-
-<div class="container">
-    <header>
-        <div class="glitch">ZERODAY_HUNTER</div>
-        <p>Advanced Cyber Intelligence Academy & Underground Store</p>
-    </header>
-
-    <div class="section-box">
-        <h2>👤 Lead Admin Profile</h2>
-        <p>Admin **ZeroDay_Hunter** is an International Security Expert (Israel/Europe Labs). Dedicated to elite cyber education.</p>
-    </div>
-
-    <div class="section-box" id="ai-node">
-        <div id="chat-window">
-            <div class="msg ai-msg">
-                System Online. Main ChatGPT aur Gemini se connect ho sakta hoon. Puchiye ya Image banane ko kahiye.
-            </div>
-        </div>
-        <div id="ai-status" style="padding: 5px 20px; font-size: 0.7rem; color: var(--gold);"></div>
-        <div class="ai-input-area">
-            <input type="text" id="aiInput" placeholder="Ask anything or 'generate image of...'">
-            <button onclick="handleAI()">SEND</button>
-        </div>
-    </div>
-
-    <div class="section-box">
-        <img src="https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800" class="section-img">
-        <h2>📱 Advanced Mobile Hacking (80+ Videos)</h2>
-        <div class="grid">
-            <div class="item"><b>1. Remote Access:</b> Android/iOS control.</div>
-            <div class="item"><b>2. Japanese Bypass:</b> Elite Anti-Ban protocols.</div>
-            <div class="item"><b>3. Live Spy:</b> Camera & Mic access.</div>
-            <div class="item"><b>4. Casino Hacks:</b> Game algorithm manipulation.</div>
-            <div class="item"><b>5. Jamming:</b> Frequency disruption.</div>
-        </div>
-    </div>
-
-    <div class="section-box" id="store">
-        <h2>🛡️ USB Hacking Tools & Gadgets</h2>
-        <div class="store-grid" id="gadget-list">
-            </div>
-    </div>
-
-    <div class="section-box">
-        <img src="https://images.pexels.com/photos/5473337/pexels-photo-5473337.jpeg?auto=compress&cs=tinysrgb&w=800" class="section-img">
-        <h2>💻 PC & Laptop Penetration</h2>
-        <div class="grid">
-            <div class="item"><b>1. Software Cracking:</b> Bypassing auth-walls.</div>
-            <div class="item"><b>2. Dark Web:</b> Anonymous browsing.</div>
-            <div class="item"><b>3. RAT Setup:</b> FUD Trojans.</div>
-            <div class="item"><b>4. OS Bypass:</b> Password removal.</div>
-        </div>
-    </div>
-
-    <div class="section-box">
-        <h2>💬 Verified Feedback</h2>
-        <div class="testimonial">
-            <p>Luffycrak****: "Japanese Bypass is 100% working!"</p>
-            <button class="like-btn" onclick="toggleLike(this, 2400)">👍 2.4k Likes</button>
-        </div>
-        <div class="testimonial">
-            <p>Anasqure****: "Finally found a real USB Rubber Ducky seller."</p>
-            <button class="like-btn" onclick="toggleLike(this, 850)">👍 850 Likes</button>
-        </div>
+<div class="header">
+    <img src="https://i.pravatar.cc/150?u=priya" alt="Priya">
+    <div>
+        <strong>Priya</strong><br>
+        <span id="sub-status" style="font-size: 12px;">Online</span>
     </div>
 </div>
 
-<div class="overlay" id="checkoutOverlay">
-    <div class="checkout-box" id="step1">
-        <h2>SHIPPING_LOGS</h2>
-        <p id="selectedItem" style="color:var(--gold)"></p>
-        <input type="text" id="cName" placeholder="Full Legal Name">
-        <textarea id="cAddr" placeholder="Shipping Address" rows="3"></textarea>
-        <input type="text" id="cPhone" placeholder="Contact Phone">
-        <button class="buy-btn" onclick="toPayment()">CONTINUE</button>
-        <button onclick="closeModal()" style="background:none; border:none; color:#555; width:100%; margin-top:10px; cursor:pointer;">CANCEL</button>
-    </div>
-    <div class="checkout-box hidden" id="step2">
-        <h2>PAYMENT_GATEWAY</h2>
-        <p>1. Open Telegram to get Payment Link.<br>2. Send Order ID here after payment.</p>
-        <a href="https://t.me/ZeroDay_Hunter" target="_blank" class="btn tele-btn" style="display:block; text-align:center;">OPEN TELEGRAM ADMIN</a>
-        <input type="text" id="orderID" placeholder="Enter Order ID from Admin">
-        <button class="buy-btn" onclick="finishOrder()">VERIFY & COMPLETE</button>
-    </div>
-    <div class="checkout-box hidden" id="step3">
-        <h2 style="color:var(--neon)">ORDER_SUCCESS</h2>
-        <p>Status: <span style="color:var(--gold)">Stealth Shipping Active</span></p>
-        <p>ETA: 6 Business Days</p>
-        <button class="buy-btn" onclick="location.reload()">FINISH</button>
-    </div>
+<div class="chat-container" id="chatBox">
+    <div class="msg received">Haan ji boliyee...<div class="status">10:00 AM</div></div>
 </div>
 
-<div class="footer-cta">
-    <a href="https://wa.me/917505685543" class="btn wa-btn">ENROLL VIA WHATSAPP</a>
-    <a href="https://t.me/ZeroDay_Hunter" class="btn tele-btn">TELEGRAM SUPPORT</a>
+<div class="footer">
+    <input type="text" id="userInput" placeholder="Type a message...">
+    <button class="btn" onclick="processChat()">➤</button>
 </div>
 
 <script>
-    // 1. Matrix Effect
-    const canvas = document.getElementById('matrix'); const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    const alphabet = "010101#@%"; const drops = Array.from({ length: canvas.width/16 }).fill(1);
-    function drawMatrix() {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#0F0'; ctx.font = '16px monospace';
-        drops.forEach((y, i) => {
-            ctx.fillText(alphabet.charAt(Math.floor(Math.random()*alphabet.length)), i*16, y*16);
-            if(y*16 > canvas.height && Math.random() > 0.975) drops[i] = 0; drops[i]++;
-        });
-    } setInterval(drawMatrix, 33);
+    const chatBox = document.getElementById('chatBox');
+    const subStatus = document.getElementById('sub-status');
 
-    // 2. Gadget Injection
-    const gadgets = [
-        { n: "USB Rubber Ducky", p: "6,500", i: "https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=200" },
-        { n: "LAN Turtle", p: "8,200", i: "https://images.pexels.com/photos/5473302/pexels-photo-5473302.jpeg?auto=compress&cs=tinysrgb&w=200" },
-        { n: "Flipper Zero", p: "24,999", i: "https://images.pexels.com/photos/1432675/pexels-photo-1432675.jpeg?auto=compress&cs=tinysrgb&w=200" },
-        { n: "Wi-Fi Deauther", p: "4,800", i: "https://images.pexels.com/photos/1043474/pexels-photo-1043474.jpeg?auto=compress&cs=tinysrgb&w=200" },
-        { n: "Satellite Phone Spy", p: "35,000", i: "https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=200" }
-    ];
-    const gList = document.getElementById('gadget-list');
-    gadgets.forEach(g => {
-        gList.innerHTML += `<div class="gadget-card">
-            <img src="${g.i}" class="gadget-img">
-            <div class="gadget-info"><h3>${g.n}</h3><div class="price">₹${g.p}</div>
-            <button class="buy-btn" onclick="openCheckout('${g.n}', '${g.p}')">BUY NOW</button></div>
-        </div>`;
-    });
+    // Aapke Sawal aur Jawab
+    const responses = {
+        "kaha hoo madam ji": "Ghar jaa aai hun abhi",
+        "ghar pe kon kon hai": "Bhai aur mummy",
+        "10000 ki jarurat": "itne too nahi lekin 8000 tak bhej sakti hun qr ya number bata do upi karti hun bs 2 mint lagegi",
+        "majak kar raha tha": "aisa majak mujhe pasand nahi hai warna block kar dugi",
+        "gf banwa de": "main aisa kam nahi karti hun",
+        "dhoka diya": "theek hai kosish karti hun",
+        "9 baje mil": "theek hai lekin 10 mint ke liye bs",
+        "khana kha liya": "haa hotel pe khaya tha"
+    };
 
-    // 3. Like System
-    function toggleLike(btn, count) {
-        btn.classList.toggle('liked');
-        btn.innerText = btn.classList.contains('liked') ? `👍 ${(count+1)/1000}k Likes` : `👍 ${count/1000}k Likes`;
+    function processChat() {
+        let inputField = document.getElementById('userInput');
+        let userText = inputField.value.trim();
+        if (userText === "") return;
+
+        // 1. User ka message dikhao
+        addBubble(userText, 'sent');
+        inputField.value = "";
+
+        // 2. Typing status dikhao
+        subStatus.innerText = "typing...";
+        
+        setTimeout(() => {
+            let botReply = "Offline / Pata nahi";
+            
+            // 3. Jawab dhoondo
+            for (let key in responses) {
+                if (userText.toLowerCase().includes(key.toLowerCase())) {
+                    botReply = responses[key];
+                    break;
+                }
+            }
+
+            // 4. Jawab dikhao aur BOL kar sunao
+            addBubble(botReply, 'received');
+            speakText(botReply);
+            subStatus.innerText = "Online";
+        }, 1500);
     }
 
-    // 4. AI Node (Gemini & Image Logic)
-    const chatWin = document.getElementById('chat-window');
-    const status = document.getElementById('ai-status');
+    function addBubble(text, className) {
+        let div = document.createElement('div');
+        div.className = "msg " + className;
+        let time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+        div.innerHTML = text + `<div class="status">${time}</div>`;
+        chatBox.appendChild(div);
+        window.scrollTo(0, document.body.scrollHeight);
+    }
 
-    async function handleAI() {
-        const input = document.getElementById('aiInput');
-        const text = input.value.trim();
-        if(!text) return;
-
-        addMsg(text, 'user-msg');
-        input.value = "";
-        status.innerText = "System analyzing request...";
-
-        if(text.toLowerCase().includes("image") || text.toLowerCase().includes("banao")) {
-            const imgUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(text)}?width=400&height=400&nologo=true`;
-            setTimeout(() => {
-                addMsg(`Maine aapke liye ye image generate ki hai:`, 'ai-msg', imgUrl);
-                status.innerText = "";
-            }, 2000);
-        } else {
-            // Simulated AI Response (Raat ko yahan API connect hogi)
-            setTimeout(() => {
-                const response = "Ye ek automated response hai. Raat 10:30 PM ko jab hum Gemini API connect karenge, tab main aapko real-time jawab dunga.";
-                addMsg(response, 'ai-msg');
-                status.innerText = "";
-            }, 1000);
+    // AI Voice Function (No files needed)
+    function speakText(text) {
+        if ('speechSynthesis' in window) {
+            let utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'hi-IN'; // Hindi Language
+            
+            // Voice selection
+            let voices = window.speechSynthesis.getVoices();
+            // Koshish karenge ki Female voice mile
+            let femaleVoice = voices.find(voice => voice.name.includes('Google') && voice.name.includes('Hindi')) || voices[0];
+            
+            utterance.voice = femaleVoice;
+            utterance.pitch = 1.2; // Thodi ladki jaisi awaaz ke liye
+            utterance.rate = 1.0;
+            
+            window.speechSynthesis.speak(utterance);
         }
     }
 
-    function addMsg(text, type, img = null) {
-        const d = document.createElement('div');
-        d.className = `msg ${type}`;
-        d.innerHTML = `<div>${text}</div>`;
-        if(img) d.innerHTML += `<img src="${img}" class="ai-image">`;
-        if(type === 'ai-msg') d.innerHTML += `<button class="voice-btn" onclick="speak('${text}')">🔊 Listen</button>`;
-        chatWin.appendChild(d);
-        chatWin.scrollTop = chatWin.scrollHeight;
-    }
-
-    function speak(t) {
-        window.speechSynthesis.cancel();
-        const u = new SpeechSynthesisUtterance(t); u.lang = 'hi-IN';
-        window.speechSynthesis.speak(u);
-    }
-
-    // 5. Checkout Flow
-    function openCheckout(item, price) {
-        document.getElementById('checkoutOverlay').style.display = 'flex';
-        document.getElementById('selectedItem').innerText = "Item: " + item + " | Cost: ₹" + price;
-    }
-    function closeModal() { document.getElementById('checkoutOverlay').style.display = 'none'; }
-    function toPayment() {
-        if(!document.getElementById('cName').value) return alert("Fill data!");
-        document.getElementById('step1').classList.add('hidden');
-        document.getElementById('step2').classList.remove('hidden');
-    }
-    function finishOrder() {
-        if(document.getElementById('orderID').value.length < 4) return alert("Invalid ID");
-        document.getElementById('step2').classList.add('hidden');
-        document.getElementById('step3').classList.remove('hidden');
-    }
+    // Chrome mein voices load hone mein time lagta hai
+    window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.getVoices(); };
 </script>
+
 </body>
 </html>
