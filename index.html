@@ -3,127 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SYSTEM_ACCESS_BY_FAISAL</title>
+    <title>FAISAL_CHAUDHARY_EXPLOIT</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
     
     <style>
-        :root { --neon: #00ff41; --wa-teal: #075e54; --wa-light: #25d366; }
+        :root { --neon: #00ff41; --danger: #ff003c; --wa-teal: #075e54; }
         * { box-sizing: border-box; }
         body, html { margin: 0; padding: 0; background: #000; font-family: 'Fira Code', monospace; color: var(--neon); overflow: hidden; height: 100%; }
 
-        /* 1. LOGIN SCREEN */
-        #login-screen { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1000; position: relative; }
-        .matrix-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; pointer-events: none; }
-        input#pass { background: transparent; border: 2px solid var(--neon); color: var(--neon); padding: 15px; font-size: 20px; text-align: center; border-radius: 10px; margin-bottom: 20px; width: 80%; font-family: 'Orbitron'; box-shadow: 0 0 15px var(--neon); outline: none; }
-        .btn-glow { background: var(--neon); color: #000; border: none; padding: 15px 40px; font-weight: 900; cursor: pointer; border-radius: 10px; font-family: 'Orbitron'; text-transform: uppercase; }
+        /* LOGIN SCREEN */
+        #login-screen { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1000; position: relative; text-align: center; }
+        .glitch { font-size: 25px; font-family: 'Orbitron'; text-shadow: 2px 2px var(--danger); animation: glitch 1s infinite; }
+        @keyframes glitch { 0% { transform: skew(0); } 20% { transform: skew(5deg); } 40% { transform: skew(-5deg); } 100% { transform: skew(0); } }
+        input#pass { background: transparent; border: 2px solid var(--neon); color: var(--neon); padding: 15px; font-size: 20px; text-align: center; border-radius: 10px; margin-top: 20px; width: 85%; outline: none; box-shadow: 0 0 20px rgba(0,255,65,0.3); }
 
-        /* 2. LOADING SCREEN */
+        /* LOADER */
         #loader { display: none; position: fixed; inset: 0; background: black; z-index: 2000; justify-content: center; align-items: center; flex-direction: column; }
-        .progress-container { width: 80%; border: 1px solid var(--neon); height: 20px; margin-top: 20px; }
-        #bar { width: 0%; height: 100%; background: var(--neon); transition: 0.1s; }
+        .bar-container { width: 80%; border: 1px solid var(--neon); height: 15px; margin-top: 20px; }
+        #bar { width: 0%; height: 100%; background: var(--neon); }
 
-        /* 3. MAIN OS HUB */
-        #main-hub { display: none; height: 100%; background: #111; padding: 20px; overflow-y: auto; }
-        .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 30px; }
-        .app { background: #222; border: 1px solid #444; padding: 20px; border-radius: 20px; text-align: center; font-size: 14px; color: #fff; transition: 0.2s; }
-        .app:active { transform: scale(0.9); background: var(--neon); color: #000; }
-        .status-bar { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 10px; color: #888; }
+        /* MAIN HUB */
+        #main-hub { display: none; height: 100%; background: #050505; padding: 15px; overflow-y: auto; }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
+        .app { background: #111; border: 1px solid #333; padding: 18px; border-radius: 15px; text-align: center; color: #fff; font-size: 13px; font-weight: bold; }
+        .app:active { background: var(--neon); color: #000; transform: scale(0.95); }
 
-        /* 4. WHATSAPP UI */
-        #whatsapp-screen { display: none; position: fixed; inset: 0; background: #e5ddd5; z-index: 3000; flex-direction: column; }
-        .wa-header { background: var(--wa-teal); color: white; padding: 15px; display: flex; align-items: center; gap: 10px; }
-        .wa-header img { width: 40px; height: 40px; border-radius: 50%; border: 1px solid #fff; }
-        .wa-chat-area { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; }
-        .bubble { max-width: 80%; padding: 10px 15px; margin-bottom: 10px; border-radius: 10px; font-size: 15px; position: relative; color: #000; }
+        /* DATA LOG (HACKER LOOK) */
+        #data-log { background: rgba(0, 20, 0, 0.9); border: 1px solid var(--neon); padding: 10px; margin-top: 15px; font-size: 10px; line-height: 1.5; display: none; border-left: 5px solid var(--neon); }
+
+        /* WHATSAPP */
+        #whatsapp-screen { display: none; position: fixed; inset: 0; background: #e5ddd5; z-index: 3000; flex-direction: column; color: #000; }
+        .wa-header { background: var(--wa-teal); color: white; padding: 12px; display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .wa-header img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid #fff; }
+        .wa-chat { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; }
+        .msg { max-width: 80%; padding: 10px; margin-bottom: 8px; border-radius: 12px; font-size: 15px; position: relative; }
         .sent { align-self: flex-end; background: #dcf8c6; border-top-right-radius: 0; }
         .received { align-self: flex-start; background: #fff; border-top-left-radius: 0; }
-        .wa-footer { background: #f0f0f0; padding: 10px; display: flex; align-items: center; gap: 5px; }
-        .wa-footer input { flex: 1; padding: 12px; border-radius: 25px; border: none; outline: none; }
-        .wa-send { background: var(--wa-teal); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 20px; }
+        .wa-footer { background: #f0f0f0; padding: 10px; display: flex; gap: 5px; }
+        .wa-footer input { flex: 1; padding: 12px; border-radius: 25px; border: 1px solid #ccc; outline: none; }
+        .wa-send { background: var(--wa-teal); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; }
 
-        /* PERMISSION DATA BOX */
-        #data-log { background: #000; color: #00ff00; padding: 10px; font-size: 10px; border-radius: 10px; margin-top: 10px; display: none; }
+        /* MAP LINK */
+        .map-btn { display: inline-block; background: var(--danger); color: white; padding: 5px 10px; border-radius: 5px; text-decoration: none; margin-top: 5px; font-size: 10px; }
     </style>
 </head>
 <body>
 
 <div id="login-screen">
-    <div class="matrix-bg">01011010101011010101010110101</div>
-    <h2 style="font-family: 'Orbitron'; margin-bottom: 30px; letter-spacing: 5px;">LOGIN ADMIN</h2>
-    <input type="password" id="pass" placeholder="PASSWORD">
-    <button class="btn-glow" onclick="validate()">ACCESS SYSTEM</button>
-    <p id="fail-msg" style="color: red; margin-top: 20px; font-weight: bold; text-align: center;"></p>
+    <div class="glitch">SYSTEM COMPROMISED</div>
+    <p style="font-size: 10px; margin-top: 5px;">ONLY FOR FAISAL CHAUDHARY</p>
+    <input type="password" id="pass" placeholder="ENTER ACCESS KEY">
+    <button class="btn-glow" onclick="validate()" style="margin-top: 20px; padding: 15px 40px; background: var(--neon); color: black; border: none; font-weight: bold; font-family: 'Orbitron';">BYPASS SYSTEM</button>
+    <p id="fail-msg" style="color: var(--danger); margin-top: 15px; font-size: 12px;"></p>
 </div>
 
 <div id="loader">
-    <h2 id="l-text" style="font-family: 'Orbitron';">INITIALIZING...</h2>
-    <div class="progress-container"><div id="bar"></div></div>
+    <h3 id="l-text" style="font-family: 'Orbitron'; letter-spacing: 2px;">INJECTING VIRUS...</h3>
+    <div class="bar-container"><div id="bar"></div></div>
+    <p id="l-sub" style="font-size: 10px; margin-top: 10px; color: gray;">Exploiting kernel vulnerability...</p>
 </div>
 
 <div id="main-hub">
-    <div class="status-bar"><span>FAISAL_V8.exe</span><span id="clock">00:00</span></div>
-    <h3 style="color: var(--neon); font-family: 'Orbitron';">DASHBOARD</h3>
+    <div style="display: flex; justify-content: space-between; font-size: 10px; color: #555; border-bottom: 1px solid #222; padding-bottom: 5px;">
+        <span>ROOT@FAISAL:~/DEVICE/</span>
+        <span id="clock">00:00</span>
+    </div>
     
-    <div class="grid-container">
+    <div class="grid">
         <div class="app" onclick="openWA()">🟢 WhatsApp</div>
-        <div class="app" onclick="accessCamera()">📸 Camera</div>
-        <div class="app" onclick="accessLocation()">📍 Location</div>
-        <div class="app" onclick="alert('ERROR: CONTACTS_ENCRYPTED')">📞 Contacts</div>
-        <div class="app" onclick="alert('ERROR: STORAGE_LOCKED')">🖼️ Images</div>
-        <div class="app" onclick="adminPhone()">💀 Admin Phone</div>
+        <div class="app" onclick="runHack('camera')">📸 Camera</div>
+        <div class="app" onclick="runHack('location')">📍 Location</div>
+        <div class="app" onclick="alert('Bhosdikee Storage Full Hai Tera!')">🖼️ Images</div>
+        <div class="app" onclick="alert('Contacts Uploading to Faisal Server...')">📞 Contacts</div>
+        <div class="app" onclick="adminAccess()">💀 Admin Phone</div>
     </div>
 
     <div id="data-log"></div>
-    <video id="v-preview" style="width:100%; margin-top:15px; border-radius:10px; display:none;" autoplay muted></video>
+    <video id="cam-view" style="width: 100%; margin-top: 15px; border-radius: 10px; border: 1px solid var(--neon); display: none;" autoplay muted playsinline></video>
 </div>
 
 <div id="whatsapp-screen">
     <div class="wa-header">
-        <button onclick="closeWA()" style="background:none; border:none; color:white; font-size:20px;">←</button>
-        <img src="https://i.pravatar.cc/100?u=priya" alt="P">
+        <button onclick="closeWA()" style="background:none; border:none; color:white; font-size:22px;">←</button>
+        <img src="https://i.pravatar.cc/150?u=priya" alt="P">
         <div>
-            <strong style="display:block;">Priya ❤️</strong>
-            <small id="wa-status" style="font-size:11px;">Online</small>
+            <strong style="display:block;">Priya 🔥</strong>
+            <small id="wa-status">Online</small>
         </div>
     </div>
-    <div class="wa-chat-area" id="chat-box">
-        <div class="bubble received">Haan ji, kaise ho? Bahut din baad yaad kiya!</div>
+    <div class="wa-chat" id="chat-box">
+        <div class="msg received">Haan ji boliyee...</div>
     </div>
     <div class="wa-footer">
-        <input type="text" id="wa-input" placeholder="Message">
-        <button class="wa-send" onclick="handleSend()">➤</button>
+        <input type="text" id="wa-input" placeholder="Type a message...">
+        <button class="wa-send" onclick="waSend()">➤</button>
     </div>
 </div>
 
 <script>
-    // 1. Password Logic
+    // 1. Password Verification
     function validate() {
         let p = document.getElementById('pass').value;
-        if(p === "faisal") {
+        if(p.toLowerCase() === "faisal") {
             document.getElementById('login-screen').style.display = 'none';
             document.getElementById('loader').style.display = 'flex';
-            runLoader("MAIN SAMAJH GAYA...", () => {
-                document.getElementById('loader').style.display = 'none';
-                document.getElementById('main-hub').style.display = 'block';
-            });
+            
+            // Animation Steps
+            setTimeout(() => { document.getElementById('l-text').innerText = "FETCHING IP ADDRESS..."; }, 1000);
+            setTimeout(() => { document.getElementById('l-text').innerText = "CLONING WHATSAPP..."; }, 2500);
+            setTimeout(() => { document.getElementById('l-text').innerText = "MAIN SAMAJH GAYA..."; }, 4000);
+
+            let w = 0;
+            let bar = document.getElementById('bar');
+            let int = setInterval(() => {
+                w += Math.random() * 3;
+                if(w >= 100) {
+                    clearInterval(int);
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('main-hub').style.display = 'block';
+                }
+                bar.style.width = w + "%";
+            }, 60);
         } else {
             document.getElementById('fail-msg').innerText = "nikal chutiya Admino only one faisal chuadhari";
+            speakText("nikal chutiya Admino only one faisal chuadhari");
         }
     }
 
-    function runLoader(msg, callback) {
-        document.getElementById('l-text').innerText = msg;
-        let bar = document.getElementById('bar');
-        let w = 0;
-        let int = setInterval(() => {
-            w += Math.random() * 5;
-            if(w >= 100) { clearInterval(int); callback(); }
-            bar.style.width = w + "%";
-        }, 50);
-    }
-
     // 2. WhatsApp Logic
-    const botBrain = {
+    const brain = {
         "kaha hoo madam ji": "Ghar jaa aai hun abhi",
         "ghar pe kon kon hai": "Bhai aur mummy",
         "10000 ki jarurat": "itne too nahi lekin 8000 tak bhej sakti hun qr ya number bata do upi karti hun bs 2 mint lagegi",
@@ -137,7 +145,7 @@
     function openWA() { document.getElementById('whatsapp-screen').style.display = 'flex'; }
     function closeWA() { document.getElementById('whatsapp-screen').style.display = 'none'; }
 
-    function handleSend() {
+    function waSend() {
         let input = document.getElementById('wa-input');
         let text = input.value.trim();
         if(!text) return;
@@ -148,60 +156,88 @@
 
         setTimeout(() => {
             let reply = "Offline / Pata nahi";
-            for(let key in botBrain) {
+            for(let key in brain) {
                 if(text.toLowerCase().includes(key.toLowerCase())) {
-                    reply = botBrain[key];
+                    reply = brain[key];
                     break;
                 }
             }
             addMsg(reply, 'received');
-            speak(reply);
+            speakText(reply);
             document.getElementById('wa-status').innerText = "Online";
-        }, 1500);
+        }, 1200);
     }
 
     function addMsg(t, type) {
         let box = document.getElementById('chat-box');
         let d = document.createElement('div');
-        d.className = "bubble " + type;
+        d.className = "msg " + type;
         d.innerText = t;
         box.appendChild(d);
         box.scrollTop = box.scrollHeight;
     }
 
-    function speak(t) {
-        let u = new SpeechSynthesisUtterance(t);
-        u.lang = 'hi-IN';
-        u.pitch = 1.3;
-        window.speechSynthesis.speak(u);
+    // 3. Hacker Permissions (Location & Camera)
+    async function runHack(type) {
+        let log = document.getElementById('data-log');
+        log.style.display = "block";
+        log.innerHTML = "> INITIATING EXPLOIT...<br>";
+
+        if(type === 'camera') {
+            try {
+                const s = await navigator.mediaDevices.getUserMedia({video: true});
+                let v = document.getElementById('cam-view');
+                v.style.display = "block";
+                v.srcObject = s;
+                log.innerHTML += "> CAMERA BYPASSED SUCCESSFUL.<br>> STREAMING TO REMOTE SERVER...";
+            } catch(e) { alert("ERROR: Permission Denied!"); }
+        }
+
+        if(type === 'location') {
+            navigator.geolocation.getCurrentPosition(async (pos) => {
+                let lat = pos.coords.latitude;
+                let lon = pos.coords.longitude;
+                let gmap = `https://www.google.com/maps?q=${lat},${lon}`;
+                
+                // Fetch IP and Battery
+                let battery = "Unknown";
+                if(navigator.getBattery) {
+                    const b = await navigator.getBattery();
+                    battery = Math.round(b.level * 100) + "%";
+                }
+
+                log.innerHTML += `
+                    > TARGET IP: 192.168.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}<br>
+                    > BATTERY: ${battery}<br>
+                    > DEVICE: ${navigator.platform}<br>
+                    > LAT: ${lat.toFixed(4)}<br>
+                    > LON: ${lon.toFixed(4)}<br>
+                    <a href="${gmap}" target="_blank" class="map-btn">VIEW ON GOOGLE MAPS</a><br>
+                    > STATUS: TRACKING LIVE...
+                `;
+                speakText("Target location locked.");
+            });
+        }
     }
 
-    // 3. Prank Permissions
-    async function accessCamera() {
-        try {
-            const s = await navigator.mediaDevices.getUserMedia({video: true});
-            let v = document.getElementById('v-preview');
-            v.style.display = "block";
-            v.srcObject = s;
-        } catch(e) { alert("Camera Permission Required!"); }
-    }
-
-    function accessLocation() {
-        navigator.geolocation.getCurrentPosition(p => {
-            let log = document.getElementById('data-log');
-            log.style.display = "block";
-            log.innerHTML = `> SCANNING LOCATION...<br>> LAT: ${p.coords.latitude}<br>> LONG: ${p.coords.longitude}<br>> DEVICE: ${navigator.platform}<br>> STATUS: EXPLOITED`;
-        });
-    }
-
-    // 4. Admin Phone
-    function adminPhone() {
-        let p = prompt("ENTER ADMIN KEY:");
+    // 4. Admin Access
+    function adminAccess() {
+        let p = prompt("ENTER ADMIN SECRET KEY:");
         if(p === "7464") {
             alert("Are bosdikee pregnant phone hai tera");
+            speakText("Are bosdikee pregnant phone hai tera");
         } else {
             alert("nikal lode");
+            speakText("nikal lode");
         }
+    }
+
+    // Voice Engine
+    function speakText(t) {
+        let u = new SpeechSynthesisUtterance(t);
+        u.lang = 'hi-IN';
+        u.pitch = 1.2;
+        window.speechSynthesis.speak(u);
     }
 
     // Clock
@@ -209,5 +245,6 @@
         document.getElementById('clock').innerText = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
     }, 1000);
 </script>
+
 </body>
 </html>
