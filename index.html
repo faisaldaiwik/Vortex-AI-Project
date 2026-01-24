@@ -3,124 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAISAL CHAUDHARY | Official Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+    <title>Faisal Visuals | Professional Editing Agency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     <style>
-        :root { --neon: #00ff41; --bg: #050505; --panel: rgba(15, 15, 15, 0.9); }
-        body { margin: 0; background: var(--bg); font-family: 'Fira Code', monospace; color: var(--neon); overflow-x: hidden; }
+        :root { --primary: #00f2fe; --secondary: #4facfe; --accent: #7000ff; --dark: #050505; --card-bg: rgba(20, 20, 25, 0.8); }
+        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--dark); color: #fff; scroll-behavior: smooth; line-height: 1.6; }
         
-        /* Matrix Background */
-        #canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
-
-        .container { max-width: 900px; margin: 50px auto; padding: 20px; }
+        /* Hero Section */
+        header { 
+            height: 100vh; background: radial-gradient(circle at center, rgba(0,242,254,0.15) 0%, transparent 70%), #000;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px;
+        }
+        .hero-h1 { font-family: 'Orbitron', sans-serif; font-size: 4.5rem; margin: 0; text-transform: uppercase; letter-spacing: 5px; background: linear-gradient(45deg, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         
-        /* Profile Header */
-        .profile-card { 
-            background: var(--panel); 
-            border: 1px solid var(--neon); 
-            border-radius: 15px; 
-            padding: 30px; 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 30px; 
-            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
-            backdrop-filter: blur(10px);
-        }
+        .container { max-width: 1200px; margin: auto; padding: 80px 20px; }
+        h2.section-title { font-family: 'Orbitron'; text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: var(--primary); text-transform: uppercase; }
 
-        .image-container { position: relative; width: 200px; height: 200px; }
-        .user-img { 
-            width: 100%; height: 100%; object-fit: cover; 
-            border-radius: 10px; border: 2px solid var(--neon);
-        }
-        .scan-line {
-            position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-            background: var(--neon); box-shadow: 0 0 10px var(--neon);
-            animation: scan 3s linear infinite;
-        }
+        /* Tech Stack Grid (30 Tools) */
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; text-align: center; }
+        .tool-item { background: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid #222; transition: 0.3s; }
+        .tool-item:hover { border-color: var(--primary); transform: scale(1.05); background: rgba(0,242,254,0.05); }
+        .tool-item span { display: block; font-size: 14px; font-weight: 600; margin-top: 10px; }
 
-        .info { flex: 1; min-width: 300px; }
-        h1 { font-family: 'Orbitron'; margin: 0; font-size: 2rem; letter-spacing: 2px; }
-        .title { color: #fff; font-size: 1.1rem; margin-bottom: 15px; display: block; }
+        /* Service Cards */
+        .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .s-card { background: var(--card-bg); padding: 40px; border-radius: 25px; border-left: 5px solid var(--accent); transition: 0.4s; }
+        .s-card:hover { border-left-color: var(--primary); box-shadow: 0 15px 40px rgba(0,0,0,0.5); }
+        .s-card h3 { font-family: 'Orbitron'; color: var(--primary); margin-top: 0; }
 
-        /* Stats Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 30px; }
-        .card { 
-            background: rgba(0, 255, 65, 0.05); border: 1px solid #333; 
-            padding: 15px; border-radius: 8px; transition: 0.3s;
-        }
-        .card:hover { border-color: var(--neon); background: rgba(0, 255, 65, 0.1); }
-        .card strong { display: block; color: #fff; margin-bottom: 5px; }
+        /* Trust Banner */
+        .trust-banner { background: linear-gradient(90deg, var(--accent), var(--secondary)); padding: 60px 20px; border-radius: 30px; text-align: center; margin: 50px 0; }
+        .cta-btn { background: #fff; color: #000; padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: 900; display: inline-block; transition: 0.3s; margin-top: 20px; }
+        .cta-btn:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
 
-        /* Buttons */
-        .btn {
-            display: inline-block; margin-top: 20px; padding: 10px 25px;
-            border: 1px solid var(--neon); color: var(--neon); text-decoration: none;
-            text-transform: uppercase; font-size: 14px; transition: 0.3s;
-        }
-        .btn:hover { background: var(--neon); color: #000; box-shadow: 0 0 15px var(--neon); }
-
-        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
-        @media (max-width: 600px) { .profile-card { justify-content: center; text-align: center; } }
+        footer { padding: 50px; text-align: center; border-top: 1px solid #222; opacity: 0.5; }
+        @media (max-width: 768px) { .hero-h1 { font-size: 2.5rem; } }
     </style>
 </head>
 <body>
 
-<canvas id="canvas"></canvas>
+<header>
+    <div style="color: var(--primary); font-weight: bold; letter-spacing: 3px; margin-bottom: 10px;">PREMIUM POST-PRODUCTION</div>
+    <h1 class="hero-h1">FAISAL<br>VISUALS</h1>
+    <p style="max-width: 700px; font-size: 1.1rem; opacity: 0.8;">हम साधारण वीडियो को सिनेमाई अनुभव में बदलते हैं। 30+ प्रीमियम टूल्स और AI तकनीक के साथ आपके ब्रांड को वायरल बनाने की गारंटी।</p>
+    <a href="#tools" class="cta-btn">Check My Toolkit</a>
+</header>
 
-<div class="container">
-    <div class="profile-card">
-        <div class="image-container">
-            <img src="https://raw.githubusercontent.com/faisalchaudhary/images/main/1000366438.jpg" alt="Faisal" class="user-img" onerror="this.src='https://via.placeholder.com/200?text=Faisal+Chaudhary'">
-            <div class="scan-line"></div>
-        </div>
+<div class="container" id="tools">
+    <h2 class="section-title">My Professional Toolkit</h2>
+    <p style="text-align:center; margin-top:-40px; margin-bottom:40px; opacity:0.7;">बेहतरीन क्वालिटी देने के लिए मैं इन सभी टूल्स का मास्टर हूँ:</p>
+    
+    <div class="tools-grid">
+        <div class="tool-item">🖥️ <span>Adobe Premiere Pro</span></div>
+        <div class="tool-item">💥 <span>After Effects</span></div>
+        <div class="tool-item">🎨 <span>DaVinci Resolve</span></div>
+        <div class="tool-item">📸 <span>Photoshop</span></div>
+        <div class="tool-item">✍️ <span>Illustrator</span></div>
         
-        <div class="info">
-            <h1>FAISAL CHAUDHARY</h1>
-            <span class="title">Gaming Editor & Mod Expert</span>
-            <p>// लक्ष्य 2027: ₹6,00,000</p>
-            <p>मैं एक प्रोफेशनल वीडियो एडिटर और गेमिंग टेलीग्राम चैनल एडमिन हूँ। मैं वायरल एड्स और गेमिंग मॉड्स पर काम करता हूँ।</p>
-            
-            <a href="https://www.facebook.com/share/1AVXWmVDhx/" target="_blank" class="btn">Connect on Facebook</a>
-            <p style="font-size: 12px; margin-top: 10px;">Contact: +91 7505685543</p>
-        </div>
-    </div>
+        <div class="tool-item">🎬 <span>CapCut Pro</span></div>
+        <div class="tool-item">📱 <span>VN Editor</span></div>
+        <div class="tool-item">🌀 <span>Alight Motion</span></div>
+        <div class="tool-item">🎥 <span>KineMaster</span></div>
+        <div class="tool-item">🎞️ <span>Node Video</span></div>
 
-    <div class="grid">
-        <div class="card">
-            <strong>PROJECTS</strong>
-            Telegram Mod Channels
-        </div>
-        <div class="card">
-            <strong>SKILLS</strong>
-            Video Editing, VFX, Scripting
-        </div>
-        <div class="card">
-            <strong>PLATFORMS</strong>
-            YouTube & Instagram Ads
-        </div>
+        <div class="tool-item">🤖 <span>Runway Gen-2</span></div>
+        <div class="tool-item">🗣️ <span>ElevenLabs AI</span></div>
+        <div class="tool-item">🧠 <span>ChatGPT Plus</span></div>
+        <div class="tool-item">🖌️ <span>Midjourney AI</span></div>
+        <div class="tool-item">✨ <span>Topaz Video AI</span></div>
+        <div class="tool-item">🎧 <span>Adobe Podcast</span></div>
+        <div class="tool-item">🖼️ <span>Leonardo AI</span></div>
+        <div class="tool-item">⚡ <span>Pika Labs</span></div>
+
+        <div class="tool-item">🎵 <span>Audacity</span></div>
+        <div class="tool-item">🔊 <span>FL Studio</span></div>
+        <div class="tool-item">🌈 <span>Lightroom</span></div>
+        <div class="tool-item">📏 <span>Canva Pro</span></div>
+        <div class="tool-item">🧊 <span>Blender (3D)</span></div>
+        <div class="tool-item">📦 <span>Unreal Engine</span></div>
+
+        <div class="tool-item">📝 <span>Notion</span></div>
+        <div class="tool-item">🌥️ <span>Frame.io</span></div>
+        <div class="tool-item">📤 <span>WeTransfer</span></div>
+        <div class="tool-item">🎥 <span>OBS Studio</span></div>
+        <div class="tool-item">🤳 <span>InShot</span></div>
+        <div class="tool-item">✂️ <span>Remini Pro</span></div>
     </div>
 </div>
 
-<script>
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    const chars = "01";
-    const drops = Array(Math.floor(canvas.width / 20)).fill(1);
-    function draw() {
-        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#0f0";
-        drops.forEach((y, i) => {
-            const text = chars[Math.floor(Math.random() * chars.length)];
-            ctx.fillText(text, i * 20, y * 20);
-            if (y * 20 > canvas.height && Math.random() > 0.975) drops[i] = 0;
-            drops[i]++;
-        });
-    }
-    setInterval(draw, 50);
-</script>
+<div class="container">
+    <h2 class="section-title">Exclusive Services</h2>
+    <div class="services">
+        <div class="s-card">
+            <h3>Viral Social Media Ads</h3>
+            <p>हम Facebook और Instagram के लिए ऐसे एड्स बनाते हैं जो देखते ही लोग रुक जाएं। हाई कन्वर्जन रेट की गारंटी।</p>
+        </div>
+        <div class="s-card" style="border-left-color: #00f2fe;">
+            <h3>Gaming Montages</h3>
+            <p>BGMI, Free Fire और PC गेम्स के लिए सिंक की हुई बीट्स और धमाकेदार VFX के साथ मॉन्टेज।</p>
+        </div>
+        <div class="s-card">
+            <h3>AI Humanoid Avatars</h3>
+            <p>AI का इस्तेमाल करके बोलने वाले अवतार और प्रोफेशनल वॉइसओवर वीडियो बनाना।</p>
+        </div>
+    </div>
+
+    <div class="trust-banner">
+        <h2 style="font-family: 'Orbitron'; margin:0;">₹6,00,000 MILESTONE 2027</h2>
+        <p>मैं हर प्रोजेक्ट को अपना बेस्ट मानकर काम करता हूँ। आपका भरोसा मेरी सबसे बड़ी कमाई है।</p>
+        <a href="https://www.facebook.com/share/1AVXWmVDhx/" target="_blank" class="cta-btn">Hire Me Now (Facebook)</a>
+        <div style="margin-top:20px; font-weight:bold;">Call/WhatsApp: +91 7505685543</div>
+    </div>
+</div>
+
+<footer>
+    &copy; 2026 FAISAL VISUALS | Visual Arts & Motion Graphics Agency<br>
+    Built for Excellence. Target 2027.
+</footer>
 
 </body>
 </html>
