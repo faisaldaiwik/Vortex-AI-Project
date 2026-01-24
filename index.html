@@ -2,248 +2,124 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FAISAL_CHAUDHARY_EXPLOIT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAISAL CHAUDHARY | Official Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
-    
     <style>
-        :root { --neon: #00ff41; --danger: #ff003c; --wa-teal: #075e54; }
-        * { box-sizing: border-box; }
-        body, html { margin: 0; padding: 0; background: #000; font-family: 'Fira Code', monospace; color: var(--neon); overflow: hidden; height: 100%; }
+        :root { --neon: #00ff41; --bg: #050505; --panel: rgba(15, 15, 15, 0.9); }
+        body { margin: 0; background: var(--bg); font-family: 'Fira Code', monospace; color: var(--neon); overflow-x: hidden; }
+        
+        /* Matrix Background */
+        #canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
 
-        /* LOGIN SCREEN */
-        #login-screen { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1000; position: relative; text-align: center; }
-        .glitch { font-size: 25px; font-family: 'Orbitron'; text-shadow: 2px 2px var(--danger); animation: glitch 1s infinite; }
-        @keyframes glitch { 0% { transform: skew(0); } 20% { transform: skew(5deg); } 40% { transform: skew(-5deg); } 100% { transform: skew(0); } }
-        input#pass { background: transparent; border: 2px solid var(--neon); color: var(--neon); padding: 15px; font-size: 20px; text-align: center; border-radius: 10px; margin-top: 20px; width: 85%; outline: none; box-shadow: 0 0 20px rgba(0,255,65,0.3); }
+        .container { max-width: 900px; margin: 50px auto; padding: 20px; }
+        
+        /* Profile Header */
+        .profile-card { 
+            background: var(--panel); 
+            border: 1px solid var(--neon); 
+            border-radius: 15px; 
+            padding: 30px; 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 30px; 
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.2);
+            backdrop-filter: blur(10px);
+        }
 
-        /* LOADER */
-        #loader { display: none; position: fixed; inset: 0; background: black; z-index: 2000; justify-content: center; align-items: center; flex-direction: column; }
-        .bar-container { width: 80%; border: 1px solid var(--neon); height: 15px; margin-top: 20px; }
-        #bar { width: 0%; height: 100%; background: var(--neon); }
+        .image-container { position: relative; width: 200px; height: 200px; }
+        .user-img { 
+            width: 100%; height: 100%; object-fit: cover; 
+            border-radius: 10px; border: 2px solid var(--neon);
+        }
+        .scan-line {
+            position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--neon); box-shadow: 0 0 10px var(--neon);
+            animation: scan 3s linear infinite;
+        }
 
-        /* MAIN HUB */
-        #main-hub { display: none; height: 100%; background: #050505; padding: 15px; overflow-y: auto; }
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px; }
-        .app { background: #111; border: 1px solid #333; padding: 18px; border-radius: 15px; text-align: center; color: #fff; font-size: 13px; font-weight: bold; }
-        .app:active { background: var(--neon); color: #000; transform: scale(0.95); }
+        .info { flex: 1; min-width: 300px; }
+        h1 { font-family: 'Orbitron'; margin: 0; font-size: 2rem; letter-spacing: 2px; }
+        .title { color: #fff; font-size: 1.1rem; margin-bottom: 15px; display: block; }
 
-        /* DATA LOG (HACKER LOOK) */
-        #data-log { background: rgba(0, 20, 0, 0.9); border: 1px solid var(--neon); padding: 10px; margin-top: 15px; font-size: 10px; line-height: 1.5; display: none; border-left: 5px solid var(--neon); }
+        /* Stats Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 30px; }
+        .card { 
+            background: rgba(0, 255, 65, 0.05); border: 1px solid #333; 
+            padding: 15px; border-radius: 8px; transition: 0.3s;
+        }
+        .card:hover { border-color: var(--neon); background: rgba(0, 255, 65, 0.1); }
+        .card strong { display: block; color: #fff; margin-bottom: 5px; }
 
-        /* WHATSAPP */
-        #whatsapp-screen { display: none; position: fixed; inset: 0; background: #e5ddd5; z-index: 3000; flex-direction: column; color: #000; }
-        .wa-header { background: var(--wa-teal); color: white; padding: 12px; display: flex; align-items: center; gap: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
-        .wa-header img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid #fff; }
-        .wa-chat { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; }
-        .msg { max-width: 80%; padding: 10px; margin-bottom: 8px; border-radius: 12px; font-size: 15px; position: relative; }
-        .sent { align-self: flex-end; background: #dcf8c6; border-top-right-radius: 0; }
-        .received { align-self: flex-start; background: #fff; border-top-left-radius: 0; }
-        .wa-footer { background: #f0f0f0; padding: 10px; display: flex; gap: 5px; }
-        .wa-footer input { flex: 1; padding: 12px; border-radius: 25px; border: 1px solid #ccc; outline: none; }
-        .wa-send { background: var(--wa-teal); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; }
+        /* Buttons */
+        .btn {
+            display: inline-block; margin-top: 20px; padding: 10px 25px;
+            border: 1px solid var(--neon); color: var(--neon); text-decoration: none;
+            text-transform: uppercase; font-size: 14px; transition: 0.3s;
+        }
+        .btn:hover { background: var(--neon); color: #000; box-shadow: 0 0 15px var(--neon); }
 
-        /* MAP LINK */
-        .map-btn { display: inline-block; background: var(--danger); color: white; padding: 5px 10px; border-radius: 5px; text-decoration: none; margin-top: 5px; font-size: 10px; }
+        @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+        @media (max-width: 600px) { .profile-card { justify-content: center; text-align: center; } }
     </style>
 </head>
 <body>
 
-<div id="login-screen">
-    <div class="glitch">SYSTEM COMPROMISED</div>
-    <p style="font-size: 10px; margin-top: 5px;">ONLY FOR FAISAL CHAUDHARY</p>
-    <input type="password" id="pass" placeholder="ENTER ACCESS KEY">
-    <button class="btn-glow" onclick="validate()" style="margin-top: 20px; padding: 15px 40px; background: var(--neon); color: black; border: none; font-weight: bold; font-family: 'Orbitron';">BYPASS SYSTEM</button>
-    <p id="fail-msg" style="color: var(--danger); margin-top: 15px; font-size: 12px;"></p>
-</div>
+<canvas id="canvas"></canvas>
 
-<div id="loader">
-    <h3 id="l-text" style="font-family: 'Orbitron'; letter-spacing: 2px;">INJECTING VIRUS...</h3>
-    <div class="bar-container"><div id="bar"></div></div>
-    <p id="l-sub" style="font-size: 10px; margin-top: 10px; color: gray;">Exploiting kernel vulnerability...</p>
-</div>
-
-<div id="main-hub">
-    <div style="display: flex; justify-content: space-between; font-size: 10px; color: #555; border-bottom: 1px solid #222; padding-bottom: 5px;">
-        <span>ROOT@FAISAL:~/DEVICE/</span>
-        <span id="clock">00:00</span>
-    </div>
-    
-    <div class="grid">
-        <div class="app" onclick="openWA()">🟢 WhatsApp</div>
-        <div class="app" onclick="runHack('camera')">📸 Camera</div>
-        <div class="app" onclick="runHack('location')">📍 Location</div>
-        <div class="app" onclick="alert('Bhosdikee Storage Full Hai Tera!')">🖼️ Images</div>
-        <div class="app" onclick="alert('Contacts Uploading to Faisal Server...')">📞 Contacts</div>
-        <div class="app" onclick="adminAccess()">💀 Admin Phone</div>
-    </div>
-
-    <div id="data-log"></div>
-    <video id="cam-view" style="width: 100%; margin-top: 15px; border-radius: 10px; border: 1px solid var(--neon); display: none;" autoplay muted playsinline></video>
-</div>
-
-<div id="whatsapp-screen">
-    <div class="wa-header">
-        <button onclick="closeWA()" style="background:none; border:none; color:white; font-size:22px;">←</button>
-        <img src="https://i.pravatar.cc/150?u=priya" alt="P">
-        <div>
-            <strong style="display:block;">Priya 🔥</strong>
-            <small id="wa-status">Online</small>
+<div class="container">
+    <div class="profile-card">
+        <div class="image-container">
+            <img src="https://raw.githubusercontent.com/faisalchaudhary/images/main/1000366438.jpg" alt="Faisal" class="user-img" onerror="this.src='https://via.placeholder.com/200?text=Faisal+Chaudhary'">
+            <div class="scan-line"></div>
+        </div>
+        
+        <div class="info">
+            <h1>FAISAL CHAUDHARY</h1>
+            <span class="title">Gaming Editor & Mod Expert</span>
+            <p>// लक्ष्य 2027: ₹6,00,000</p>
+            <p>मैं एक प्रोफेशनल वीडियो एडिटर और गेमिंग टेलीग्राम चैनल एडमिन हूँ। मैं वायरल एड्स और गेमिंग मॉड्स पर काम करता हूँ।</p>
+            
+            <a href="https://www.facebook.com/share/1AVXWmVDhx/" target="_blank" class="btn">Connect on Facebook</a>
+            <p style="font-size: 12px; margin-top: 10px;">Contact: +91 7505685543</p>
         </div>
     </div>
-    <div class="wa-chat" id="chat-box">
-        <div class="msg received">Haan ji boliyee...</div>
-    </div>
-    <div class="wa-footer">
-        <input type="text" id="wa-input" placeholder="Type a message...">
-        <button class="wa-send" onclick="waSend()">➤</button>
+
+    <div class="grid">
+        <div class="card">
+            <strong>PROJECTS</strong>
+            Telegram Mod Channels
+        </div>
+        <div class="card">
+            <strong>SKILLS</strong>
+            Video Editing, VFX, Scripting
+        </div>
+        <div class="card">
+            <strong>PLATFORMS</strong>
+            YouTube & Instagram Ads
+        </div>
     </div>
 </div>
 
 <script>
-    // 1. Password Verification
-    function validate() {
-        let p = document.getElementById('pass').value;
-        if(p.toLowerCase() === "faisal") {
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('loader').style.display = 'flex';
-            
-            // Animation Steps
-            setTimeout(() => { document.getElementById('l-text').innerText = "FETCHING IP ADDRESS..."; }, 1000);
-            setTimeout(() => { document.getElementById('l-text').innerText = "CLONING WHATSAPP..."; }, 2500);
-            setTimeout(() => { document.getElementById('l-text').innerText = "MAIN SAMAJH GAYA..."; }, 4000);
-
-            let w = 0;
-            let bar = document.getElementById('bar');
-            let int = setInterval(() => {
-                w += Math.random() * 3;
-                if(w >= 100) {
-                    clearInterval(int);
-                    document.getElementById('loader').style.display = 'none';
-                    document.getElementById('main-hub').style.display = 'block';
-                }
-                bar.style.width = w + "%";
-            }, 60);
-        } else {
-            document.getElementById('fail-msg').innerText = "nikal chutiya Admino only one faisal chuadhari";
-            speakText("nikal chutiya Admino only one faisal chuadhari");
-        }
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const chars = "01";
+    const drops = Array(Math.floor(canvas.width / 20)).fill(1);
+    function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#0f0";
+        drops.forEach((y, i) => {
+            const text = chars[Math.floor(Math.random() * chars.length)];
+            ctx.fillText(text, i * 20, y * 20);
+            if (y * 20 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+        });
     }
-
-    // 2. WhatsApp Logic
-    const brain = {
-        "kaha hoo madam ji": "Ghar jaa aai hun abhi",
-        "ghar pe kon kon hai": "Bhai aur mummy",
-        "10000 ki jarurat": "itne too nahi lekin 8000 tak bhej sakti hun qr ya number bata do upi karti hun bs 2 mint lagegi",
-        "majak kar raha tha": "aisa majak mujhe pasand nahi hai warna block kar dugi",
-        "gf banwa de": "main aisa kam nahi karti hun",
-        "dhoka diya": "theek hai kosish karti hun",
-        "9 baje mil": "theek hai lekin 10 mint ke liye bs",
-        "khana kha liya": "haa hotel pe khaya tha"
-    };
-
-    function openWA() { document.getElementById('whatsapp-screen').style.display = 'flex'; }
-    function closeWA() { document.getElementById('whatsapp-screen').style.display = 'none'; }
-
-    function waSend() {
-        let input = document.getElementById('wa-input');
-        let text = input.value.trim();
-        if(!text) return;
-
-        addMsg(text, 'sent');
-        input.value = "";
-        document.getElementById('wa-status').innerText = "typing...";
-
-        setTimeout(() => {
-            let reply = "Offline / Pata nahi";
-            for(let key in brain) {
-                if(text.toLowerCase().includes(key.toLowerCase())) {
-                    reply = brain[key];
-                    break;
-                }
-            }
-            addMsg(reply, 'received');
-            speakText(reply);
-            document.getElementById('wa-status').innerText = "Online";
-        }, 1200);
-    }
-
-    function addMsg(t, type) {
-        let box = document.getElementById('chat-box');
-        let d = document.createElement('div');
-        d.className = "msg " + type;
-        d.innerText = t;
-        box.appendChild(d);
-        box.scrollTop = box.scrollHeight;
-    }
-
-    // 3. Hacker Permissions (Location & Camera)
-    async function runHack(type) {
-        let log = document.getElementById('data-log');
-        log.style.display = "block";
-        log.innerHTML = "> INITIATING EXPLOIT...<br>";
-
-        if(type === 'camera') {
-            try {
-                const s = await navigator.mediaDevices.getUserMedia({video: true});
-                let v = document.getElementById('cam-view');
-                v.style.display = "block";
-                v.srcObject = s;
-                log.innerHTML += "> CAMERA BYPASSED SUCCESSFUL.<br>> STREAMING TO REMOTE SERVER...";
-            } catch(e) { alert("ERROR: Permission Denied!"); }
-        }
-
-        if(type === 'location') {
-            navigator.geolocation.getCurrentPosition(async (pos) => {
-                let lat = pos.coords.latitude;
-                let lon = pos.coords.longitude;
-                let gmap = `https://www.google.com/maps?q=${lat},${lon}`;
-                
-                // Fetch IP and Battery
-                let battery = "Unknown";
-                if(navigator.getBattery) {
-                    const b = await navigator.getBattery();
-                    battery = Math.round(b.level * 100) + "%";
-                }
-
-                log.innerHTML += `
-                    > TARGET IP: 192.168.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}<br>
-                    > BATTERY: ${battery}<br>
-                    > DEVICE: ${navigator.platform}<br>
-                    > LAT: ${lat.toFixed(4)}<br>
-                    > LON: ${lon.toFixed(4)}<br>
-                    <a href="${gmap}" target="_blank" class="map-btn">VIEW ON GOOGLE MAPS</a><br>
-                    > STATUS: TRACKING LIVE...
-                `;
-                speakText("Target location locked.");
-            });
-        }
-    }
-
-    // 4. Admin Access
-    function adminAccess() {
-        let p = prompt("ENTER ADMIN SECRET KEY:");
-        if(p === "7464") {
-            alert("Are bosdikee pregnant phone hai tera");
-            speakText("Are bosdikee pregnant phone hai tera");
-        } else {
-            alert("nikal lode");
-            speakText("nikal lode");
-        }
-    }
-
-    // Voice Engine
-    function speakText(t) {
-        let u = new SpeechSynthesisUtterance(t);
-        u.lang = 'hi-IN';
-        u.pitch = 1.2;
-        window.speechSynthesis.speak(u);
-    }
-
-    // Clock
-    setInterval(() => {
-        document.getElementById('clock').innerText = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-    }, 1000);
+    setInterval(draw, 50);
 </script>
 
 </body>
