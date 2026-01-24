@@ -3,113 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAISAL VISUALS | Pro Editing & AI Hub</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <title>FAISAL VISUALS | Elite AI & Cinematic Video Agency</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --neon: #00ff41; --bg: #050505; --panel: rgba(15, 15, 15, 0.95); --accent: #ff003c; }
-        * { box-sizing: border-box; transition: 0.3s; }
-        body { margin: 0; background: var(--bg); font-family: 'Rajdhani', sans-serif; color: white; overflow-x: hidden; }
+        :root {
+            --neon: #00ff41;
+            --bg: #020202;
+            --panel: rgba(10, 10, 10, 0.98);
+            --accent: #ff003c;
+            --glow-green: 0 0 20px rgba(0, 255, 65, 0.5);
+            --glow-red: 0 0 20px rgba(255, 0, 60, 0.5);
+        }
+
+        * { box-sizing: border-box; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); scroll-behavior: smooth; }
         
-        /* Matrix Rain Background */
-        #canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.2; }
+        body { 
+            margin: 0; 
+            background: var(--bg); 
+            font-family: 'Rajdhani', sans-serif; 
+            color: #ffffff; 
+            overflow-x: hidden; 
+        }
 
-        /* Hero Section */
-        header { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle, rgba(0,255,65,0.1) 0%, transparent 80%); }
-        .glitch-title { font-family: 'Orbitron'; font-size: clamp(3rem, 10vw, 6rem); color: var(--neon); text-shadow: 0 0 20px var(--neon); margin: 0; }
-        .tagline { font-size: 1.5rem; letter-spacing: 3px; opacity: 0.8; margin-bottom: 30px; }
+        /* Matrix Canvas */
+        #canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
 
-        .container { max-width: 1200px; margin: auto; padding: 20px; }
+        /* Floating Live Counter */
+        .live-stat-box {
+            position: fixed; top: 25px; right: 25px;
+            background: var(--panel); border: 1px solid var(--neon);
+            padding: 10px 20px; border-radius: 50px;
+            display: flex; align-items: center; gap: 10px;
+            font-family: 'Orbitron'; font-size: 13px; z-index: 9999;
+            box-shadow: var(--glow-green); border-left: 4px solid var(--neon);
+        }
+        .pulse-dot { width: 10px; height: 10px; background: var(--neon); border-radius: 50%; animation: pulse 1.5s infinite; }
 
-        /* Tools Grid */
-        .section-h { font-family: 'Orbitron'; color: var(--neon); text-align: center; margin: 60px 0 30px; font-size: 2.5rem; border-bottom: 2px solid #222; padding-bottom: 10px; }
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .tool-card { background: var(--panel); border: 1px solid #333; padding: 20px; border-radius: 12px; position: relative; overflow: hidden; }
-        .tool-card:hover { border-color: var(--neon); transform: translateY(-5px); box-shadow: 0 0 15px var(--neon); }
-        .tool-card h3 { color: var(--neon); margin: 0 0 10px; font-size: 1.3rem; }
-        .tool-card p { font-size: 1rem; color: #ccc; margin: 0; }
+        /* Header / Hero Section */
+        header { 
+            height: 100vh; display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; text-align: center;
+            background: radial-gradient(circle at center, rgba(0, 255, 65, 0.08) 0%, transparent 70%);
+            padding: 20px;
+        }
+        .main-logo { 
+            font-family: 'Syncopate', sans-serif; font-size: clamp(2.5rem, 12vw, 7rem); 
+            color: var(--neon); text-transform: uppercase; letter-spacing: 15px;
+            margin: 0; text-shadow: var(--glow-green); font-weight: 700;
+        }
+        .sub-text { font-size: 1.4rem; letter-spacing: 5px; opacity: 0.7; margin: 20px 0; font-weight: 300; }
 
-        /* Feedback System */
-        .feedback-form { background: #111; padding: 30px; border: 1px dashed var(--neon); border-radius: 15px; margin-bottom: 40px; }
-        .feedback-form input, .feedback-form textarea { width: 100%; background: #000; border: 1px solid #444; color: white; padding: 12px; margin-bottom: 10px; border-radius: 5px; font-family: inherit; }
-        .review-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--neon); animation: fadeIn 0.5s ease; }
-        .review-meta { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 8px; }
-        
-        /* Contact Box */
-        .contact-box { background: linear-gradient(135deg, #004d1a 0%, #000 100%); padding: 50px; border-radius: 20px; text-align: center; border: 2px solid var(--neon); }
-        .btn { display: inline-block; padding: 15px 40px; background: var(--neon); color: black; text-decoration: none; font-weight: 900; border-radius: 50px; margin: 10px; font-family: 'Orbitron'; cursor: pointer; border: none; }
-        .btn:hover { box-shadow: 0 0 30px var(--neon); transform: scale(1.05); }
+        .container { max-width: 1300px; margin: auto; padding: 40px 25px; }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        /* Why Choose Us Section (English Content for Clients) */
+        .intro-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px; margin: 100px 0;
+        }
+        .intro-content h2 { font-family: 'Orbitron'; font-size: 2.5rem; color: var(--neon); }
+        .intro-content p { font-size: 1.2rem; line-height: 1.8; color: #bbb; }
+
+        /* Professional Master Toolkit */
+        .section-title { 
+            font-family: 'Orbitron'; text-align: center; font-size: 3rem; 
+            margin-bottom: 60px; color: #fff; position: relative;
+        }
+        .section-title::after { content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 150px; height: 3px; background: var(--neon); }
+
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        .tool-card { 
+            background: #0d0d0d; border: 1px solid #222; padding: 35px; 
+            border-radius: 20px; position: relative; border-bottom: 4px solid #333;
+        }
+        .tool-card:hover { border-color: var(--neon); transform: translateY(-10px); background: #111; border-bottom-color: var(--neon); box-shadow: var(--glow-green); }
+        .tool-card h3 { font-family: 'Orbitron'; color: var(--neon); margin: 0 0 15px; font-size: 1.5rem; }
+        .tool-card p { font-size: 1.05rem; color: #999; line-height: 1.6; }
+
+        /* Feedback Section */
+        .feedback-wrapper { background: #080808; padding: 60px 30px; border-radius: 30px; border: 1px solid #1a1a1a; margin: 100px 0; }
+        .feedback-form input, .feedback-form textarea {
+            width: 100%; background: #000; border: 1px solid #333; 
+            color: #fff; padding: 20px; border-radius: 12px; margin-bottom: 20px; font-family: inherit; font-size: 1rem;
+        }
+        .feedback-form input:focus { border-color: var(--neon); outline: none; box-shadow: 0 0 10px rgba(0,255,65,0.2); }
+
+        .review-card { 
+            background: rgba(255,255,255,0.02); padding: 30px; border-radius: 15px; 
+            margin-bottom: 25px; border-left: 6px solid var(--neon); position: relative;
+            animation: slideUp 0.7s ease;
+        }
+        .review-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .reviewer-name { font-weight: 700; color: var(--neon); font-size: 1.2rem; }
+
+        .like-container { 
+            cursor: pointer; display: flex; align-items: center; gap: 10px; 
+            background: rgba(255, 0, 60, 0.1); padding: 8px 18px; border-radius: 50px; 
+            color: var(--accent); font-weight: bold; border: 1px solid transparent;
+        }
+        .like-container.active { background: var(--accent); color: white; transform: scale(1.1); }
+
+        /* Call to Action */
+        .cta-final { 
+            text-align: center; background: linear-gradient(135deg, #001a05 0%, #000 100%); 
+            padding: 80px 40px; border-radius: 40px; border: 2px solid var(--neon); margin: 100px 0;
+            box-shadow: var(--glow-green);
+        }
+        .huge-btn { 
+            display: inline-block; padding: 22px 60px; background: var(--neon); 
+            color: #000; text-decoration: none; font-weight: 900; border-radius: 100px; 
+            font-family: 'Orbitron'; font-size: 1.2rem; letter-spacing: 2px;
+        }
+        .huge-btn:hover { box-shadow: 0 0 40px var(--neon); transform: scale(1.1); }
+
+        /* Animations */
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes glitch { 0% { transform: skew(0deg); } 20% { transform: skew(2deg); } 40% { transform: skew(-2deg); } 100% { transform: skew(0deg); } }
     </style>
 </head>
 <body>
 
+<div class="live-stat-box">
+    <div class="pulse-dot"></div>
+    LIVE: <span id="online-users">52</span> CLIENTS CONNECTED
+</div>
+
 <canvas id="canvas"></canvas>
 
 <header>
-    <p style="color:var(--neon)">SYSTEM ACCESS GRANTED</p>
-    <h1 class="glitch-title">FAISAL VISUALS</h1>
-    <p class="tagline">Next-Gen Video Editing & AI Ads Specialist</p>
-    <a href="#work" class="btn">VIEW MY TOOLKIT</a>
+    <div style="color: var(--neon); font-family: 'Orbitron'; letter-spacing: 8px; font-weight: bold;">SECURITY PROTOCOL ACTIVE</div>
+    <h1 class="main-logo">FAISAL</h1>
+    <h1 class="main-logo" style="font-size: clamp(2rem, 10vw, 5.5rem); margin-top: -20px;">VISUALS</h1>
+    <p class="sub-text">PREMIUM AI VIDEO EDITING & ADVERTISING SOLUTIONS</p>
+    <a href="#work" class="huge-btn" style="margin-top: 40px;">GET STARTED</a>
 </header>
 
 <div class="container" id="work">
-    <h2 class="section-h">30+ Pro Master Tools</h2>
+    
+    <div class="intro-grid">
+        <div class="intro-content">
+            <h2>// WHY CHOOSE US?</h2>
+            <p>At <strong>Faisal Visuals</strong>, we don't just edit videos; we engineer virality. With a target to achieve excellence by 2027, we use a hybrid workflow combining Human Creativity and Artificial Intelligence.</p>
+        </div>
+        <div class="intro-content">
+            <h2>// OUR PROMISE</h2>
+            <p>High-conversion ads, 100% no-copyright content, and lightning-fast delivery. Whether it's a 4K gaming montage or a high-ticket business ad, we ensure your brand stands out in the digital noise.</p>
+        </div>
+    </div>
+
+    <h2 class="section-title">MASTER TOOLKIT</h2>
     <div class="tools-grid">
-        <div class="tool-card"><h3>Runway Gen-2 (AI)</h3><p>Text se Cinematic Video banane ke liye best AI tool.</p></div>
-        <div class="tool-card"><h3>ElevenLabs (AI)</h3><p>Human jaisi awaaz wala AI Voiceover generate karne ke liye.</p></div>
-        <div class="tool-card"><h3>HeyGen (AI)</h3><p>Talking AI Avatars jo aapke Business Ads ko viral karenge.</p></div>
-        <div class="tool-card"><h3>Topaz Video AI</h3><p>Low-quality purani videos ko 4K Crystal Clear banaye.</p></div>
-        <div class="tool-card"><h3>ChatGPT-4</h3><p>Viral Script Writing aur Content Strategy planning ke liye.</p></div>
+        <div class="tool-card"><h3>Runway Gen-3 (AI)</h3><p>Using world-class AI to generate cinematic visuals from simple text. Future of storytelling.</p></div>
+        <div class="tool-card"><h3>HeyGen Pro</h3><p>Creating AI Talking Avatars for brand commercials that convert viewers into customers.</p></div>
+        <div class="tool-card"><h3>Adobe Premiere Pro</h3><p>The backbone of post-production. Precision cutting and professional storytelling.</p></div>
+        <div class="tool-card"><h3>After Effects</h3><p>Advanced Motion Graphics, 3D Compositing, and explosive Visual Effects (VFX).</p></div>
+        <div class="tool-card"><h3>ElevenLabs AI</h3><p>Crystal clear AI narration and voice cloning in any language for global reach.</p></div>
+        <div class="tool-card"><h3>DaVinci Resolve</h3><p>Industry-standard color grading. We give your videos that "Hollywood" cinematic look.</p></div>
+        <div class="tool-card"><h3>Topaz AI 4.0</h3><p>Upscaling low-quality footage to 4K crystalline quality. Clarity like never before.</p></div>
+        <div class="tool-card"><h3>CapCut Desktop</h3><p>Leveraging trending viral transitions and social media hooks for maximum engagement.</p></div>
+        <div class="tool-card"><h3>Blender 3D</h3><p>Custom 3D environments, product renders, and high-tech futuristic intros.</p></div>
+        <div class="tool-card"><h3>Audacity Pro</h3><p>Professional audio restoration. Removing background noise for studio-quality sound.</p></div>
+        <div class="tool-card"><h3>Midjourney AI</h3><p>Generating unique digital assets and backgrounds that are 100% original.</p></div>
+        <div class="tool-card"><h3>OBS Studio 4K</h3><p>Optimized gaming stream setups and high-bitrate screen recording for pro gamers.</p></div>
+    </div>
+
+    <div class="feedback-wrapper">
+        <h2 class="section-title">CLIENT TRANSMISSIONS</h2>
         
-        <div class="tool-card"><h3>Premiere Pro</h3><p>Industry standard color grading aur advanced cutting.</p></div>
-        <div class="tool-card"><h3>After Effects</h3><p>High-end VFX aur Motion Graphics ka baap tool.</p></div>
-        <div class="tool-card"><h3>DaVinci Resolve</h3><p>Hollywood movies jaisa Color Correction aur Grading.</p></div>
-        <div class="tool-card"><h3>Photoshop</h3><p>Eye-catching Clickbait Thumbnails design karne ke liye.</p></div>
-        <div class="tool-card"><h3>Audacity</h3><p>Background noise saaf karke Studio-quality audio banaye.</p></div>
-
-        <div class="tool-card"><h3>CapCut Pro</h3><p>Viral Transitions aur Trending Reels editing expert.</p></div>
-        <div class="tool-card"><h3>VN Editor</h3><p>Quick social media content aur smooth edits ke liye.</p></div>
-        <div class="tool-card"><h3>Alight Motion</h3><p>Mobile par After Effects jaisa animation aur effects.</p></div>
-        <div class="tool-card"><h3>Node Video</h3><p>Advanced Mobile Grading aur Realistic Blurs ke liye.</p></div>
-        <div class="tool-card"><h3>Remini Pro</h3><p>Photos aur Video frames ki clarity badhane ke liye.</p></div>
+        <div class="feedback-form">
+            <input type="text" id="cName" placeholder="Your Name / Organization">
+            <input type="email" id="cEmail" placeholder="Your Email (will be hidden)">
+            <textarea id="cMsg" rows="4" placeholder="Share your experience with Faisal Visuals..."></textarea>
+            <button class="huge-btn" onclick="submitFeed()" style="width: 100%; cursor: pointer; border: none;">POST FEEDBACK</button>
         </div>
 
-    <h2 class="section-h" id="feedback">Client Feedback</h2>
-    <div class="feedback-form">
-        <h3 style="color:var(--neon)">Submit Feedback</h3>
-        <input type="text" id="name" placeholder="Name">
-        <input type="email" id="email" placeholder="Email (anas****@gmail.com)">
-        <textarea id="msg" rows="3" placeholder="Aapka experience kaisa raha?"></textarea>
-        <button class="btn" onclick="postFB()" style="width:100%">POST FEEDBACK</button>
-    </div>
-
-    <div id="fb-list">
-        <div class="review-card">
-            <div class="review-meta"><span>Priya S. (priy****@gmail.com)</span> <span style="color:var(--accent)">❤️ 1,842 Likes</span></div>
-            <p>"Faisal ne mere brand ke liye AI ad banaya, sales 3x badh gayi! Zero Copyright issue."</p>
-        </div>
-        <div class="review-card">
-            <div class="review-meta"><span>anasqure2***** (anas****@gmail.com)</span> <span style="color:var(--accent)">❤️ 1,210 Likes</span></div>
-            <p>"Gaming montage me jo sync aur transitions use kiye hain, wo unreal hain. Top level kaam!"</p>
+        <div id="feedList">
+            <div class="review-card">
+                <div class="review-top">
+                    <span class="reviewer-name">Priya Sharma (***@gmail.com)</span>
+                    <div class="like-container" onclick="doLike(this)">❤️ <span>1,842</span></div>
+                </div>
+                <p>"Faisal's AI Ads increased our revenue by 300%. The quality is unparalleled. Best in the business for 2026!"</p>
+            </div>
+            <div class="review-card">
+                <div class="review-top">
+                    <span class="reviewer-name">anasqure2***** (***@gmail.com)</span>
+                    <div class="like-container" onclick="doLike(this)">❤️ <span>1,210</span></div>
+                </div>
+                <p>"The gaming montage sync is better than most PC editors I've hired. Highly creative and fast!"</p>
+            </div>
         </div>
     </div>
 
-    <div class="contact-box">
-        <h2 style="font-family:'Orbitron'; margin:0">START YOUR PROJECT</h2>
-        <p>Targeting 2027 Milestone | High Quality Guaranteed</p>
-        <p><strong>Direct Call:</strong> +91 7505685543</p>
-        <a href="https://www.facebook.com/share/1AVXWmVDhx/" class="btn" style="background:white; color:black">FACEBOOK CONNECT</a>
-        <a href="tel:+917505685543" class="btn">WHATSAPP / CALL</a>
+    <div class="cta-final">
+        <h2 style="font-family: 'Orbitron'; font-size: 3rem; margin: 0;">WORK WITH THE BEST</h2>
+        <p style="font-size: 1.5rem; margin: 30px 0; opacity: 0.8;">Available for Global Projects. Specializing in AI Content.</p>
+        <div style="font-size: 2rem; color: var(--neon); margin-bottom: 40px; font-weight: bold;">PHONE: +91 7505685543</div>
+        <a href="https://www.facebook.com/share/1AVXWmVDhx/" target="_blank" class="huge-btn" style="background: #fff;">FACEBOOK</a>
+        <a href="tel:+917505685543" class="huge-btn" style="margin-left: 15px;">DIRECT CALL</a>
     </div>
+
 </div>
 
+<footer>
+    <div style="text-align: center; padding: 50px; opacity: 0.4; font-size: 0.9rem; letter-spacing: 2px;">
+        &copy; 2026 FAISAL VISUALS | NEXT-GEN DIGITAL AGENCY | TARGET 2027 MILESTONE
+    </div>
+</footer>
+
 <script>
-    // Matrix Background
+    // Matrix Effect
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-    const chars = "010101"; const drops = Array(Math.floor(canvas.width / 20)).fill(1);
+    const chars = "01ABCDEF"; const drops = Array(Math.floor(canvas.width / 20)).fill(1);
     function draw() {
         ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = "#0f0"; ctx.font = "15px monospace";
@@ -122,18 +230,46 @@
     }
     setInterval(draw, 50);
 
-    // Feedback Logic
-    function postFB() {
-        let n = document.getElementById('name').value;
-        let e = document.getElementById('email').value;
-        let m = document.getElementById('msg').value;
-        if(!n || !m) return alert("Details bhariye!");
-        let masked = e.split('@')[0].substring(0,4) + "****@gmail.com";
-        let div = document.createElement('div'); div.className = 'review-card';
-        div.innerHTML = `<div class="review-meta"><span>${n} (${masked})</span> <span style="color:var(--accent)">❤️ 1 Like</span></div><p>${m}</p>`;
-        document.getElementById('fb-list').prepend(div);
-        alert("Feedback posted successfully!");
+    // Live Online Users (30-74 range)
+    setInterval(() => {
+        const count = Math.floor(Math.random() * (74 - 30 + 1)) + 30;
+        document.getElementById('online-users').innerText = count;
+    }, 4000);
+
+    // Like Function
+    function doLike(el) {
+        let span = el.querySelector('span');
+        let count = parseInt(span.innerText.replace(',', ''));
+        if(!el.classList.contains('active')) {
+            el.classList.add('active');
+            span.innerText = (count + 1).toLocaleString();
+        } else {
+            el.classList.remove('active');
+            span.innerText = (count - 1).toLocaleString();
+        }
+    }
+
+    // Feedback Submission
+    function submitFeed() {
+        const name = document.getElementById('cName').value;
+        const msg = document.getElementById('cMsg').value;
+        if(!name || !msg) { alert("Access Denied: Please fill Name and Message."); return; }
+        
+        const list = document.getElementById('feedList');
+        const div = document.createElement('div');
+        div.className = 'review-card';
+        div.innerHTML = `
+            <div class="review-top">
+                <span class="reviewer-name">${name} (***@gmail.com)</span>
+                <div class="like-container" onclick="doLike(this)">❤️ <span>1</span></div>
+            </div>
+            <p>"${msg}"</p>
+        `;
+        list.prepend(div);
+        alert("Transmission Sent: Your feedback is now live.");
+        document.getElementById('cName').value = ""; document.getElementById('cEmail').value = ""; document.getElementById('cMsg').value = "";
     }
 </script>
+
 </body>
 </html>
