@@ -1,133 +1,139 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faisal Visuals | 360° Editing & AI Solutions</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <title>FAISAL VISUALS | Pro Editing & AI Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #00f2fe; --secondary: #4facfe; --accent: #7000ff; --dark: #050505; --card-bg: rgba(20, 20, 25, 0.9); }
-        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--dark); color: #fff; scroll-behavior: smooth; }
+        :root { --neon: #00ff41; --bg: #050505; --panel: rgba(15, 15, 15, 0.95); --accent: #ff003c; }
+        * { box-sizing: border-box; transition: 0.3s; }
+        body { margin: 0; background: var(--bg); font-family: 'Rajdhani', sans-serif; color: white; overflow-x: hidden; }
         
-        /* --- Hero Section --- */
-        header { 
-            height: 90vh; background: radial-gradient(circle at center, rgba(0, 242, 254, 0.15) 0%, transparent 70%), #000;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px;
-        }
-        .hero-h1 { font-family: 'Orbitron'; font-size: clamp(2.5rem, 8vw, 5rem); margin: 0; background: linear-gradient(45deg, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 15px var(--primary)); }
-        
-        .container { max-width: 1200px; margin: auto; padding: 60px 20px; }
-        h2.section-title { font-family: 'Orbitron'; text-align: center; font-size: 2.5rem; margin-bottom: 50px; color: var(--primary); border-bottom: 2px solid var(--accent); display: inline-block; width: 100%; padding-bottom: 10px; }
+        /* Matrix Rain Background */
+        #canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.2; }
 
-        /* --- Tool Cards --- */
-        .tools-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .tool-card { background: var(--card-bg); border: 1px solid #222; padding: 20px; border-radius: 15px; transition: 0.3s; }
-        .tool-card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 0 20px rgba(0, 242, 254, 0.2); }
-        .tool-card h4 { color: var(--primary); margin: 0 0 10px 0; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
-        .tool-card p { font-size: 0.9rem; opacity: 0.8; margin: 0; line-height: 1.5; }
+        /* Hero Section */
+        header { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle, rgba(0,255,65,0.1) 0%, transparent 80%); }
+        .glitch-title { font-family: 'Orbitron'; font-size: clamp(3rem, 10vw, 6rem); color: var(--neon); text-shadow: 0 0 20px var(--neon); margin: 0; }
+        .tagline { font-size: 1.5rem; letter-spacing: 3px; opacity: 0.8; margin-bottom: 30px; }
 
-        /* --- Feedback Section --- */
-        .feedback-form { background: #111; padding: 30px; border-radius: 20px; border: 1px solid var(--accent); margin-bottom: 40px; }
-        .review-card { background: rgba(255,255,255,0.03); border: 1px solid #333; padding: 20px; border-radius: 15px; margin-bottom: 20px; }
-        .user-id { color: var(--primary); font-weight: bold; }
+        .container { max-width: 1200px; margin: auto; padding: 20px; }
+
+        /* Tools Grid */
+        .section-h { font-family: 'Orbitron'; color: var(--neon); text-align: center; margin: 60px 0 30px; font-size: 2.5rem; border-bottom: 2px solid #222; padding-bottom: 10px; }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .tool-card { background: var(--panel); border: 1px solid #333; padding: 20px; border-radius: 12px; position: relative; overflow: hidden; }
+        .tool-card:hover { border-color: var(--neon); transform: translateY(-5px); box-shadow: 0 0 15px var(--neon); }
+        .tool-card h3 { color: var(--neon); margin: 0 0 10px; font-size: 1.3rem; }
+        .tool-card p { font-size: 1rem; color: #ccc; margin: 0; }
+
+        /* Feedback System */
+        .feedback-form { background: #111; padding: 30px; border: 1px dashed var(--neon); border-radius: 15px; margin-bottom: 40px; }
+        .feedback-form input, .feedback-form textarea { width: 100%; background: #000; border: 1px solid #444; color: white; padding: 12px; margin-bottom: 10px; border-radius: 5px; font-family: inherit; }
+        .review-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; margin-bottom: 15px; border-left: 4px solid var(--neon); animation: fadeIn 0.5s ease; }
+        .review-meta { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 8px; }
         
-        .cta-box { background: linear-gradient(45deg, var(--accent), #000); padding: 50px; border-radius: 30px; text-align: center; margin-top: 50px; border: 1px solid var(--primary); }
-        .btn { background: var(--primary); color: #000; padding: 15px 35px; border-radius: 50px; text-decoration: none; font-weight: 800; display: inline-block; margin: 10px; transition: 0.3s; cursor: pointer; border: none; }
-        .btn:hover { box-shadow: 0 0 20px var(--primary); transform: scale(1.05); }
+        /* Contact Box */
+        .contact-box { background: linear-gradient(135deg, #004d1a 0%, #000 100%); padding: 50px; border-radius: 20px; text-align: center; border: 2px solid var(--neon); }
+        .btn { display: inline-block; padding: 15px 40px; background: var(--neon); color: black; text-decoration: none; font-weight: 900; border-radius: 50px; margin: 10px; font-family: 'Orbitron'; cursor: pointer; border: none; }
+        .btn:hover { box-shadow: 0 0 30px var(--neon); transform: scale(1.05); }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
 
+<canvas id="canvas"></canvas>
+
 <header>
-    <div style="letter-spacing: 5px; color: var(--primary); margin-bottom: 15px;">THE FUTURE OF EDITING</div>
-    <h1 class="hero-h1">FAISAL VISUALS</h1>
-    <p style="max-width: 800px; font-size: 1.2rem;">22 साल का अनुभव नहीं, 22 साल का जुनून। हम AI और 30+ प्रीमियम टूल्स से आपके वीडियो को 'Viral Machine' बनाते हैं।</p>
-    <div style="margin-top: 30px;">
-        <a href="#services" class="btn">मेरे टूल्स देखें</a>
-        <a href="#contact" class="btn" style="background:#fff;">Contact Now</a>
-    </div>
+    <p style="color:var(--neon)">SYSTEM ACCESS GRANTED</p>
+    <h1 class="glitch-title">FAISAL VISUALS</h1>
+    <p class="tagline">Next-Gen Video Editing & AI Ads Specialist</p>
+    <a href="#work" class="btn">VIEW MY TOOLKIT</a>
 </header>
 
-<div class="container" id="services">
-    <h2 class="section-title">Master Toolkit (30+ Apps & AI)</h2>
-    <div class="tools-container">
-        <div class="tool-card"><h4>🖥️ Premiere Pro</h4><p>हाई-एंड इंडस्ट्री लेवल वीडियो एडिटिंग और कलर ग्रेडिंग के लिए।</p></div>
-        <div class="tool-card"><h4>💥 After Effects</h4><p>धमाकेदार Visual Effects (VFX) और 3D मोशन ग्राफिक्स के लिए।</p></div>
-        <div class="tool-card"><h4>🎨 DaVinci Resolve</h4><p>हॉलीवुड लेवल कलर करेक्शन और प्रोफेशनल सिनेमैटिक लुक्स के लिए।</p></div>
-        <div class="tool-card"><h4>📸 Photoshop</h4><p>वीडियो थंबनेल और हाई-क्वालिटी पोस्टर डिजाइनिंग के लिए।</p></div>
-        <div class="tool-card"><h4>✍️ Illustrator</h4><p>वेक्टर लोगो और यूनीक ग्राफिक्स बनाने के लिए।</p></div>
+<div class="container" id="work">
+    <h2 class="section-h">30+ Pro Master Tools</h2>
+    <div class="tools-grid">
+        <div class="tool-card"><h3>Runway Gen-2 (AI)</h3><p>Text se Cinematic Video banane ke liye best AI tool.</p></div>
+        <div class="tool-card"><h3>ElevenLabs (AI)</h3><p>Human jaisi awaaz wala AI Voiceover generate karne ke liye.</p></div>
+        <div class="tool-card"><h3>HeyGen (AI)</h3><p>Talking AI Avatars jo aapke Business Ads ko viral karenge.</p></div>
+        <div class="tool-card"><h3>Topaz Video AI</h3><p>Low-quality purani videos ko 4K Crystal Clear banaye.</p></div>
+        <div class="tool-card"><h3>ChatGPT-4</h3><p>Viral Script Writing aur Content Strategy planning ke liye.</p></div>
+        
+        <div class="tool-card"><h3>Premiere Pro</h3><p>Industry standard color grading aur advanced cutting.</p></div>
+        <div class="tool-card"><h3>After Effects</h3><p>High-end VFX aur Motion Graphics ka baap tool.</p></div>
+        <div class="tool-card"><h3>DaVinci Resolve</h3><p>Hollywood movies jaisa Color Correction aur Grading.</p></div>
+        <div class="tool-card"><h3>Photoshop</h3><p>Eye-catching Clickbait Thumbnails design karne ke liye.</p></div>
+        <div class="tool-card"><h3>Audacity</h3><p>Background noise saaf karke Studio-quality audio banaye.</p></div>
 
-        <div class="tool-card"><h4>🎬 CapCut Pro</h4><p>वायरल ट्रांजिशन और स्मूथ स्लो-मोशन एडिटर।</p></div>
-        <div class="tool-card"><h4>📱 VN Editor</h4><p>क्विक और क्लीन सोशल मीडिया रील्स एडिटिंग के लिए।</p></div>
-        <div class="tool-card"><h4>🌀 Alight Motion</h4><p>मोबाइल पर प्रोफेशनल एनीमेशन और शेक इफेक्ट्स के लिए।</p></div>
-        <div class="tool-card"><h4>🎥 KineMaster</h4><p>मल्टी-लेयर क्रोमा की (Green Screen) और ओवरले काम के लिए।</p></div>
-        <div class="tool-card"><h4>🎞️ Node Video</h4><p>मोबाइल का After Effects - एडवांस्ड कलरिंग और ब्लर इफेक्ट्स।</p></div>
+        <div class="tool-card"><h3>CapCut Pro</h3><p>Viral Transitions aur Trending Reels editing expert.</p></div>
+        <div class="tool-card"><h3>VN Editor</h3><p>Quick social media content aur smooth edits ke liye.</p></div>
+        <div class="tool-card"><h3>Alight Motion</h3><p>Mobile par After Effects jaisa animation aur effects.</p></div>
+        <div class="tool-card"><h3>Node Video</h3><p>Advanced Mobile Grading aur Realistic Blurs ke liye.</p></div>
+        <div class="tool-card"><h3>Remini Pro</h3><p>Photos aur Video frames ki clarity badhane ke liye.</p></div>
+        </div>
 
-        <div class="tool-card"><h4>🤖 Runway Gen-2</h4><p>टेक्स्ट से वीडियो बनाना और AI वीडियो एडिटिंग।</p></div>
-        <div class="tool-card"><h4>🗣️ ElevenLabs AI</h4><p>ह्यूमन जैसी नेचुरल AI वॉइसओवर (बिना अपनी आवाज दिए)।</p></div>
-        <div class="tool-card"><h4>🧠 ChatGPT Plus</h4><p>वीडियो की स्क्रिप्ट और वायरल आइडियाज जेनरेशन।</p></div>
-        <div class="tool-card"><h4>🖌️ Midjourney AI</h4><p>कल्पना से परे की आर्ट और बैकग्राउंड तैयार करना।</p></div>
-        <div class="tool-card"><h4>✨ Topaz Video AI</h4><p>पुरानी और धुंधली वीडियो को 4K क्रिस्टल क्लियर बनाना।</p></div>
-        <div class="tool-card"><h4>🎧 Adobe Podcast</h4><p>शोर वाली ऑडियो को स्टूडियो जैसी साफ़ आवाज में बदलना।</p></div>
-        <div class="tool-card"><h4>🖼️ Leonardo AI</h4><p>गेमिंग एसेट्स और 3D मॉडल्स की इमेज जेनरेशन।</p></div>
-        <div class="tool-card"><h4>⚡ Pika Labs</h4><p>एनिमेटेड मोशन और सिनेमैटिक AI क्लिप्स।</p></div>
-        <div class="tool-card"><h4>👤 HeyGen</h4><p>बोलने वाले AI अवतार जो आपके बिजनेस के लिए एड्स बनाएंगे।</p></div>
-        <div class="tool-card"><h4>🎥 Kaiber AI</h4><p>म्यूजिक वीडियो में कूल AI ट्रांसफॉर्मेशन इफेक्ट्स।</p></div>
-
-        <div class="tool-card"><h4>🎵 Audacity</h4><p>डीप और क्रिस्प साउंड एडिटिंग और नॉइज़ रिमूवल।</p></div>
-        <div class="tool-card"><h4>🔊 FL Studio</h4><p>कस्टम बैकग्राउंड म्यूजिक और बीट मेकिंग।</p></div>
-        <div class="tool-card"><h4>🌈 Lightroom</h4><p>वीडियो के हर फ्रेम की फोटो जैसी फिनिशिंग।</p></div>
-        <div class="tool-card"><h4>📏 Canva Pro</h4><p>इंस्टेंट सोशल मीडिया पोस्ट और एड टेम्प्लेट्स।</p></div>
-        <div class="tool-card"><h4>🧊 Blender</h4><p>वीडियो में 3D ऑब्जेक्ट्स और इंट्रो जोड़ने के लिए।</p></div>
-        <div class="tool-card"><h4>📝 Notion</h4><p>प्रोजेक्ट्स की प्लानिंग और क्लाइंट मैनेजमेंट।</p></div>
-        <div class="tool-card"><h4>📤 WeTransfer</h4><p>बिना क्वालिटी गिराए बड़ी फाइल्स को क्लाइंट तक भेजना।</p></div>
-        <div class="tool-card"><h4>🎥 OBS Studio</h4><p>गेमिंग लाइव स्ट्रीम और स्क्रीन रिकॉर्डिंग सेटअप।</p></div>
-        <div class="tool-card"><h4>✂️ Remini Pro</h4><p>चेहरे की डिटेल्स और फोटो क्वालिटी फिक्स करना।</p></div>
-        <div class="tool-card"><h4>🤳 InShot Pro</h4><p>फास्ट सोशल मीडिया वीडियो कटिंग और म्यूजिक सिंक।</p></div>
-    </div>
-</div>
-
-<div class="container" id="feedback">
-    <h2 class="section-title">Client Love & Feedback</h2>
+    <h2 class="section-h" id="feedback">Client Feedback</h2>
     <div class="feedback-form">
-        <input type="text" id="name" placeholder="Name" style="width:100%; padding:10px; margin-bottom:10px; background:#000; border:1px solid #333; color:#fff;">
-        <input type="email" id="email" placeholder="Email" style="width:100%; padding:10px; margin-bottom:10px; background:#000; border:1px solid #333; color:#fff;">
-        <textarea id="msg" placeholder="Your Feedback" style="width:100%; padding:10px; margin-bottom:10px; background:#000; border:1px solid #333; color:#fff;"></textarea>
-        <button class="btn" onclick="postFB()">Submit Review</button>
+        <h3 style="color:var(--neon)">Submit Feedback</h3>
+        <input type="text" id="name" placeholder="Name">
+        <input type="email" id="email" placeholder="Email (anas****@gmail.com)">
+        <textarea id="msg" rows="3" placeholder="Aapka experience kaisa raha?"></textarea>
+        <button class="btn" onclick="postFB()" style="width:100%">POST FEEDBACK</button>
     </div>
-    
-    <div id="fb-list">
-        <div class="review-card"><span class="user-id">Priya Sharma</span> (priy****@gmail.com) <br> "Faisal ne AI ka use karke jo ad banaya, meri sales 3x badh gayi! No copyright issue." <span style="float:right; color:#ff003c;">❤️ 1,840</span></div>
-        <div class="review-card"><span class="user-id">anasqure2*****</span> (anas****@gmail.com) <br> "Bhai ka gaming montage ekdam cinematic hai. 30 tools ka knowledge dikhta hai." <span style="float:right; color:#ff003c;">❤️ 1,210</span></div>
-    </div>
-</div>
 
-<div class="container id="contact">
-    <div class="cta-box">
-        <h2 style="font-family:'Orbitron';">READY TO GO VIRAL?</h2>
-        <p>बिना कॉपीराइट की चिंता किए, AI और प्रोफेशनल टूल्स से अपने वीडियो बनवाएं।</p>
-        <p><strong>Phone:</strong> +91 7505685543</p>
-        <a href="https://www.facebook.com/share/1AVXWmVDhx/" target="_blank" class="btn">Connect on Facebook</a>
-        <a href="tel:+917505685543" class="btn" style="background:#25d366; color:#fff;">WhatsApp / Call</a>
+    <div id="fb-list">
+        <div class="review-card">
+            <div class="review-meta"><span>Priya S. (priy****@gmail.com)</span> <span style="color:var(--accent)">❤️ 1,842 Likes</span></div>
+            <p>"Faisal ne mere brand ke liye AI ad banaya, sales 3x badh gayi! Zero Copyright issue."</p>
+        </div>
+        <div class="review-card">
+            <div class="review-meta"><span>anasqure2***** (anas****@gmail.com)</span> <span style="color:var(--accent)">❤️ 1,210 Likes</span></div>
+            <p>"Gaming montage me jo sync aur transitions use kiye hain, wo unreal hain. Top level kaam!"</p>
+        </div>
+    </div>
+
+    <div class="contact-box">
+        <h2 style="font-family:'Orbitron'; margin:0">START YOUR PROJECT</h2>
+        <p>Targeting 2027 Milestone | High Quality Guaranteed</p>
+        <p><strong>Direct Call:</strong> +91 7505685543</p>
+        <a href="https://www.facebook.com/share/1AVXWmVDhx/" class="btn" style="background:white; color:black">FACEBOOK CONNECT</a>
+        <a href="tel:+917505685543" class="btn">WHATSAPP / CALL</a>
     </div>
 </div>
 
 <script>
+    // Matrix Background
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+    const chars = "010101"; const drops = Array(Math.floor(canvas.width / 20)).fill(1);
+    function draw() {
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#0f0"; ctx.font = "15px monospace";
+        drops.forEach((y, i) => {
+            const text = chars[Math.floor(Math.random() * chars.length)];
+            ctx.fillText(text, i * 20, y * 20);
+            if (y * 20 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            drops[i]++;
+        });
+    }
+    setInterval(draw, 50);
+
+    // Feedback Logic
     function postFB() {
         let n = document.getElementById('name').value;
         let e = document.getElementById('email').value;
         let m = document.getElementById('msg').value;
-        if(n=="" || m=="") return alert("Please fill details");
-        
+        if(!n || !m) return alert("Details bhariye!");
         let masked = e.split('@')[0].substring(0,4) + "****@gmail.com";
-        let div = document.createElement('div');
-        div.className = 'review-card';
-        div.style.borderLeft = "4px solid #00f2fe";
-        div.innerHTML = `<span class="user-id">${n}</span> (${masked}) <br> "${m}" <span style="float:right; color:#ff003c;">❤️ 1</span>`;
+        let div = document.createElement('div'); div.className = 'review-card';
+        div.innerHTML = `<div class="review-meta"><span>${n} (${masked})</span> <span style="color:var(--accent)">❤️ 1 Like</span></div><p>${m}</p>`;
         document.getElementById('fb-list').prepend(div);
-        alert("Feedback Posted Successfully!");
+        alert("Feedback posted successfully!");
     }
 </script>
-
 </body>
 </html>
