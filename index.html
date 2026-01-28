@@ -2,242 +2,178 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VORTEX AI | Premium Visual Engineering Hub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VORTEX AI | Elite Visual Studio</title>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        :root { --neon-blue: #00d4ff; --neon-purple: #9400d3; --bg: #030303; --card: #0d0d0d; }
-        body { background: var(--bg); color: #fff; font-family: 'Rajdhani', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
-        
-        #canvas-vortex { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
+        :root { --neon: #00d4ff; --bg: #050505; --card: #0d0d0d; }
+        * { box-sizing: border-box; }
+        body { background: var(--bg); color: #fff; font-family: 'Rajdhani', sans-serif; margin: 0; padding: 0; width: 100%; overflow-x: hidden; }
+        #v-bg { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
 
-        header { text-align: center; padding: 120px 20px; border-bottom: 2px solid var(--neon-blue); background: linear-gradient(45deg, #000, #0a0a0a); }
-        .brand { font-family: 'Orbitron'; font-size: 4.5rem; letter-spacing: 12px; text-shadow: 0 0 20px var(--neon-blue); margin: 0; }
-        .live-stat { color: var(--neon-blue); font-size: 1.2rem; margin-top: 15px; text-transform: uppercase; }
+        /* Full Screen Header */
+        header { text-align: center; padding: 50px 10px; border-bottom: 2px solid var(--neon); background: #000; width: 100%; }
+        .logo-box { display: inline-block; padding: 15px 25px; border: 3px solid var(--neon); border-radius: 4px; box-shadow: 0 0 20px var(--neon); margin-bottom: 10px; }
+        .brand { font-family: 'Orbitron'; font-size: 2.5rem; letter-spacing: 4px; margin: 0; }
+        .live-stat { background: rgba(0, 212, 255, 0.1); border: 1px solid var(--neon); padding: 6px 15px; border-radius: 20px; display: inline-block; margin-top: 15px; color: var(--neon); font-weight: bold; }
 
-        .container { max-width: 1300px; margin: auto; padding: 40px 20px; }
-        h2 { font-family: 'Orbitron'; font-size: 2.2rem; color: #fff; border-left: 8px solid var(--neon-blue); padding-left: 20px; margin: 60px 0 30px; }
+        .container { width: 100%; max-width: 1200px; margin: auto; padding: 15px; }
+        h2 { font-family: 'Orbitron'; font-size: 1.8rem; color: #fff; border-left: 6px solid var(--neon); padding-left: 15px; margin: 50px 0 25px; }
 
-        /* Tools Grid */
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; }
-        .tool-card { background: var(--card); border: 1px solid #222; border-radius: 15px; padding: 25px; transition: 0.4s; position: relative; overflow: hidden; }
-        .tool-card:hover { border-color: var(--neon-blue); transform: translateY(-8px); box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2); }
-        
-        /* Tool Logo Style */
-        .tool-icon { width: 50px; height: 50px; background: #1a1a1a; border-radius: 10px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; font-family: 'Orbitron'; font-size: 1.5rem; color: var(--neon-blue); border: 1px solid #333; }
-        
-        .tool-card h3 { font-family: 'Orbitron'; font-size: 1.3rem; margin: 10px 0; color: #fff; }
-        .tool-card p { font-size: 0.95rem; color: #aaa; line-height: 1.5; }
-        .category-tag { position: absolute; top: 15px; right: 15px; font-size: 0.7rem; color: var(--neon-purple); border: 1px solid var(--neon-purple); padding: 2px 8px; border-radius: 4px; text-transform: uppercase; }
+        /* Tools Grid - Heavy List */
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 15px; }
+        .tool-card { background: var(--card); border: 1px solid #222; border-radius: 10px; padding: 20px; transition: 0.3s; position: relative; }
+        .tool-icon { width: 45px; height: 45px; background: #1a1a1a; border: 1px solid var(--neon); border-radius: 5px; display: flex; align-items: center; justify-content: center; font-family: 'Orbitron'; color: var(--neon); font-weight: bold; margin-bottom: 15px; }
+        .tool-card h3 { font-family: 'Orbitron'; font-size: 1.1rem; margin: 0; color: #fff; }
+        .tool-card p { font-size: 0.95rem; color: #bbb; line-height: 1.4; margin-top: 8px; }
 
         /* Feedback Hub */
-        .feedback-section { background: #080808; border-radius: 20px; padding: 50px; margin-top: 100px; border: 1px solid #1a1a1a; }
-        .input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
-        input, textarea { background: #111; border: 1px solid #333; color: #fff; padding: 15px; border-radius: 8px; font-family: 'Rajdhani'; font-size: 1.1rem; width: 100%; box-sizing: border-box; }
-        .sub-btn { background: var(--neon-blue); color: #000; font-family: 'Orbitron'; font-weight: 900; padding: 20px; border: none; cursor: pointer; border-radius: 8px; width: 100%; margin-top: 10px; transition: 0.3s; }
-        .sub-btn:hover { box-shadow: 0 0 40px var(--neon-blue); transform: scale(1.01); }
+        .fb-section { background: #080808; padding: 30px 15px; border-radius: 12px; border: 1px solid #1a1a1a; margin-top: 60px; }
+        input, textarea { width: 100%; background: #111; border: 1px solid #333; color: #fff; padding: 12px; border-radius: 5px; margin-bottom: 15px; font-family: inherit; }
+        .sub-btn { width: 100%; background: var(--neon); color: #000; font-family: 'Orbitron'; font-weight: bold; padding: 15px; border: none; cursor: pointer; border-radius: 5px; }
 
-        .review-box { margin-top: 50px; }
-        .review { background: #0c0c0c; padding: 25px; border-radius: 10px; margin-bottom: 20px; border-bottom: 2px solid #1a1a1a; animation: slideUp 0.5s ease; }
-        .rev-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .rev-name { color: var(--neon-blue); font-family: 'Orbitron'; font-size: 1.1rem; }
-        .like-counter { background: #1a1a1a; padding: 6px 15px; border-radius: 50px; cursor: pointer; border: 1px solid #333; }
+        .feed-list { margin-top: 30px; }
+        .rev { background: #0c0c0c; padding: 15px; border-radius: 8px; border-bottom: 1px solid #222; margin-bottom: 10px; }
+        .rev-head { display: flex; justify-content: space-between; align-items: center; font-family: 'Orbitron'; font-size: 0.8rem; color: var(--neon); }
+        .like-cnt { cursor: pointer; background: #1a1a1a; padding: 4px 10px; border-radius: 15px; border: 1px solid #333; font-size: 0.8rem; }
 
-        footer { position: sticky; bottom: 0; background: rgba(0,0,0,0.95); padding: 30px; text-align: center; border-top: 3px solid var(--neon-blue); z-index: 1000; }
-        .wa-btn { background: #25d366; color: #fff; padding: 16px 45px; text-decoration: none; border-radius: 50px; font-family: 'Orbitron'; font-weight: bold; font-size: 1.2rem; box-shadow: 0 0 25px rgba(37, 211, 102, 0.4); }
-
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        /* Footer WhatsApp Fix */
+        footer { position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.95); padding: 15px; text-align: center; border-top: 2px solid var(--neon); z-index: 9999; }
+        .wa-btn { background: #25d366; color: #fff; padding: 14px 40px; text-decoration: none; border-radius: 50px; font-family: 'Orbitron'; font-weight: bold; box-shadow: 0 0 20px rgba(37, 211, 102, 0.4); display: inline-block; width: 80%; }
+        .spacer { height: 120px; }
     </style>
 </head>
 <body>
 
-<canvas id="canvas-vortex"></canvas>
+<canvas id="v-bg"></canvas>
 
 <div class="container">
     <header>
-        <h1 class="brand">VORTEX AI</h1>
-        <p style="font-size: 1.6rem; letter-spacing: 4px; opacity: 0.8;">ELITE VIDEO ARCHITECTURE & VFX</p>
-        <div class="live-stat">📡 NETWORK ACCESS: <span id="user-count" style="font-weight: 900;">47</span> CLIENTS ONLINE</div>
+        <div class="logo-box"><h1 class="brand">VORTEX AI</h1></div>
+        <p style="letter-spacing: 3px; font-size: 0.8rem; opacity: 0.8;">ELITE VISUAL ARCHITECTURE</p>
+        <div class="live-stat">📡 <span id="online-stat">42</span> OPERATORS ONLINE</div>
     </header>
 
     <section>
-        <h2>🛠️ Industrial Processing Engine (40+ Tools)</h2>
+        <h2>🛠️ 40+ Professional Tech Suite</h2>
         <div class="tools-grid">
-            <div class="tool-card">
-                <div class="category-tag">PC/Heavy</div>
-                <div class="tool-icon">Pr</div>
-                <h3>Adobe Premiere Pro</h3>
-                <p>Industrial standard cinematic editing. Used for high-end ad campaigns and viral storytelling sequences.</p>
-            </div>
-            <div class="tool-card">
-                <div class="category-tag">PC/VFX</div>
-                <div class="tool-icon">Ae</div>
-                <h3>After Effects</h3>
-                <p>Advanced motion graphics and digital compositing. Creating complex visual illusions and 3D manipulations.</p>
-            </div>
-            <div class="tool-card">
-                <div class="category-tag">PC/Color</div>
-                <div class="tool-icon">Dr</div>
-                <h3>DaVinci Resolve</h3>
-                <p>Elite color grading suite. Used by Hollywood studios for perfect visual aesthetics and lighting balance.</p>
-            </div>
-            <div class="tool-card">
-                <div class="category-tag">PC/3D</div>
-                <div class="tool-icon">C4</div>
-                <h3>Cinema 4D</h3>
-                <p>High-end 3D modeling and animation tool. Essential for hyper-realistic product ads and VFX.</p>
-            </div>
-            <div class="tool-card">
-                <div class="category-tag">PC/AI</div>
-                <div class="tool-icon">Tz</div>
-                <h3>Topaz Video AI</h3>
-                <p>Advanced neural upscaling. Converts low-resolution footage into crystal clear 4K production quality.</p>
-            </div>
-            <div class="tool-card">
-                <div class="category-tag">PC/Pro</div>
-                <div class="tool-icon">Av</div>
-                <h3>Avid Media Composer</h3>
-                <p>The choice of professional filmmakers for non-linear high-speed industrial editing.</p>
-            </div>
-            <div class="tool-card">
-                <div class="category-tag">PC/VFX</div>
-                <div class="tool-icon">Bl</div>
-                <h3>Blender VFX</h3>
-                <p>Open-source powerhouse for 3D simulations, smoke, fire, and liquid visual effects.</p>
-            </div>
-            <div class="tool-card">
-                <div class="category-tag">PC/Pro</div>
-                <div class="tool-icon">Nu</div>
-                <h3>Foundry Nuke</h3>
-                <p>Node-based compositing for high-end feature films and top-tier brand advertisements.</p>
-            </div>
-            <div class="tool-card">
-                <div class="category-tag">AI/Image</div>
-                <div class="tool-icon">Mj</div>
-                <h3>Midjourney V6</h3>
-                <p>Generative AI for hyper-realistic visual concepts and cinematic thumbnail architecture.</p>
-            </div>
-            <div class="tool-card">
-                <div class="category-tag">AI/Video</div>
-                <div class="tool-icon">Rw</div>
-                <h3>Runway Gen-2</h3>
-                <p>Next-gen AI video synthesis. Creating surreal motions from simple text prompts.</p>
-            </div>
-            <div class="tool-card">
-                <div class="category-tag">AI/Voice</div>
-                <div class="tool-icon">11</div>
-                <h3>ElevenLabs</h3>
-                <p>Neural voice cloning. Professional multilingual narrations for global ad distribution.</p>
-            </div>
-            <div class="tool-card">
-                <div class="category-tag">AI/3D</div>
-                <div class="tool-icon">Lu</div>
-                <h3>Luma Dream Machine</h3>
-                <p>Physics-accurate AI video generator for realistic cinematic shots and character motion.</p>
-            </div>
-            </div>
-        <p style="text-align: center; color: var(--neon-blue); margin-top: 40px; font-family: 'Orbitron';">+30 MORE PROFESSIONAL PRODUCTION TOOLS IN DATABASE</p>
-    </section>
+            <div class="tool-card"><div class="tool-icon">Pr</div><h3>Adobe Premiere Pro</h3><p>Industry-standard for cinematic editing and professional ads.</p></div>
+            <div class="tool-card"><div class="tool-icon">Ae</div><h3>After Effects</h3><p>Advanced VFX and digital motion graphics for high-end ads.</p></div>
+            <div class="tool-card"><div class="tool-icon">Dr</div><h3>DaVinci Resolve</h3><p>Professional color grading for Hollywood-level visual quality.</p></div>
+            <div class="tool-card"><div class="tool-icon">C4</div><h3>Cinema 4D</h3><p>3D modeling for hyper-realistic visual product videos.</p></div>
+            <div class="tool-card"><div class="tool-icon">Bl</div><h3>Blender</h3><p>3D simulations, smoke, fire, and liquid visual effects.</p></div>
+            <div class="tool-card"><div class="tool-icon">Tz</div><h3>Topaz Video AI</h3><p>Neural upscaling to convert low-res clips into 4K/8K.</p></div>
+            <div class="tool-card"><div class="tool-icon">Av</div><h3>Avid Composer</h3><p>Elite-level non-linear editing for pro production houses.</p></div>
+            <div class="tool-card"><div class="tool-icon">Nu</div><h3>Foundry Nuke</h3><p>Node-based compositing for high-end feature films.</p></div>
+            <div class="tool-card"><div class="tool-icon">Fc</div><h3>Final Cut Pro</h3><p>High-speed visual delivery suite for professional editors.</p></div>
+            <div class="tool-card"><div class="tool-icon">Sv</div><h3>Sony Vegas Pro</h3><p>Creative audio-visual synchronization and fast editing.</p></div>
+            <div class="tool-card"><div class="tool-icon">Mc</div><h3>Mocha Pro</h3><p>World-class planar tracking and masking for VFX.</p></div>
+            <div class="tool-card"><div class="tool-icon">Au</div><h3>Adobe Audition</h3><p>Professional sound design and audio engineering suite.</p></div>
+            <div class="tool-card"><div class="tool-icon">Zb</div><h3>ZBrush</h3><p>Digital sculpting for detailed 3D assets and characters.</p></div>
+            <div class="tool-card"><div class="tool-icon">Kt</div><h3>Katana</h3><p>High-end look development and production lighting.</p></div>
+            <div class="tool-card"><div class="tool-icon">Hd</div><h3>Houdini</h3><p>Advanced procedural animation for complex VFX shots.</p></div>
 
-    <section class="feedback-section">
-        <h2>📊 Client Network Logs & Reviews</h2>
-        <form id="vortex-fb">
-            <div class="input-row">
-                <input type="text" id="fb-name" placeholder="Full Name" required>
-                <input type="email" id="fb-email" placeholder="Email (System Verification)" required>
-            </div>
-            <textarea id="fb-msg" rows="5" placeholder="Transmit your feedback to Vortex AI database..." required></textarea>
-            <button type="submit" class="sub-btn">UPLOAD TO SYSTEM</button>
-        </form>
+            <div class="tool-card"><div class="tool-icon">Mj</div><h3>Midjourney V6</h3><p>Neural image synthesis for cinematic visual concepts.</p></div>
+            <div class="tool-card"><div class="tool-icon">Rw</div><h3>Runway Gen-2</h3><p>AI video synthesis to create surreal motion from text.</p></div>
+            <div class="tool-card"><div class="tool-icon">11</div><h3>ElevenLabs</h3><p>AI voice cloning for multilingual global narrations.</p></div>
+            <div class="tool-card"><div class="tool-icon">Lu</div><h3>Luma AI</h3><p>High-fidelity AI video generator for realistic motion.</p></div>
+            <div class="tool-card"><div class="tool-icon">Kb</div><h3>Kaiber AI</h3><p>AI animation engine for artistic visual loops and music.</p></div>
+            <div class="tool-card"><div class="tool-icon">Pi</div><h3>Pika Labs</h3><p>AI animation tool for static images and b-roll creation.</p></div>
+            <div class="tool-card"><div class="tool-icon">Ff</div><h3>Adobe Firefly</h3><p>Generative AI integrated for efficient creative workflows.</p></div>
+            <div class="tool-card"><div class="tool-icon">Di</div><h3>D-ID AI</h3><p>Speaking portrait generator for AI brand ambassadors.</p></div>
+            <div class="tool-card"><div class="tool-icon">Hg</div><h3>HeyGen</h3><p>Professional AI platform for video marketing content.</p></div>
+            <div class="tool-card"><div class="tool-icon">Sr</div><h3>Sora AI</h3><p>Next-gen simulator for complex storytelling and realism.</p></div>
+            <div class="tool-card"><div class="tool-icon">Ln</div><h3>Leonardo AI</h3><p>Visual asset generation with high-quality AI models.</p></div>
+            <div class="tool-card"><div class="tool-icon">Cc</div><h3>Clipchamp</h3><p>Web-based fast editor for social media content creation.</p></div>
+            <div class="tool-card"><div class="tool-icon">In</div><h3>InVideo AI</h3><p>Automated video creation for social media marketing.</p></div>
+            <div class="tool-card"><div class="tool-icon">Sd</div><h3>Stable Diffusion</h3><p>Open AI model for customized visual manipulations.</p></div>
+            <div class="tool-card"><div class="tool-icon">Ds</div><h3>Descript AI</h3><p>AI-powered video and podcast editor with text control.</p></div>
 
-        <div class="review-box" id="rev-list">
-            <div class="review">
-                <div class="rev-head"><span class="rev-name">Aryan Malhotra</span> <span class="like-counter">👍 <span class="n">2499</span></span></div>
-                <p>"The visual engineering by Vortex AI is unmatched. 100% professional results."</p>
-            </div>
-            <div class="review">
-                <div class="rev-head"><span class="rev-name">Zoya Digital Lab</span> <span class="like-counter">👍 <span class="n">1842</span></span></div>
-                <p>"Best AI-assisted editing in the market. Highly recommended for brands."</p>
-            </div>
-            <div class="review">
-                <div class="rev-head"><span class="rev-name">TechFusion Agency</span> <span class="like-counter">👍 <span class="n">634</span></span></div>
-                <p>"System Architecture is top-notch. Fast delivery and elite quality."</p>
-            </div>
+            <div class="tool-card"><div class="tool-icon">Cp</div><h3>CapCut Desktop</h3><p>Optimized for viral transitions and social media reels.</p></div>
+            <div class="tool-card"><div class="tool-icon">Cv</div><h3>Canva Studio</h3><p>Rapid graphic design and visual asset creation suite.</p></div>
+            <div class="tool-card"><div class="tool-icon">Rb</div><h3>Remove.bg</h3><p>Instant precision background removal for visual assets.</p></div>
+            <div class="tool-card"><div class="tool-icon">Vm</div><h3>Vector Magic</h3><p>Converts raster images into clean high-res vectors.</p></div>
+            <div class="tool-card"><div class="tool-icon">Ph</div><h3>Photoshop</h3><p>Industry standard for advanced image manipulation.</p></div>
+            <div class="tool-card"><div class="tool-icon">Il</div><h3>Illustrator</h3><p>Professional vector graphics for brand identity design.</p></div>
+            <div class="tool-card"><div class="tool-icon">Fi</div><h3>Figma</h3><p>Modern collaborative tool for UI/UX and web design.</p></div>
+            <div class="tool-card"><div class="tool-icon">Lr</div><h3>Lightroom</h3><p>Professional photo retouching and color enhancement.</p></div>
+            <div class="tool-card"><div class="tool-icon">An</div><h3>Animate</h3><p>2D animation engine for interactive web and video.</p></div>
+            <div class="tool-card"><div class="tool-icon">St</div><h3>Stock AI</h3><p>AI-driven high-res stock asset discovery for editors.</p></div>
         </div>
     </section>
 
-    <div style="text-align: center; padding: 80px 0; opacity: 0.3; font-size: 0.8rem;">
-        VORTEX AI | GLOBAL VISUAL ARCHITECTURE PORTAL<br>
-        TARGET MILESTONE: 2027
+    <section class="fb-section">
+        <h2>📊 Network Logs</h2>
+        <form id="v-fb">
+            <input type="text" id="n" placeholder="Name" required>
+            <input type="email" id="e" placeholder="Email" required>
+            <textarea id="m" rows="4" placeholder="Your Feedback..." required></textarea>
+            <button type="submit" class="sub-btn">LOG DATA</button>
+        </form>
+        <div class="feed-list" id="v-list">
+            <div class="rev"><div class="rev-head"><span>Aryan M.</span> <span class="like-cnt">👍 <span class="num">2499</span></span></div><p>"Dangerous edits! Viral growth guaranteed."</p></div>
+            <div class="rev"><div class="rev-head"><span>Studio X</span> <span class="like-cnt">👍 <span class="num">1842</span></span></div><p>"Best AI-driven workflow I've seen in 2026."</p></div>
+            <div class="rev"><div class="rev-head"><span>Digital Lab</span> <span class="like-cnt">👍 <span class="num">634</span></span></div><p>"Professional, fast, and high-end quality."</p></div>
+        </div>
+    </section>
+
+    <div style="text-align:center; padding: 40px 0; opacity: 0.3; font-size: 0.7rem;">
+        VORTEX AI PORTAL | TARGET 2027 [cite: 2026-01-12]
     </div>
+    <div class="spacer"></div>
 </div>
 
 <footer>
-    <a href="https://wa.me/917464858039" class="wa-btn">CONNECT ON WHATSAPP</a>
+    <a href="https://wa.me/917464858039" class="wa-btn">WHATSAPP CONNECT</a>
 </footer>
 
 <script>
-    // Matrix Vortex Background
-    const cvs = document.getElementById('canvas-vortex');
-    const ctx = cvs.getContext('2d');
-    cvs.width = window.innerWidth;
-    cvs.height = window.innerHeight;
-    const txt = "VORTEXAI01";
-    const fsize = 15;
-    const cols = cvs.width/fsize;
-    const drps = Array(Math.floor(cols)).fill(1);
+    // Live Users Counter (35-88)
+    const stat = document.getElementById('online-stat');
+    setInterval(() => {
+        let n = parseInt(stat.innerText);
+        let move = Math.floor(Math.random() * 7) - 3;
+        let final = n + move;
+        if(final < 35) final = 38; if(final > 88) final = 84;
+        stat.innerText = final;
+    }, 3000);
+
+    // Feedback System
+    const form = document.getElementById('v-fb');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const div = document.createElement('div');
+        div.className = 'rev';
+        div.innerHTML = `<div class="rev-head"><span>${document.getElementById('n').value}</span> <span class="like-cnt">👍 <span class="num">0</span></span></div><p>${document.getElementById('m').value}</p>`;
+        document.getElementById('v-list').prepend(div);
+        form.reset();
+        alert('Transmitted!');
+    });
+
+    // Like Click
+    document.addEventListener('click', (e) => {
+        if(e.target.closest('.like-cnt')) {
+            const s = e.target.closest('.like-cnt').querySelector('.num');
+            s.innerText = (parseInt(s.innerText.replace(/,/g,'')) + 1).toLocaleString();
+        }
+    });
+
+    // Matrix Background
+    const c = document.getElementById('v-bg'); const x = c.getContext('2d');
+    c.width = window.innerWidth; c.height = window.innerHeight;
+    const txt = "VORTEXAI01"; const fs = 15; const cols = c.width/fs;
+    const drp = Array(Math.floor(cols)).fill(1);
     function draw() {
-        ctx.fillStyle = 'rgba(0,0,0,0.05)';
-        ctx.fillRect(0,0,cvs.width,cvs.height);
-        ctx.fillStyle = '#00d4ff';
-        ctx.font = fsize + 'px monospace';
-        for(let i=0; i<drps.length; i++) {
-            const char = txt[Math.floor(Math.random()*txt.length)];
-            ctx.fillText(char, i*fsize, drps[i]*fsize);
-            if(drps[i]*fsize > cvs.height && Math.random() > 0.975) drps[i] = 0;
-            drps[i]++;
+        x.fillStyle = 'rgba(0,0,0,0.05)'; x.fillRect(0,0,c.width,c.height);
+        x.fillStyle = '#00d4ff'; x.font = fs + 'px monospace';
+        for(let i=0; i<drp.length; i++) {
+            x.fillText(txt[Math.floor(Math.random()*txt.length)], i*fs, drp[i]*fs);
+            if(drp[i]*fs > c.height && Math.random() > 0.975) drp[i] = 0;
+            drp[i]++;
         }
     }
     setInterval(draw, 50);
-
-    // User Counter (35 - 88)
-    const uCount = document.getElementById('user-count');
-    setInterval(() => {
-        let n = parseInt(uCount.innerText);
-        let c = Math.floor(Math.random()*7) - 3;
-        let res = n + c;
-        if(res < 35) res = 39;
-        if(res > 88) res = 82;
-        uCount.innerText = res;
-    }, 3500);
-
-    // Feedback Handling
-    const form = document.getElementById('vortex-fb');
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('fb-name').value;
-        const msg = document.getElementById('fb-msg').value;
-        const list = document.getElementById('rev-list');
-        const card = document.createElement('div');
-        card.className = 'review';
-        card.innerHTML = `
-            <div class="rev-head"><span class="rev-name">${name}</span> <span class="like-counter">👍 <span class="n">0</span></span></div>
-            <p>${msg}</p>
-        `;
-        list.prepend(card);
-        form.reset();
-        alert('Feedback transmitted successfully!');
-    });
-
-    // Like Click Logic
-    document.addEventListener('click', (e) => {
-        if(e.target.closest('.like-counter')) {
-            const num = e.target.closest('.like-counter').querySelector('.n');
-            num.innerText = (parseInt(num.innerText.replace(/,/g,'')) + 1).toLocaleString();
-        }
-    });
 </script>
 
 </body>
 </html>
-
